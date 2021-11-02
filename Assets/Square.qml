@@ -21,17 +21,28 @@ Item {
             color: squareMouseArea.pressed ? "#ffffff" : "#000000"
         }
 
+
+
         MouseArea {
             id: squareMouseArea
 
-            property int startPoitX: mouseX
-            property int startPoitY: mouseY
+            property int deltaX: onMouseXChanged - mouseX
+            property int deltaY: onMouseYChanged - mouseY
+
+            property int newX: 0
+            property int newY: 0
+
+
+            property string direction
 
             anchors.fill: parent
             drag.target: parent
-            onStartPoitXChanged: console.log(startPoitX)
-            onStartPoitYChanged: console.log(startPoitY)
 
+            direction: deltaX > 0 ? "left" : "right"
+
+
+            onPressed: console.log(onMouseXChanged[0], onMouseYChanged[1])
         }
+
     }
 }
