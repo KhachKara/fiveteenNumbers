@@ -9,6 +9,8 @@ int main(int argc, char *argv[])
 #endif
 
     QGuiApplication app(argc, argv);
+    qmlRegisterSingletonType(QUrl("qrc:///Assets/ProjectStyles.qml"), "Common", 43, 21, "ProjectStyles");
+
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));

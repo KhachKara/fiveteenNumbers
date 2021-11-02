@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>Assets/ProjectStyles.qml</file>
+        <file>Assets/Square.qml</file>
     </qresource>
 </RCC>
