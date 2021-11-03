@@ -2,5 +2,5 @@ pragma Singleton
 import QtQuick 2.0
 
 QtObject{
-    property int ganeSide: 400
+    property int gameSide: 400
 }

@@ -5,14 +5,14 @@ Item {
     property alias squareNumber: squareText.text
 
 
-    width: ProjectStyles.ganeSide / 4
-    height: ProjectStyles.ganeSide / 4
+    width: ProjectStyles.gameSide / 4
+    height: ProjectStyles.gameSide / 4
 
     function borderCollision() {
-        if((squareRect.x >= parent.x && squareRect.x <= parent.height) &&
-                (squareRect.y >= parent.y && squareRect.y <= parent.height))
-            return true
-        return false
+        if((squareRect.x >= gameArea.x && squareRect.x + squareRect.width >= gameArea.width) &&
+           (squareRect.y <= gameArea.y && squareRect.y + squareRect.height <= gameArea.height))
+        {return console.log(squareNumber + " true")}
+        else {return console.log(squareNumber + " false")}
     }
 
     Rectangle{
@@ -28,19 +28,20 @@ Item {
             id: squareText
             text: squareNumber
             anchors.centerIn: parent
-            font.pixelSize: ProjectStyles.ganeSide * 0.15
+            font.pixelSize: ProjectStyles.gameSide * 0.15
             color: squareMouseArea.pressed ? "#ffffff" : "#000000"
         }
 
-        Drag.active: squareMouseArea.drag.active
+        //        Drag.active: squareMouseArea.drag.active
 
         MouseArea {
             id: squareMouseArea
 
             anchors.fill: parent
             drag.target: parent
+            drag.minimumX: squareRect.width
             onPositionChanged: {
-                console.log("Error" + squareNumber)
+
             }
         }
     }
