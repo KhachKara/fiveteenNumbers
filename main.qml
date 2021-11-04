@@ -18,8 +18,15 @@ Window {
     Rectangle {
         id: gameArea
 
+        property int pressedX: 0
+        property int pressedY: 0
+        property int releasedX: 0
+        property int releasedY: 0
+
+
         width: parent.width
         height: parent.height
+
 
         Square {
             id: sq1
@@ -27,104 +34,16 @@ Window {
             squareNumber: "1"
             x: 0
             y: 0
-        }
-        Square {
-            id: sq2
-
-            squareNumber: "2"
-            x: 100
-            y: 0
-        }
-        Square {
-            id: sq3
-
-            squareNumber: "3"
-            x: 200
-            y: 0
-        }
-        Square {
-            id: sq4
-
-            squareNumber: "4"
-            x: 300
-            y: 0
-        }
-        Square{
-            id: sq5
-
-            squareNumber: "5"
-            x: 0
-            y: 100
-        }
-        Square{
-            id: sq6
-
-            squareNumber: "6"
-            x: 100
-            y: 100
-        }
-        Square{
-            id: sq7
-
-            squareNumber: "7"
-            x: 200
-            y: 100
-        }
-        Square{
-            id: sq8
-
-            squareNumber: "8"
-            x: 300
-            y: 100
-        }
-        Square{
-            id: sq9
-
-            squareNumber: "9"
-            x: 0
-            y: 200
-        }
-        Square{
-            id: sq10
-
-            squareNumber: "10"
-            x: 100
-            y: 200
-        }
-        Square{
-            id: sq11
-
-            squareNumber: "11"
-            x: 200
-            y: 200
-        }
-        Square{
-            id: sq12
-
-            squareNumber: "12"
-            x: 300
-            y: 200
-        }
-        Square{
-            id: sq13
-
-            squareNumber: "13"
-            x: 0
-            y: 300
-        }
-        Square{
-            id: sq14
-
-            squareNumber: "14"
-            x: 100
-            y: 300
-        }
-        Square{
-            id: sq15
-
-            squareNumber: "15"
-            x: 200
-            y: 300
+            squareMouseArea.onPressed: {
+                gameArea.pressedX = gameArea.mapToGlobal(parseInt(squareMouseArea.mouseX), parseInt(squareMouseArea.mouseY))[0]
+                gameArea.pressedY = gameArea.mapToGlobal(parseInt(squareMouseArea.mouseX), parseInt(squareMouseArea.mouseY))[1]
+                console.log(gameArea.mapToGlobal(parseInt(squareMouseArea.mouseX), parseInt(squareMouseArea.mouseY)))
+//                console.log(gameArea.pressedX, gameArea.pressedY)
+            }
+            squareMouseArea.onReleased: {
+                console.log(gameArea.mapToGlobal(parseInt(squareMouseArea.mouseX), parseInt(squareMouseArea.mouseY)))
+            }
         }
     }
 }
+

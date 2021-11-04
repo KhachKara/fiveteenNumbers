@@ -3,6 +3,8 @@ import QtQuick 2.2
 
 Item {
     property alias squareNumber: squareText.text
+    property alias squareMouseArea: squareMouseArea
+    property alias squareRect: squareRect
 
 
     width: ProjectStyles.gameSide / 4
@@ -10,7 +12,7 @@ Item {
 
     function borderCollision() {
         if((squareRect.x >= gameArea.x && squareRect.x + squareRect.width >= gameArea.width) &&
-           (squareRect.y <= gameArea.y && squareRect.y + squareRect.height <= gameArea.height))
+                (squareRect.y <= gameArea.y && squareRect.y + squareRect.height <= gameArea.height))
         {return console.log(squareNumber + " true")}
         else {return console.log(squareNumber + " false")}
     }
@@ -38,11 +40,8 @@ Item {
             id: squareMouseArea
 
             anchors.fill: parent
-            drag.target: parent
-            drag.minimumX: squareRect.width
-            onPositionChanged: {
-
-            }
+//            drag.target: parent
+//            drag.minimumX: squareRect.width
         }
     }
 }
