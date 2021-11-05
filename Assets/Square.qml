@@ -47,23 +47,24 @@ Item {
             anchors.fill: parent
 
             onPressed: {
-
                 pressedX = gameArea.mapToGlobal(squareMouseArea.mouseX, squareMouseArea.mouseY).x
                 pressedY = gameArea.mapToGlobal(squareMouseArea.mouseX, squareMouseArea.mouseY).y
-
-                console.log(pressedX, pressedY, releasedX, releasedY)
             }
             onReleased: {
                 releasedX = gameArea.mapToGlobal(squareMouseArea.mouseX, squareMouseArea.mouseY).x
                 releasedY = gameArea.mapToGlobal(squareMouseArea.mouseX, squareMouseArea.mouseY).y
 
-                if (pressedX - releasedX <= 10) {
-                    squareRect.x = squareRect.width
-                } else if (pressedX - releasedX <= 10) {
-                    squareRect.x = -squareRect.width
+                if (releasedX - pressedX >= 10) {
+                    squareRect.x += squareRect.width
+                } else if (pressedX - releasedX >= 10) {
+                    squareRect.x -= squareRect.width
                 }
-                console.log(pressedX, pressedY, releasedX, releasedY)
-            }
+                if(releasedY - pressedY >= 10) {
+                    squareRect.y += squareRect.height
+                } else if (pressedY - releasedY >= 10) {
+                    squareRect.y -= squareRect.height
+                }
+                console.log(pressedX, pressedY, releasedX, releasedY)            }
         }
     }
 }
