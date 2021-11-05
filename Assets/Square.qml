@@ -39,9 +39,31 @@ Item {
         MouseArea {
             id: squareMouseArea
 
+            property real pressedX
+            property real pressedY
+            property real releasedX
+            property real releasedY
+
             anchors.fill: parent
-//            drag.target: parent
-//            drag.minimumX: squareRect.width
+
+            onPressed: {
+
+                pressedX = gameArea.mapToGlobal(squareMouseArea.mouseX, squareMouseArea.mouseY).x
+                pressedY = gameArea.mapToGlobal(squareMouseArea.mouseX, squareMouseArea.mouseY).y
+
+                console.log(pressedX, pressedY, releasedX, releasedY)
+            }
+            onReleased: {
+                releasedX = gameArea.mapToGlobal(squareMouseArea.mouseX, squareMouseArea.mouseY).x
+                releasedY = gameArea.mapToGlobal(squareMouseArea.mouseX, squareMouseArea.mouseY).y
+
+                if (pressedX - releasedX <= 10) {
+                    squareRect.x = squareRect.width
+                } else if (pressedX - releasedX <= 10) {
+                    squareRect.x = -squareRect.width
+                }
+                console.log(pressedX, pressedY, releasedX, releasedY)
+            }
         }
     }
 }

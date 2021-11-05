@@ -18,10 +18,10 @@ Window {
     Rectangle {
         id: gameArea
 
-        property int pressedX: 0
-        property int pressedY: 0
-        property int releasedX: 0
-        property int releasedY: 0
+//        property point pressedX
+//        property point pressedY
+//        property point releasedX
+//        property point releasedY
 
 
         width: parent.width
@@ -34,15 +34,15 @@ Window {
             squareNumber: "1"
             x: 0
             y: 0
-            squareMouseArea.onPressed: {
-                gameArea.pressedX = gameArea.mapToGlobal(parseInt(squareMouseArea.mouseX), parseInt(squareMouseArea.mouseY))[0]
-                gameArea.pressedY = gameArea.mapToGlobal(parseInt(squareMouseArea.mouseX), parseInt(squareMouseArea.mouseY))[1]
-                console.log(gameArea.mapToGlobal(parseInt(squareMouseArea.mouseX), parseInt(squareMouseArea.mouseY)))
+//            squareMouseArea.onPressed: {
+//                gameArea.pressedX = gameArea.mapToGlobal(parseInt(squareMouseArea.mouseX), parseInt(squareMouseArea.mouseY))
+//                gameArea.pressedY = gameArea.mapToGlobal(parseInt(squareMouseArea.mouseX), parseInt(squareMouseArea.mouseY))
+////                console.log(gameArea.mapToGlobal(parseInt(squareMouseArea.mouseX), parseInt(squareMouseArea.mouseY)))
 //                console.log(gameArea.pressedX, gameArea.pressedY)
-            }
-            squareMouseArea.onReleased: {
-                console.log(gameArea.mapToGlobal(parseInt(squareMouseArea.mouseX), parseInt(squareMouseArea.mouseY)))
-            }
+//            }
+//            squareMouseArea.onReleased: {
+//                console.log(gameArea.mapToGlobal(parseInt(squareMouseArea.mouseX), parseInt(squareMouseArea.mouseY)))
+//            }
         }
     }
 }
