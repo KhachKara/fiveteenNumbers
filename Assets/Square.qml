@@ -30,7 +30,6 @@ Item {
         Text {
             id: squareText
 
-            text: squareNumber
             anchors.centerIn: parent
             font.pixelSize: ProjectStyles.gameSide * 0.15
             color: squareMouseArea.pressed ? "#ffffff" : "#000000"

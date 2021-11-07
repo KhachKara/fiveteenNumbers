@@ -16,6 +16,13 @@ Window {
     visible: true
     title: qsTr("15 Numbers")
 
+    Component {
+        id: squareComponent
+
+        Square {}
+
+    }
+
     Rectangle {
         id: gameArea
 
@@ -25,15 +32,16 @@ Window {
         property int rowQuantity: 4
 
         Component.onCompleted: {
+            console.log('squareComponent.status', squareComponent.status)
             for (var i = 0; i <= rowQuantity; ++i) {
                 for (var j = 0; j <= rowQuantity; ++j) {
-                    SquareCreationScript.createSquareObjects()
-//                    Square.sqsquareNumber += 1  // не соответствие типов
-                    Square.squareRect.x = i * Square.squareRect.width
-                    Square.squareRect.y = j * Square.squareRect.height
+                    squareComponent.incubateObject(root, {
+                                                      x: i * ProjectStyles.gameSide / 4,
+                                                      y: j * ProjectStyles.gameSide / 4,
+                                                      squareNumber: '%1, %2'.arg(i).arg(j)
+                                                  });
                 }
             }
         }
-
     }
 }
