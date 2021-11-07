@@ -3,6 +3,7 @@ import "./Assets"
 
 import QtQuick 2.15
 import QtQuick.Window 2.15
+import "./Assets/componentCreation.js" as SquareCreationScript
 
 Window {
     id: root
@@ -21,14 +22,18 @@ Window {
         width: parent.width
         height: parent.height
 
-        Repeater {
-            model: 16
-            Square {
-                squareNumber: index + 1
-                x: (index % 4) * width
-                y: (index / 4) * height
+        property int rowQuantity: 4
+
+        Component.onCompleted: {
+            for (var i = 0; i <= rowQuantity; ++i) {
+                for (var j = 0; j <= rowQuantity; ++j) {
+                    SquareCreationScript.createSquareObjects()
+//                    Square.sqsquareNumber += 1  // не соответствие типов
+                    Square.squareRect.x = i * Square.squareRect.width
+                    Square.squareRect.y = j * Square.squareRect.height
+                }
             }
         }
+
     }
 }
-

@@ -3,5 +3,6 @@
         <file>main.qml</file>
         <file>Assets/ProjectStyles.qml</file>
         <file>Assets/Square.qml</file>
+        <file>Assets/componentCreation.js</file>
     </qresource>
 </RCC>
