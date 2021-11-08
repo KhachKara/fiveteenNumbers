@@ -33,16 +33,19 @@ Window {
 
         Component.onCompleted: {
             console.log('squareComponent.status', squareComponent.status)
-            var k = 1
-            for (var i = 0; i <= rowQuantity; ++i) {
-                for (var j = 0; j <= rowQuantity; ++j) {
+            let k = 1
+            for (let j = 0; j < rowQuantity; ++j) {
+                for (let i = 0; i < rowQuantity; ++i) {
                     squareComponent.incubateObject(root, {
-                                                      x: i * ProjectStyles.gameSide / 4,
-                                                      y: j * ProjectStyles.gameSide / 4,
-//                                                      squareNumber: '%1, %2'.arg(i).arg(j)
-                                                       squareNumber: k,
-                                                       k = k + 1
-                                                  });                }
+                                                       x: i * ProjectStyles.gameSide / 4,
+                                                       y: j * ProjectStyles.gameSide / 4,
+                                                       squareNumber: k
+                                                   });
+                    k = k + 1;
+                    if (k === 16) {
+                        break
+                    }
+                }
             }
         }
     }

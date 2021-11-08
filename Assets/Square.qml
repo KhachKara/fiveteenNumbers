@@ -54,15 +54,15 @@ Item {
                 releasedX = gameArea.mapToGlobal(squareMouseArea.mouseX, squareMouseArea.mouseY).x
                 releasedY = gameArea.mapToGlobal(squareMouseArea.mouseX, squareMouseArea.mouseY).y
 
-                if (releasedX - pressedX >= 10) {
+                if (releasedX - pressedX >= 10 && releasedY - pressedY < 10 && pressedY - releasedY < 10) {
                     squareRect.x += squareRect.width
-                } else if (pressedX - releasedX >= 10) {
+                } else if (pressedX - releasedX >= 10  && releasedY - pressedY < 10 && pressedY - releasedY < 10) {
                     squareRect.x -= squareRect.width
                 }
 
-                if(releasedY - pressedY >= 10) {
+                if(releasedY - pressedY >= 10  && releasedX - pressedX < 10 && pressedX - releasedX < 10) {
                     squareRect.y += squareRect.height
-                } else if (pressedY - releasedY >= 10) {
+                } else if (pressedY - releasedY >= 10  && releasedX - pressedX < 10 && pressedX - releasedX < 10) {
                     squareRect.y -= squareRect.height
                 }
             }
