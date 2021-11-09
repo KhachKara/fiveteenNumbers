@@ -4,5 +4,6 @@
         <file>Assets/ProjectStyles.qml</file>
         <file>Assets/Square.qml</file>
         <file>Assets/componentCreation.js</file>
+        <file>Assets/BackgroundRect.qml</file>
     </qresource>
 </RCC>

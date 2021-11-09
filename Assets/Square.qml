@@ -11,15 +11,8 @@ Item {
     property point leftiddlePoint: Qt.point(0, squareRect.height / 2)
     property point rightMiddlePoint: Qt.point(squareRect.width, squareRect.height / 2)
 
-    width: ProjectStyles.gameSide / 4
-    height: ProjectStyles.gameSide / 4
-
-    function borderCollision() {
-        if((topMiddlePoint.y < gameArea.y && bottomMiddlePoint.y > gameArea.height) &&
-                (leftiddlePoint.x < gameArea.x && rightMiddlePoint.x > gameArea.width))
-        {return console.log(squareNumber + " out of board")}
-        else {return console.log(squareNumber + " inside")}
-    }
+    width: ProjectStyles.gameSide / ProjectStyles.columnRow
+    height: ProjectStyles.gameSide / ProjectStyles.columnRow
 
     Rectangle{
         id: squareRect
@@ -35,7 +28,7 @@ Item {
             id: squareText
 
             anchors.centerIn: parent
-            font.pixelSize: ProjectStyles.gameSide * 0.15
+            font.pixelSize: squareRect.height * 0.75
             color: squareMouseArea.pressed ? "#ffffff" : "#000000"
         }
 
@@ -53,27 +46,34 @@ Item {
             onPressed: {
                 pressedX = gameArea.mapToGlobal(squareMouseArea.mouseX, squareMouseArea.mouseY).x
                 pressedY = gameArea.mapToGlobal(squareMouseArea.mouseX, squareMouseArea.mouseY).y
-                borderCollision()
-//                console.log(gameArea.mapFromGlobal(topMiddlePoint.y, bottomMiddlePoint.y,
-//                                                   leftiddlePoint.x, rightMiddlePoint.x))
             }
             onReleased: {
                 releasedX = gameArea.mapToGlobal(squareMouseArea.mouseX, squareMouseArea.mouseY).x
                 releasedY = gameArea.mapToGlobal(squareMouseArea.mouseX, squareMouseArea.mouseY).y
 
-                if (releasedX - pressedX >= 10 && releasedY - pressedY < 10 && pressedY - releasedY < 10) {
+                if (releasedX - pressedX >= ProjectStyles.mouseSensitivity
+                        && releasedY - pressedY < ProjectStyles.mouseSensitivity
+                        && pressedY - releasedY < ProjectStyles.mouseSensitivity
+                        && backgroundRect.flag === true) {
                     squareRect.x += squareRect.width
-                } else if (pressedX - releasedX >= 10  && releasedY - pressedY < 10 && pressedY - releasedY < 10) {
+                } else if (pressedX - releasedX >= ProjectStyles.mouseSensitivity
+                           && releasedY - pressedY < ProjectStyles.mouseSensitivity
+                           && pressedY - releasedY < ProjectStyles.mouseSensitivity
+                           && backgroundRect.flag === true) {
                     squareRect.x -= squareRect.width
                 }
 
-                if(releasedY - pressedY >= 10  && releasedX - pressedX < 10 && pressedX - releasedX < 10) {
+                if(releasedY - pressedY >= ProjectStyles.mouseSensitivity
+                        && releasedX - pressedX < ProjectStyles.mouseSensitivity
+                        && pressedX - releasedX < ProjectStyles.mouseSensitivity
+                        && backgroundRect.flag === true) {
                     squareRect.y += squareRect.height
-                } else if (pressedY - releasedY >= 10  && releasedX - pressedX < 10 && pressedX - releasedX < 10) {
+                } else if (pressedY - releasedY >= ProjectStyles.mouseSensitivity
+                           && releasedX - pressedX < ProjectStyles.mouseSensitivity
+                           && pressedX - releasedX < ProjectStyles.mouseSensitivity
+                           && backgroundRect.flag === true) {
                     squareRect.y -= squareRect.height
                 }
-
-
             }
         }
     }

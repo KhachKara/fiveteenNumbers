@@ -2,5 +2,7 @@ pragma Singleton
 import QtQuick 2.0
 
 QtObject{
-    property int gameSide: 400
+    property int gameSide: columnRow * 100
+    property int columnRow: 8
+    property int mouseSensitivity: gameSide / columnRow / 2
 }

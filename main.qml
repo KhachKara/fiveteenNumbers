@@ -16,6 +16,13 @@ Window {
     visible: true
     title: qsTr("15 Numbers")
 
+
+
+    BackgroundRect {
+        id: backgroundRect
+    }
+
+
     Component {
         id: squareComponent
 
@@ -29,7 +36,7 @@ Window {
         width: parent.width
         height: parent.height
 
-        property int rowQuantity: 4
+        property int rowQuantity: ProjectStyles.columnRow
 
         Component.onCompleted: {
             console.log('squareComponent.status', squareComponent.status)
@@ -37,12 +44,14 @@ Window {
             for (let j = 0; j < rowQuantity; ++j) {
                 for (let i = 0; i < rowQuantity; ++i) {
                     squareComponent.incubateObject(root, {
-                                                       x: i * ProjectStyles.gameSide / 4,
-                                                       y: j * ProjectStyles.gameSide / 4,
+                                                       x: i * ProjectStyles.gameSide / ProjectStyles.columnRow,
+                                                       y: j * ProjectStyles.gameSide / ProjectStyles.columnRow,
                                                        squareNumber: k
                                                    });
                     k = k + 1;
-                    if (k === 16) {
+                    if (k === ProjectStyles.columnRow * ProjectStyles.columnRow) {
+                        backgroundRect.number = k
+                        backgroundRect.flag = true
                         break
                     }
                 }
