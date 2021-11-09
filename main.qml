@@ -18,44 +18,51 @@ Window {
 
 
 
-    BackgroundRect {
-        id: backgroundRect
-    }
 
+        Component {
+            id: squareComponent
 
-    Component {
-        id: squareComponent
+            Square {}
 
-        Square {}
+        }
 
-    }
+        Rectangle {
+            id: gameArea
 
-    Rectangle {
-        id: gameArea
+            width: parent.width
+            height: parent.height
 
-        width: parent.width
-        height: parent.height
+            property int rowQuantity: ProjectStyles.columnRow
 
-        property int rowQuantity: ProjectStyles.columnRow
-
-        Component.onCompleted: {
-            console.log('squareComponent.status', squareComponent.status)
-            let k = 1
-            for (let j = 0; j < rowQuantity; ++j) {
-                for (let i = 0; i < rowQuantity; ++i) {
-                    squareComponent.incubateObject(root, {
-                                                       x: i * ProjectStyles.gameSide / ProjectStyles.columnRow,
-                                                       y: j * ProjectStyles.gameSide / ProjectStyles.columnRow,
-                                                       squareNumber: k
-                                                   });
-                    k = k + 1;
-                    if (k === ProjectStyles.columnRow * ProjectStyles.columnRow) {
-                        backgroundRect.number = k
-                        backgroundRect.flag = true
-                        break
+            Component.onCompleted: {
+                console.log('squareComponent.status', squareComponent.status)
+                let k = 1
+                for (let j = 0; j < rowQuantity; ++j) {
+                    for (let i = 0; i < rowQuantity; ++i) {
+                        squareComponent.incubateObject(root, {
+                                                           x: i * ProjectStyles.gameSide / ProjectStyles.columnRow,
+                                                           y: j * ProjectStyles.gameSide / ProjectStyles.columnRow,
+                                                           squareNumber: k
+                                                       });
+                        k = k + 1;
+                        if (k === ProjectStyles.columnRow * ProjectStyles.columnRow) {
+                            break
+                        }
                     }
                 }
             }
         }
+
+        MouseArea {
+            id: cursor
+
+            property bool cur: false
+            anchors.fill: parent
+            cursorShape: Qt.CrossCursor
+
+            onCursorShapeChanged: {
+                cur = true
+                console.log("Hover")
+            }
+        }
     }
-}

@@ -21,14 +21,14 @@ Item {
         height: parent.height
         radius: parent.width * 0.1
         color: "red"
-        border.width: 2
+        border.width: ProjectStyles.borderThiknes
         border.color: "#000000"
 
         Text {
             id: squareText
 
             anchors.centerIn: parent
-            font.pixelSize: squareRect.height * 0.75
+            font.pixelSize: squareRect.height * ProjectStyles.numberFontSize
             color: squareMouseArea.pressed ? "#ffffff" : "#000000"
         }
 
@@ -53,25 +53,21 @@ Item {
 
                 if (releasedX - pressedX >= ProjectStyles.mouseSensitivity
                         && releasedY - pressedY < ProjectStyles.mouseSensitivity
-                        && pressedY - releasedY < ProjectStyles.mouseSensitivity
-                        && backgroundRect.flag === true) {
+                        && pressedY - releasedY < ProjectStyles.mouseSensitivity) {
                     squareRect.x += squareRect.width
                 } else if (pressedX - releasedX >= ProjectStyles.mouseSensitivity
                            && releasedY - pressedY < ProjectStyles.mouseSensitivity
-                           && pressedY - releasedY < ProjectStyles.mouseSensitivity
-                           && backgroundRect.flag === true) {
+                           && pressedY - releasedY < ProjectStyles.mouseSensitivity) {
                     squareRect.x -= squareRect.width
                 }
 
                 if(releasedY - pressedY >= ProjectStyles.mouseSensitivity
                         && releasedX - pressedX < ProjectStyles.mouseSensitivity
-                        && pressedX - releasedX < ProjectStyles.mouseSensitivity
-                        && backgroundRect.flag === true) {
+                        && pressedX - releasedX < ProjectStyles.mouseSensitivity) {
                     squareRect.y += squareRect.height
                 } else if (pressedY - releasedY >= ProjectStyles.mouseSensitivity
                            && releasedX - pressedX < ProjectStyles.mouseSensitivity
-                           && pressedX - releasedX < ProjectStyles.mouseSensitivity
-                           && backgroundRect.flag === true) {
+                           && pressedX - releasedX < ProjectStyles.mouseSensitivity) {
                     squareRect.y -= squareRect.height
                 }
             }
