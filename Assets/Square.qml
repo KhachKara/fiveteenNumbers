@@ -6,16 +6,20 @@ Item {
     property alias squareMouseArea: squareMouseArea
     property alias squareRect: squareRect
 
+    property point topMiddlePoint: Qt.point(squareRect.width / 2, 0)
+    property point bottomMiddlePoint: Qt.point(squareRect.width / 2, squareRect.height)
+    property point leftiddlePoint: Qt.point(0, squareRect.height / 2)
+    property point rightMiddlePoint: Qt.point(squareRect.width, squareRect.height / 2)
 
     width: ProjectStyles.gameSide / 4
     height: ProjectStyles.gameSide / 4
 
-    //    function borderCollision() {
-    //        if((squareRect.x >= gameArea.x && squareRect.x + squareRect.width >= gameArea.width) &&
-    //                (squareRect.y <= gameArea.y && squareRect.y + squareRect.height <= gameArea.height))
-    //        {return console.log(squareNumber + " true")}
-    //        else {return console.log(squareNumber + " false")}
-    //    }
+    function borderCollision() {
+        if((topMiddlePoint.y < gameArea.y && bottomMiddlePoint.y > gameArea.height) &&
+                (leftiddlePoint.x < gameArea.x && rightMiddlePoint.x > gameArea.width))
+        {return console.log(squareNumber + " out of board")}
+        else {return console.log(squareNumber + " inside")}
+    }
 
     Rectangle{
         id: squareRect
@@ -49,6 +53,9 @@ Item {
             onPressed: {
                 pressedX = gameArea.mapToGlobal(squareMouseArea.mouseX, squareMouseArea.mouseY).x
                 pressedY = gameArea.mapToGlobal(squareMouseArea.mouseX, squareMouseArea.mouseY).y
+                borderCollision()
+//                console.log(gameArea.mapFromGlobal(topMiddlePoint.y, bottomMiddlePoint.y,
+//                                                   leftiddlePoint.x, rightMiddlePoint.x))
             }
             onReleased: {
                 releasedX = gameArea.mapToGlobal(squareMouseArea.mouseX, squareMouseArea.mouseY).x
@@ -65,6 +72,8 @@ Item {
                 } else if (pressedY - releasedY >= 10  && releasedX - pressedX < 10 && pressedX - releasedX < 10) {
                     squareRect.y -= squareRect.height
                 }
+
+
             }
         }
     }
