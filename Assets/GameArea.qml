@@ -7,6 +7,12 @@ Item {
         Square {}
     }
 
+    function findFreePosition () {
+        if (gameArea.squares[i][j] === null) {
+            return console.log(Qt.point(i, j))
+        }
+    }
+
     Rectangle {
         id: gameArea
 
@@ -28,6 +34,7 @@ Item {
                                                                         squareNumber: k
                                                                     });
                             gameArea.squares[j].push(sq)
+                            findFreePosition()
                             k = k + 1;
                             if (k === ProjectStyles.columnRow * ProjectStyles.columnRow) {
                                 gameArea.squares[j].push(null)
@@ -35,28 +42,9 @@ Item {
                             }
                         }
                     }
+                    findFreePosition()
                     console.log(squares)
                 }
-
-//        Component.onCompleted: {
-//            console.log('squareComponent.status', squareComponent.status)
-//            let k = 1
-//            for (let j = 0; j < rowQuantity; ++j) {
-//                for (let i = 0; i < rowQuantity; ++i) {
-//                    let sq = squareComponent.incubateObject(root, {
-//                                                                x: i * ProjectStyles.gameSide / ProjectStyles.columnRow,
-//                                                                y: j * ProjectStyles.gameSide / ProjectStyles.columnRow,
-//                                                                squareNumber: k
-//                                                            });
-//                    gameArea.squares.push(sq)
-//                    k = k + 1;
-//                    if (k === ProjectStyles.columnRow * ProjectStyles.columnRow) {
-//                        break
-//                    }
-//                }
-//            }
-//        }
-
     }
 //    MouseArea {
 //        id: ma
