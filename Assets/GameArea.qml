@@ -1,17 +1,14 @@
 import QtQuick 2.0
 
 Item {
+
     Component {
         id: squareComponent
 
         Square {}
     }
 
-    function findFreePosition () {
-        if (gameArea.squares[i][j] === null) {
-            return console.log(Qt.point(i, j))
-        }
-    }
+
 
     Rectangle {
         id: gameArea
@@ -23,39 +20,39 @@ Item {
         property var squares: []
 
         Component.onCompleted: {
-                    console.log('squareComponent.status', squareComponent.status)
-                    let k = 1
-                    for (let j = 0; j < rowQuantity; ++j) {
-                        gameArea.squares.push([]);
-                        for (let i = 0; i < rowQuantity; ++i) {
-                            let sq = squareComponent.incubateObject(root, {
-                                                                        x: i * ProjectStyles.gameSide / ProjectStyles.columnRow,
-                                                                        y: j * ProjectStyles.gameSide / ProjectStyles.columnRow,
-                                                                        squareNumber: k
-                                                                    });
-                            gameArea.squares[j].push(sq)
-                            findFreePosition()
-                            k = k + 1;
-                            if (k === ProjectStyles.columnRow * ProjectStyles.columnRow) {
-                                gameArea.squares[j].push(null)
-                                break
-                            }
+            console.log('squareComponent.status', squareComponent.status)
+            let k = 1
+
+            function findFreePosition () {
+                for (let i = 0; i < rowQuantity; ++i) {
+                    for (let j = 0; j < columnQuantity; ++j) {
+                        if (gameArea.squares[i][j] === null) {
+                            return Qt.point(j, i);
                         }
                     }
-                    findFreePosition()
-                    console.log(squares)
                 }
-    }
-//    MouseArea {
-//        id: ma
-//        anchors.fill: gameArea
-//        signal selectRect(int row, int col)
-//        onClicked: {
-//            let r = parseInt(mouseY / 100);
-//            let c = parseInt(mouseX / 100);
-//            ma.selectRect(r, c);
+            }
 
-//            console.log(r, c)
-//        }
-//    }
+            for (let j = 0; j < rowQuantity; ++j) {
+                gameArea.squares.push([]);
+                for (let i = 0; i < rowQuantity; ++i) {
+                    let sq = squareComponent.incubateObject(root, {
+                                                                x: i * ProjectStyles.gameSide / ProjectStyles.columnRow,
+                                                                y: j * ProjectStyles.gameSide / ProjectStyles.columnRow,
+                                                                squareNumber: k
+                                                            });
+                    gameArea.squares[j].push(sq)
+                    k = k + 1;
+                    if (k === ProjectStyles.columnRow * ProjectStyles.columnRow) {
+                        gameArea.squares[j].push(null)
+                        break
+                    }
+                }
+            }
+            console.log(squares)
+        }
+    }
+    Component.onCompleted: {
+        findFreePosition()
+    }
 }
