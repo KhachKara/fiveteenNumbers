@@ -19,4 +19,8 @@ Window {
     GameArea {
         anchors.fill: parent
     }
+
+    WelcomePage {
+        anchors.fill: parent
+    }
 }

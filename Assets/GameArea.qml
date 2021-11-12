@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import Common 43.21
 
 Item {
     id: root    // всегда пишем айди у корневого элемента и всегда называем его root.
