@@ -63,27 +63,24 @@ Item {
     }
 
     // Инициализирует начальное положение клеток по порядку.
-    function initGameDemo() {
+    function initGameDemo(size) {
+        ProjectStyles.columnRowCount = size;
         let k = 1;
-        for (let j = 0; j < ProjectStyles.columnRowCount; ++j) {
+        for (let j = 0; j < size; ++j) {
             squares.push([]);
-            for (let i = 0; i < ProjectStyles.columnRowCount; ++i) {
+            for (let i = 0; i < size; ++i) {
                 let sq = squareComponent.incubateObject(root, {
                                                             squareNumber: k
                                                         }, Qt.Synchronous);
                 squares[j].push(sq.object)
                 ++k;
-                if (k === ProjectStyles.columnRowCount * ProjectStyles.columnRowCount) {
+                if (k === size * size) {
                     squares[j].push(null)
                     break
                 }
             }
         }
         updateSquaresPositions();
-    }
-
-    Component.onCompleted: {
-        initGameDemo();
     }
 
     Component {

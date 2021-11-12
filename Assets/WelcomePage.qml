@@ -5,6 +5,8 @@ import Common 43.21
 Item {
     id: root
 
+    signal startedGame(int size)
+
     implicitWidth: welcomePage.implicitWidth
     implicitHeight: welcomePage.implicitHeight
 
@@ -25,14 +27,8 @@ Item {
             text: "New Game"
 
             onClicked: {
-                GameArea.activeFocus = true
                 welcomePage.visible = false
-
-                if (rbt1.checked === true) {
-                    ProjectStyles.columnRowCount = 3
-                } else if (rbt3.checked === true) {
-                    ProjectStyles.columnRowCount = 5
-                }
+                startedGame(rbt1.checked ? 3 : rbt2.checked ? 4 : 5)
             }
         }
 

@@ -17,10 +17,14 @@ Window {
     title: qsTr("15 Numbers")
 
     GameArea {
+        id: gameArea
         anchors.fill: parent
     }
 
     WelcomePage {
         anchors.fill: parent
+        onStartedGame: {
+            gameArea.initGameDemo(size);
+        }
     }
 }
