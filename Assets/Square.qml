@@ -11,8 +11,8 @@ Item {
     property point leftiddlePoint: Qt.point(0, squareRect.height / 2)
     property point rightMiddlePoint: Qt.point(squareRect.width, squareRect.height / 2)
 
-    width: ProjectStyles.gameSide / ProjectStyles.columnRow
-    height: ProjectStyles.gameSide / ProjectStyles.columnRow
+    width: ProjectStyles.gameSide / ProjectStyles.columnRowCount
+    height: ProjectStyles.gameSide / ProjectStyles.columnRowCount
 
     Rectangle{
         id: squareRect
