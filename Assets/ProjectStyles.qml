@@ -7,5 +7,4 @@ QtObject {
     property int gameSide: columnRowCount * sizeSquare
     property real numberFontSize: 0.75
     property int borderThiknes: 2
-    property int mouseSensitivity: gameSide / columnRowCount / 2
 }

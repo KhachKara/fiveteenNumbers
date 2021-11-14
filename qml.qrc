@@ -6,5 +6,6 @@
         <file>Assets/componentCreation.js</file>
         <file>Assets/GameArea.qml</file>
         <file>Assets/WelcomePage.qml</file>
+        <file>Assets/gradientFill.svg</file>
     </qresource>
 </RCC>

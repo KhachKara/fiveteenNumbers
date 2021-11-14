@@ -65,7 +65,7 @@ Item {
     // Инициализирует начальное положение клеток по порядку.
     function initGameDemo(size) {
         ProjectStyles.columnRowCount = size;
-        let k = 1;
+        let k = randomSquareNumber(size);
         for (let j = 0; j < size; ++j) {
             squares.push([]);
             for (let i = 0; i < size; ++i) {
@@ -81,6 +81,11 @@ Item {
             }
         }
         updateSquaresPositions();
+    }
+
+    // Выдает рандомные числа в диапазоне размернсти игры -1
+    function randomSquareNumber (n) {
+        return parseInt(Math.random() * n)
     }
 
     Component {
