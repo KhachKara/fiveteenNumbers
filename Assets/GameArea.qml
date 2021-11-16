@@ -65,16 +65,16 @@ Item {
     // Инициализирует начальное положение клеток по порядку.
     function initGameDemo(size) {
         ProjectStyles.columnRowCount = size;
-        let k = randomSquareNumber(size);
+        let k = 0
         for (let j = 0; j < size; ++j) {
             squares.push([]);
             for (let i = 0; i < size; ++i) {
                 let sq = squareComponent.incubateObject(root, {
-                                                            squareNumber: k
+                                                            squareNumber: shuffle(makeNumbersList(size))[k]
                                                         }, Qt.Synchronous);
                 squares[j].push(sq.object)
                 ++k;
-                if (k === size * size) {
+                if (shuffle(makeNumbersList(size))[k] === size * size) {
                     squares[j].push(null)
                     break
                 }
@@ -83,10 +83,35 @@ Item {
         updateSquaresPositions();
     }
 
-    // Выдает рандомные числа в диапазоне размернсти игры -1
-    function randomSquareNumber (n) {
-        return parseInt(Math.random() * n)
+    // *****************************************************
+    // Выдает рандомные числа в диапазоне размернсти игры
+    function makeNumbersList(size) {
+        let numbers = []
+        for (let i = 1; i <= size * size; ++i) {
+            numbers.push(i);
+        }
+        return numbers
     }
+
+    function shuffle(array) {
+      let currentIndex = array.length,  randomIndex;
+
+      // While there remain elements to shuffle...
+      while (currentIndex !== 0) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+          array[randomIndex], array[currentIndex]];
+      }
+
+      return array;
+    }
+
+
 
     Component {
         id: squareComponent
