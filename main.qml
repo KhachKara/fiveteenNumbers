@@ -24,7 +24,7 @@ Window {
     WelcomePage {
         anchors.fill: parent
         onStartedGame: {
-            gameArea.initGameDemo(size);
+            gameArea.initGame(size);
         }
     }
 }
