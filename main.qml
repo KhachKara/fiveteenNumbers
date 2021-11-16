@@ -22,9 +22,23 @@ Window {
     }
 
     WelcomePage {
+        id: welcomePage
         anchors.fill: parent
         onStartedGame: {
             gameArea.initGame(size);
         }
+    }
+    Component.onCompleted: {
+        if (_arguments.length === 1) {
+            return;
+        }
+        let numbers = _arguments.slice(1);
+        let size = Math.sqrt(numbers.length)
+        if (size !== parseInt(size)) {
+            console.log('Не верный формат аргументов');
+            return;
+        }
+        gameArea.initGameArray(numbers);
+        welcomePage.visible = false;
     }
 }

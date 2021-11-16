@@ -15,7 +15,7 @@ Item {
     function findFreePosition () {
         for (let i = 0; i < squares.length; ++i) {
             for (let j = 0; j < squares.length; ++j) {
-                if (squares[i][j] === null) {
+                if (squares[i][j].number === 0) {
                     return Qt.point(j, i);
                 }
             }
@@ -37,13 +37,16 @@ Item {
         return false;
     }
 
+    function updateOneSquarePositions(square, row, column) {
+        squares[row][column].x = column * ProjectStyles.sizeSquare
+        squares[row][column].y = row * ProjectStyles.sizeSquare
+    }
+
     // Обновление позиций квадратов в соотвествии с матрицей.
     function updateSquaresPositions() {
         for (let i = 0; i < squares.length; ++i) {
             for (let j = 0; j < squares.length; ++j) {
-                if (squares[i][j] === null) { continue; }
-                squares[i][j].x = j * ProjectStyles.sizeSquare
-                squares[i][j].y = i * ProjectStyles.sizeSquare
+                updateOneSquarePositions(squares[i][j], i, j);
             }
         }
     }
@@ -57,9 +60,11 @@ Item {
             console.log('Шаг не возможен');
             return false;
         }
-        squares[nullPoint.y][nullPoint.x] = squares[stepPoint.y][stepPoint.x];
-        squares[stepPoint.y][stepPoint.x] = null;
-        updateSquaresPositions();
+        // swap
+        [squares[nullPoint.y][nullPoint.x], squares[stepPoint.y][stepPoint.x]] = [
+          squares[stepPoint.y][stepPoint.x], squares[nullPoint.y][nullPoint.x]];
+        updateOneSquarePositions(squares[nullPoint.y][nullPoint.x], nullPoint.y, nullPoint.x);
+        updateOneSquarePositions(squares[stepPoint.y][stepPoint.x], stepPoint.y, stepPoint.x);
     }
 
     // Инициализирует игру.
@@ -67,46 +72,37 @@ Item {
         initGameRandom(size);
     }
 
-    // Инициализирует начальное положение клеток по порядку.
-    function initGameDemo(size) {
-        ProjectStyles.columnRowCount = size;
-        let k = 1;
+    function initGameArray(array) {
+        let size = Math.sqrt(array.length)
+        if (size !== parseInt(size)) {
+            console.log('Не верный формат аргументов');
+            return;
+        }
+        ProjectStyles.columnRowCount = size
         for (let j = 0; j < size; ++j) {
             squares.push([]);
             for (let i = 0; i < size; ++i) {
                 let sq = squareComponent.incubateObject(root, {
-                                                            squareNumber: k
+                                                            number: array[j * size + i]
                                                         }, Qt.Synchronous);
-                squares[j].push(sq.object)
-                ++k;
-                if (k === size * size) {
-                    squares[j].push(null)
-                    break
-                }
+                squares[j].push(sq.object);
             }
         }
         updateSquaresPositions();
     }
 
+    // Инициализирует начальное положение клеток по порядку.
+    function initGameDemo(size) {
+        let array = iota(Array(size * size), 1);
+        array[array.length - 1] = 0;
+        initGameArray(array);
+    }
+
     // Инициализация игры с размешанными клетками.
     function initGameRandom(size) {
-        ProjectStyles.columnRowCount = size;
         // Эту строку можно разбить на 3 строки, что бы было понятнее.
-        let randomArray = shuffle(iota(Array(size * size), 0));
-        for (let j = 0; j < size; ++j) {
-            squares.push([]);
-            for (let i = 0; i < size; ++i) {
-                if (randomArray[j * size + i] === 0) {
-                    squares[j].push(null);
-                    continue;
-                }
-                let sq = squareComponent.incubateObject(root, {
-                                                            squareNumber: randomArray[j * size + i]
-                                                        }, Qt.Synchronous);
-                squares[j].push(sq.object)
-            }
-        }
-        updateSquaresPositions();
+        let randomArray = shuffle(iota(Array(size * size)));
+        initGameArray(randomArray);
     }
 
     // *****************************************************
@@ -140,7 +136,7 @@ Item {
     }
 
     // Инициализирует последовательно массив начиная с startNum.
-    function iota(array, startNum) {
+    function iota(array, startNum = 0) {
         for (let i = 0; i < array.length; ++i) {
             array[i] = startNum + i;
         }
