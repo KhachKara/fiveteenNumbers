@@ -7,5 +7,6 @@
         <file>Assets/GameArea.qml</file>
         <file>Assets/WelcomePage.qml</file>
         <file>Assets/gradientFill.svg</file>
+        <file>Assets/InfoBoard.qml</file>
     </qresource>
 </RCC>

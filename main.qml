@@ -8,9 +8,9 @@ import "./Assets/componentCreation.js" as SquareCreationScript
 Window {
     id: root
 
-    minimumWidth: ProjectStyles.gameSide
+    minimumWidth: ProjectStyles.gameSide + ProjectStyles.infoBoardWidth
     minimumHeight: ProjectStyles.gameSide
-    maximumWidth: ProjectStyles.gameSide
+    maximumWidth: ProjectStyles.gameSide + ProjectStyles.infoBoardWidth
     maximumHeight: ProjectStyles.gameSide
 
     visible: true
@@ -18,17 +18,38 @@ Window {
 
     GameArea {
         id: gameArea
-        anchors.fill: parent
+
+        visible: false
+        anchors {
+            left: root.left
+            top: root.top
+            bottom: root.bottom
+        }
+    }
+
+    InfoBoard {
+        id: infoBoard
+
+        visible: false
+        anchors {
+            left: gameArea.right
+            bottom: root.bottom
+            top: root.top
+            right: root.right
+            margins: ProjectStyles.projectMargins
+        }
     }
 
     WelcomePage {
         id: welcomePage
         anchors.fill: parent
-        onStartedGame: {
+        onStartedGame: function(size){
+            console.log('size = ', size);
             gameArea.initGame(size);
         }
     }
     Component.onCompleted: {
+        console.log(_arguments);
         if (_arguments.length === 1) {
             return;
         }
