@@ -32,16 +32,22 @@ Item {
     // Определяет соседние клетки.
     // На вход принимает 2 точки.
     // Возвращает true если точки соседи, иначе false.
-    function isNeighbour(a, b) {
-        if (a.x === b.x) {
-            return Math.abs(a.y - b.y) === 1;
+    function isNeighbour(p1, p2) {
+        if (p1.x === p2.x) {
+            return Math.abs(p1.y - p2.y) === 1;
         }
-        if (a.y === b.y) {
-            return Math.abs(a.x - b.x) === 1;
+        if (p1.y === p2.y) {
+            return Math.abs(p1.x - p2.x) === 1;
         }
         return false;
     }
 
+    // Возвращает true если на одной линии.
+    function isInOneLine(p1, p2) {
+        return p1.x === p2.x || p1.y === p2.y;
+    }
+
+    // Обновление размера квадратов.
     function updateSquaresWidth() {
         for (let i = 0; i < squares.length; ++i) {
             for (let j = 0; j < squares.length; ++j) {
@@ -51,6 +57,7 @@ Item {
         updateSquaresPositions();
     }
 
+    // Обновление позиции квадрата.
     function updateOneSquarePositions(square, row, column) {
         squares[row][column].x = column * squareWidth
         squares[row][column].y = row * squareWidth
@@ -65,20 +72,61 @@ Item {
         }
     }
 
+    // Поменять местами квадраты и обновить позиции.
+    function swap2squares(p1, p2) {
+        [squares[p1.y][p1.x], squares[p2.y][p2.x]] = [
+          squares[p2.y][p2.x], squares[p1.y][p1.x]];
+        updateOneSquarePositions(squares[p1.y][p1.x], p1.y, p1.x);
+        updateOneSquarePositions(squares[p2.y][p2.x], p2.y, p2.x);
+    }
+
     // Проверяет возможность шага и делает шаг при необходимости.
     // На входе принимает точку клика.
     // Возвращает true если шаг доступен.
     function gameStep(stepPoint) {
         let nullPoint = findFreePosition();
-        if (!isNeighbour(nullPoint, stepPoint)) {
-            console.log('Шаг не возможен');
-            return false;
+        if (stepPoint === nullPoint) {
+            // Клик на пустую клетку.
+            return;
         }
-        // swap
-        [squares[nullPoint.y][nullPoint.x], squares[stepPoint.y][stepPoint.x]] = [
-          squares[stepPoint.y][stepPoint.x], squares[nullPoint.y][nullPoint.x]];
-        updateOneSquarePositions(squares[nullPoint.y][nullPoint.x], nullPoint.y, nullPoint.x);
-        updateOneSquarePositions(squares[stepPoint.y][stepPoint.x], stepPoint.y, stepPoint.x);
+
+        if (isNeighbour(nullPoint, stepPoint)) {
+            // Если соседние клетки.
+            swap2squares(nullPoint, stepPoint);
+        } else if (isInOneLine(nullPoint, stepPoint)) {
+            // Если на одной линии.
+            const isVertical = nullPoint.x === stepPoint.x;
+            if (isVertical) {
+                const xX = nullPoint.x;
+                const toBottom = nullPoint.y > stepPoint.y;
+                if (toBottom) {
+                    for (let i = nullPoint.y; i > stepPoint.y; --i) {
+                        swap2squares(Qt.point(xX, i),
+                                     Qt.point(xX, i - 1));
+                    }
+                } else {
+                    for (let i = nullPoint.y; i < stepPoint.y; ++i) {
+                        swap2squares(Qt.point(xX, i),
+                                     Qt.point(xX, i + 1));
+                    }
+                }
+            } else {
+                const yY = nullPoint.y;
+                const toRight = nullPoint.x > stepPoint.x;
+                if (toRight) {
+                    for (let i = nullPoint.x; i > stepPoint.x; --i) {
+                        swap2squares(Qt.point(i, yY),
+                                     Qt.point(i - 1, yY));
+                    }
+                } else {
+                    for (let i = nullPoint.x; i < stepPoint.x; ++i) {
+                        swap2squares(Qt.point(i, yY),
+                                     Qt.point(i + 1, yY));
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     // Инициализирует игру.
@@ -116,16 +164,6 @@ Item {
     function initGameRandom(size) {
         let randomArray = shuffle(iota(Array(size * size)));
         initGameArray(randomArray);
-    }
-
-    // *****************************************************
-    // Выдает рандомные числа в диапазоне размернсти игры
-    function makeNumbersList(size) {
-        let numbers = []
-        for (let i = 1; i <= size * size; ++i) {
-            numbers.push(i);
-        }
-        return numbers
     }
 
     // Размешивает массив.
