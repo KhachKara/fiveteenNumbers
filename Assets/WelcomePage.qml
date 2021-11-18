@@ -28,8 +28,6 @@ Item {
 
             onClicked: {
                 welcomePage.visible = false
-                infoBoard.visible = true
-                gameArea.visible = true
                 startedGame(rbt1.checked ? 3 : rbt2.checked ? 4 : 5)
             }
         }

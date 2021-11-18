@@ -11,8 +11,9 @@ Item {
     Rectangle {
         id: infoBoard
 
-        width: 130
-        height: 400
+        implicitWidth: 130
+        implicitHeight: 400
+        anchors.fill: parent
         radius: width * 0.1
         color: "lightgrey"
         Row {
@@ -23,11 +24,6 @@ Item {
 
             Text {
                 id: lblSteps
-                anchors {
-                    top: parent.top
-                    left: parent.left
-                    leftMargin: ProjectStyles.projectMargins
-                }
                 text: "Steps"
                 font.pixelSize: ProjectStyles.infoTextFontPixel
             }
@@ -35,11 +31,6 @@ Item {
                 id: valueSteps
                 text: qsTr("text")
                 font.pixelSize: ProjectStyles.infoTextFontPixel
-                anchors {
-                    left: lblSteps.right
-                    leftMargin: ProjectStyles.projectMargins
-                }
-
             }
         }
     }

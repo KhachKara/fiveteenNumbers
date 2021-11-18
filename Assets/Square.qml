@@ -5,14 +5,13 @@ Item {
     property int number: 0
     property alias squareRect: squareRect
 
-    width: ProjectStyles.gameSide / ProjectStyles.columnRowCount
-    height: ProjectStyles.gameSide / ProjectStyles.columnRowCount
+
+    height: width
 
     Rectangle {
         id: squareRect
 
-        width: parent.width
-        height: parent.height
+        anchors.fill: parent
         visible: number > 0 // Можно так же добавить как будет выглядеть пустая клетка.
         radius: parent.width * 0.1
         color: "red"

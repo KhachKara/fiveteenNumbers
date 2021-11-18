@@ -6,6 +6,11 @@ Item {
 
     // Наша матрица объектов.
     property var squares: []
+    property int size: 4
+
+    readonly property int squareWidth: gameArea.width / size
+
+    onSquareWidthChanged: updateSquaresWidth()
 
     implicitWidth: gameArea.implicitWidth
     implicitHeight: gameArea.implicitHeight
@@ -37,9 +42,18 @@ Item {
         return false;
     }
 
+    function updateSquaresWidth() {
+        for (let i = 0; i < squares.length; ++i) {
+            for (let j = 0; j < squares.length; ++j) {
+                squares[i][j].width = squareWidth;
+            }
+        }
+        updateSquaresPositions();
+    }
+
     function updateOneSquarePositions(square, row, column) {
-        squares[row][column].x = column * ProjectStyles.sizeSquare
-        squares[row][column].y = row * ProjectStyles.sizeSquare
+        squares[row][column].x = column * squareWidth
+        squares[row][column].y = row * squareWidth
     }
 
     // Обновление позиций квадратов в соотвествии с матрицей.
@@ -78,7 +92,7 @@ Item {
             console.log('Не верный формат аргументов');
             return;
         }
-        ProjectStyles.columnRowCount = size
+        root.size = size
         for (let j = 0; j < size; ++j) {
             squares.push([]);
             for (let i = 0; i < size; ++i) {
@@ -88,7 +102,7 @@ Item {
                 squares[j].push(sq.object);
             }
         }
-        updateSquaresPositions();
+        updateSquaresWidth();
     }
 
     // Инициализирует начальное положение клеток по порядку.
@@ -100,7 +114,6 @@ Item {
 
     // Инициализация игры с размешанными клетками.
     function initGameRandom(size) {
-        // Эту строку можно разбить на 3 строки, что бы было понятнее.
         let randomArray = shuffle(iota(Array(size * size)));
         initGameArray(randomArray);
     }
@@ -145,7 +158,7 @@ Item {
 
     Component {
         id: squareComponent
-        Square {}
+        Square { }
     }
 
     Rectangle {
@@ -153,6 +166,8 @@ Item {
 
         implicitWidth: ProjectStyles.gameSide
         implicitHeight: ProjectStyles.gameSide
+        width: Math.min(root.width, root.height)
+        height: width
 
         MouseArea {
             id: ma
@@ -160,8 +175,8 @@ Item {
             anchors.fill: gameArea
 
             onClicked: {
-                let r = parseInt(mouseY / ProjectStyles.sizeSquare);
-                let c = parseInt(mouseX / ProjectStyles.sizeSquare);
+                let r = parseInt(mouseY / root.squareWidth);
+                let c = parseInt(mouseX / root.squareWidth);
                 root.gameStep(Qt.point(c, r));
             }
         }

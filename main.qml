@@ -8,44 +8,23 @@ import "./Assets/componentCreation.js" as SquareCreationScript
 Window {
     id: root
 
-    minimumWidth: ProjectStyles.gameSide + ProjectStyles.infoBoardWidth
-    minimumHeight: ProjectStyles.gameSide
-    maximumWidth: ProjectStyles.gameSide + ProjectStyles.infoBoardWidth
-    maximumHeight: ProjectStyles.gameSide
+    width: 400
+    height: 400
 
     visible: true
     title: qsTr("15 Numbers")
 
-    GameArea {
-        id: gameArea
-
-        visible: false
-        anchors {
-            left: root.left
-            top: root.top
-            bottom: root.bottom
-        }
+    GamePage {
+        id: game
+        anchors.fill: parent
     }
 
-    InfoBoard {
-        id: infoBoard
-
-        visible: false
-        anchors {
-            left: gameArea.right
-            bottom: root.bottom
-            top: root.top
-            right: root.right
-            margins: ProjectStyles.projectMargins
-        }
-    }
 
     WelcomePage {
         id: welcomePage
         anchors.fill: parent
         onStartedGame: function(size){
-            console.log('size = ', size);
-            gameArea.initGame(size);
+            game.startGame(size);
         }
     }
     Component.onCompleted: {

@@ -2,8 +2,6 @@ pragma Singleton
 import QtQuick 2.0
 
 QtObject {
-    property int columnRowCount: 4
-    property int sizeSquare: gameSide / columnRowCount
     property int gameSide: 400
     property real numberFontSize: 0.75
     property int borderThiknes: 2

@@ -8,5 +8,6 @@
         <file>Assets/WelcomePage.qml</file>
         <file>Assets/gradientFill.svg</file>
         <file>Assets/InfoBoard.qml</file>
+        <file>Assets/GamePage.qml</file>
     </qresource>
 </RCC>
