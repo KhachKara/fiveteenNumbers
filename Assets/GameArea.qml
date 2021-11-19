@@ -144,7 +144,7 @@ Item {
         for (let j = 0; j < size; ++j) {
             squares.push([]);
             for (let i = 0; i < size; ++i) {
-                let sq = squareComponent.incubateObject(root, {
+                let sq = squareComponent.incubateObject(gameArea, {
                                                             number: array[j * size + i]
                                                         }, Qt.Synchronous);
                 squares[j].push(sq.object);
@@ -204,8 +204,11 @@ Item {
 
         implicitWidth: ProjectStyles.gameSide
         implicitHeight: ProjectStyles.gameSide
+        anchors.centerIn: parent
         width: Math.min(root.width, root.height)
         height: width
+
+        color: 'skyblue'
 
         MouseArea {
             id: ma
