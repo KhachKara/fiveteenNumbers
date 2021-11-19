@@ -5,10 +5,19 @@ Item {
     implicitHeight: gameArea.implicitHeight + infoBoard.implicitHeight
     implicitWidth: gameArea.implicitWidth + infoBoard.implicitWidth
 
-    function startGame(size) {
-        gameArea.initGame(size);
+    function initOtherFields() {
         gameArea.visible = 1;
         infoBoard.visible = 1;
+    }
+
+    function startGame(size) {
+        gameArea.initGame(size);
+        initOtherFields();
+    }
+
+    function startGameArray(array) {
+        gameArea.initGameArray(array);
+        initOtherFields();
     }
 
     GameArea {

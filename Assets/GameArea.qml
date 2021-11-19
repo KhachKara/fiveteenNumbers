@@ -90,6 +90,7 @@ Item {
             return;
         }
 
+        let i; // для циклов
         if (isNeighbour(nullPoint, stepPoint)) {
             // Если соседние клетки.
             swap2squares(nullPoint, stepPoint);
@@ -100,12 +101,12 @@ Item {
                 const xX = nullPoint.x;
                 const toBottom = nullPoint.y > stepPoint.y;
                 if (toBottom) {
-                    for (let i = nullPoint.y; i > stepPoint.y; --i) {
+                    for (i = nullPoint.y; i > stepPoint.y; --i) {
                         swap2squares(Qt.point(xX, i),
                                      Qt.point(xX, i - 1));
                     }
                 } else {
-                    for (let i = nullPoint.y; i < stepPoint.y; ++i) {
+                    for (i = nullPoint.y; i < stepPoint.y; ++i) {
                         swap2squares(Qt.point(xX, i),
                                      Qt.point(xX, i + 1));
                     }
@@ -114,12 +115,12 @@ Item {
                 const yY = nullPoint.y;
                 const toRight = nullPoint.x > stepPoint.x;
                 if (toRight) {
-                    for (let i = nullPoint.x; i > stepPoint.x; --i) {
+                    for (i = nullPoint.x; i > stepPoint.x; --i) {
                         swap2squares(Qt.point(i, yY),
                                      Qt.point(i - 1, yY));
                     }
                 } else {
-                    for (let i = nullPoint.x; i < stepPoint.x; ++i) {
+                    for (i = nullPoint.x; i < stepPoint.x; ++i) {
                         swap2squares(Qt.point(i, yY),
                                      Qt.point(i + 1, yY));
                     }
@@ -134,13 +135,9 @@ Item {
         initGameRandom(size);
     }
 
+    // Инициализирует игру по последовательности array.
     function initGameArray(array) {
-        let size = Math.sqrt(array.length)
-        if (size !== parseInt(size)) {
-            console.log('Не верный формат аргументов');
-            return;
-        }
-        root.size = size
+        root.size = Math.sqrt(array.length);
         for (let j = 0; j < size; ++j) {
             squares.push([]);
             for (let i = 0; i < size; ++i) {
@@ -163,6 +160,12 @@ Item {
     // Инициализация игры с размешанными клетками.
     function initGameRandom(size) {
         let randomArray = shuffle(iota(Array(size * size)));
+        if (!checkArrayForGame(randomArray)
+                && !tryToFixArray(randomArray)) {
+            console.log("Не смог исправить игру");
+            console.log(randomArray);
+        }
+
         initGameArray(randomArray);
     }
 
@@ -192,6 +195,37 @@ Item {
             array[i] = startNum + i;
         }
         return array;
+    }
+
+    // Проверяет игру на наличие решения.
+    function checkArrayForGame(arrayOrig) {
+        let size = Math.sqrt(arrayOrig.length);
+        let indZero = arrayOrig.indexOf(0);
+        if (size !== parseInt(size) || indZero === -1) {
+            console.log('Не верный формат аргументов');
+            return false;
+        }
+
+        let array = arrayOrig.slice(); // make copy array;
+
+        let N = parseInt(indZero / size); // на какой строке пустая клетка
+        array.splice(indZero, 1); // удалил нолик из массива.
+        for(let i = 0; i < array.length; ++i) {
+            for (let j = 0; j < i; ++j) {
+                N += array[i] < array[j];
+            }
+        }
+        return N % 2;
+    }
+
+    // Попытка исправить игру. (Исли изначально игра с решением, то он делает ее нерешаемой)
+    function tryToFixArray(array) {
+        let v = 1 + parseInt(Math.random() * (array.length - 2)); // 1..length - 1
+        let indOfv1 = array.indexOf(v);
+        let indOfv2 = array.indexOf(v + 1);
+        [array[indOfv1], array[indOfv2]] = [
+          array[indOfv2], array[indOfv1]];
+        return checkArrayForGame(array);
     }
 
     Component {

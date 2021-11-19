@@ -32,13 +32,14 @@ Window {
         if (_arguments.length === 1) {
             return;
         }
-        let numbers = _arguments.slice(1);
-        let size = Math.sqrt(numbers.length)
+        let numbersStr = _arguments.slice(1);
+        let size = Math.sqrt(numbersStr.length)
         if (size !== parseInt(size)) {
             console.log('Не верный формат аргументов');
             return;
         }
-        gameArea.initGameArray(numbers);
+        let numbersInt = numbersStr.map(item => parseInt(item));
+        game.startGameArray(numbersInt);
         welcomePage.visible = false;
     }
 }
