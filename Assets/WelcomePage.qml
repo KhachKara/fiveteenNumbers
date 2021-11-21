@@ -10,47 +10,92 @@ Item {
     implicitWidth: welcomePage.implicitWidth
     implicitHeight: welcomePage.implicitHeight
 
+    NewGamePage {
+        id: newGamePage
+        visible: false
+        width: parent.width
+        height: parent.height
+    }
+
     Rectangle {
         id: welcomePage
 
-        implicitWidth: ProjectStyles.gameSide
-        implicitHeight: ProjectStyles.gameSide
-
-        color: Qt.rgba(1, 1, 1, 0.95)
-
         anchors.fill: parent
 
-        Button {
-            id: newGameBtn
+        color: "#4B4453"
 
-            anchors.centerIn: parent
-            text: "New Game"
-
-            onClicked: {
-                welcomePage.visible = false
-                startedGame(rbt1.checked ? 3 : rbt2.checked ? 4 : 5)
+        Image {
+            id: logo
+            source: "./logo.png"
+            sourceSize.width: 113
+            sourceSize.height: 127
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                top: parent.top
+                topMargin: 67
             }
         }
 
-        Row {
-            spacing: 20
+        property var rectText: ["New game", "Rate", "Settings", "Quit"]
+
+        Column {
+            spacing: 11
             anchors {
-                top: newGameBtn.bottom
-                horizontalCenter: newGameBtn.horizontalCenter
-                topMargin: 20
+                horizontalCenter: parent.horizontalCenter
+                top: parent.top
+                topMargin: 243
             }
-            RadioButton {
-                id: rbt1
-                text: "3 X 3"
-            }
-            RadioButton {
-                id: rbt2
-                checked: true
-                text: "4 X 4"
-            }
-            RadioButton {
-                id: rbt3
-                text: "5 X 5"
+            Repeater {
+                model: 4
+                Rectangle {
+                    id: rectButton
+                    width: 300
+                    height: 70
+                    color: "#845EC2"
+                    radius: 8
+                    Text {
+                        id: rectText
+                        anchors.centerIn: parent
+                        color: "#FFFFFF"
+                        text: welcomePage.rectText[index]
+                        font {
+                            family: "Ubuntu"
+                            pixelSize: 32
+                        }
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: true
+
+                        onEntered: {
+                            rectButton.color = "#8400C2"
+                            cursorShape = Qt.PointingHandCursor
+                        }
+
+                        onExited: {
+                            rectButton.color = "#845EC2"
+                            cursorShape = Qt.ArrowCursor
+                        }
+                        onClicked: {
+                            if (rectText.text === "New game") {
+                                welcomePage.visible = false
+                                newGamePage.visible = true
+                                console.log("new game page")
+                            } else if (rectText.text === "Rate") {
+                                // welcomePage.visible = false
+                                // rate.visible = true
+                                console.log("rate page")
+                            } else if (rectText.text === "Settings") {
+                                // welcomePage.visible = false
+                                // setingPage.visible = true
+                                console.log("settings page")
+                            } else {
+                                console.log("quit page")
+                            }
+                        }
+                    }
+                }
             }
         }
     }

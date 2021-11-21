@@ -9,5 +9,8 @@
         <file>Assets/gradientFill.svg</file>
         <file>Assets/InfoBoard.qml</file>
         <file>Assets/GamePage.qml</file>
+        <file>Assets/logo.png</file>
+        <file>Assets/NewGamePage.qml</file>
+        <file>Assets/GameStyleRect.qml</file>
     </qresource>
 </RCC>

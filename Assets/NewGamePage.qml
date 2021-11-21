@@ -1,0 +1,86 @@
+import QtQuick 2.0
+import QtQuick.Controls 2.5
+import Common 43.21
+
+Item {
+    id: root
+
+    implicitWidth: newGamePage.implicitWidth
+    implicitHeight: newGamePage.implicitHeight
+
+    Rectangle {
+        id: newGamePage
+
+        anchors.fill: parent
+        color: "#4B4453"
+
+
+        GameStyleRect {
+            id: gameStyle3X3
+
+            gameSize: 3
+            txtGameMode: gameSize + "x" + gameSize
+
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                top: parent.top
+                topMargin: 100
+            }
+        }
+
+        Row {
+            id: firstRow
+            spacing: 11
+
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                top: gameStyle3X3.bottom
+                topMargin: 10
+            }
+            GameStyleRect {
+                id: gameStyle4X4
+
+                gameSize: 4
+                txtGameMode: gameSize + "x" + gameSize
+            }
+
+            GameStyleRect {
+                id: gameStyle5X5
+
+                gameSize: 5
+                txtGameMode: gameSize + "x" + gameSize
+            }
+        }
+
+        Row {
+            id: secondRow
+
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                top: firstRow.bottom
+                topMargin: 10
+            }
+
+            spacing: 11
+
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                top: gameStyle3X3.bottom
+                topMargin: 10
+            }
+            GameStyleRect {
+                id: gameStyle6X6
+
+                gameSize: 6
+                txtGameMode: gameSize + "x" + gameSize
+            }
+
+            GameStyleRect {
+                id: gameStyle7X7
+
+                gameSize: 7
+                txtGameMode: gameSize + "x" + gameSize
+            }
+        }
+    }
+}
