@@ -4,11 +4,13 @@ import Common 43.21
 
 
 Rectangle {
+    id: gameMode
+
     property int gameSize: 3
-    property int spacingMargin: 2
+    property int spacingMargin: 6
     property alias txtGameMode: txtGameMode.text
 
-    id: gameMode
+
     width: 128
     height: width
     color: "#845EC2"
@@ -29,6 +31,7 @@ Rectangle {
                     model: gameSize
                     Rectangle {
                         id: rectGameMode
+
                         width: (gameMode.width - gameSize * spacingMargin) / gameSize
                         height: width
                         color: "#B0A8B9"
@@ -47,20 +50,5 @@ Rectangle {
             pixelSize: 30
         }
         anchors.centerIn: parent
-
-        MouseArea {
-            anchors.fill: parent
-            hoverEnabled: true
-
-            onEntered: {
-                txtGameMode.color = "#8400C2"
-                cursorShape = Qt.PointingHandCursor
-            }
-
-            onExited: {
-                txtGameMode.color = "#FFFFFF"
-                cursorShape = Qt.ArrowCursor
-            }
-        }
     }
 }

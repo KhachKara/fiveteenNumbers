@@ -12,5 +12,7 @@
         <file>Assets/logo.png</file>
         <file>Assets/NewGamePage.qml</file>
         <file>Assets/GameStyleRect.qml</file>
+        <file>Assets/back.svg</file>
+        <file>Assets/pause.svg</file>
     </qresource>
 </RCC>
