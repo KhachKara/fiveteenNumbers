@@ -22,7 +22,7 @@ Item {
             id: gradientFill
 
             anchors.fill: parent
-            source: "gradientFill.svg"
+            source: "./icons/gradientFill.svg"
         }
 
 

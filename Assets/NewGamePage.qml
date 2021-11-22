@@ -8,8 +8,10 @@ Item {
     implicitWidth: newGamePage.implicitWidth
     implicitHeight: newGamePage.implicitHeight
 
-
-
+    GamePage {
+        id: gamePage
+        visible: true
+    }
 
     Rectangle {
         id: newGamePage
@@ -19,7 +21,7 @@ Item {
 
         Image {
             id: back
-            source: "./back.svg"
+            source: "./icons/back.svg"
             anchors {
                 left: parent.left
                 leftMargin: 30
@@ -27,12 +29,20 @@ Item {
             }
             MouseArea {
                 anchors.fill: parent
+                hoverEnabled: true
+
+                onEntered: {
+                    cursorShape = Qt.PointingHandCursor
+                }
+
+                onExited: {
+                    cursorShape = Qt.ArrowCursor
+                }
                 onClicked: {
                     console.log("back")
                 }
             }
         }
-
 
         Text {
             id: txtNewGame
@@ -70,6 +80,10 @@ Item {
 
                 onExited: {
                     cursorShape = Qt.ArrowCursor
+                }
+                onClicked: {
+                    gamePage.visible = true
+                    newGamePage.visible = false
                 }
             }
         }
@@ -181,4 +195,5 @@ Item {
             }
         }
     }
+
 }

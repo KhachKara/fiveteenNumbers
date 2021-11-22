@@ -1,14 +1,12 @@
 import QtQuick 2.0
+import QtQuick.Controls 2.5
+import Common 43.21
 
 Item {
     id: root
-    implicitHeight: gameArea.implicitHeight + infoBoard.implicitHeight
-    implicitWidth: gameArea.implicitWidth + infoBoard.implicitWidth
 
-    function initOtherFields() {
-        gameArea.visible = 1;
-        infoBoard.visible = 1;
-    }
+    implicitWidth: gamePage.implicitWidth
+    implicitHeight: gamePage.implicitHeight
 
     function startGame(size) {
         gameArea.initGame(size);
@@ -20,27 +18,17 @@ Item {
         initOtherFields();
     }
 
-    GameArea {
-        id: gameArea
+    Rectangle {
+        id: gamePage
 
-        visible: false
-        anchors {
-            left: root.left
-            right: infoBoard.left
-            top: root.top
-            bottom: root.bottom
-        }
-    }
+        anchors.fill: parent
+        color: "#4B4453"
 
-    InfoBoard {
-        id: infoBoard
+        GameArea {
+            id: gameArea
 
-        visible: false
-        anchors {
-            bottom: root.bottom
-            top: root.top
-            right: root.right
-            margins: ProjectStyles.projectMargins
+            visible: false
+            anchors.centerIn: parent
         }
     }
 }

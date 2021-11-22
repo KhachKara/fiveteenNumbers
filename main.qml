@@ -14,14 +14,9 @@ Window {
     visible: true
     title: qsTr("15 Numbers")
 
-    GamePage {
-        id: game
-        anchors.fill: parent
-    }
-
-
     WelcomePage {
         id: welcomePage
+
         anchors.fill: parent
         onStartedGame: function(size){
             game.startGame(size);

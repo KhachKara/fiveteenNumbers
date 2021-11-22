@@ -12,6 +12,7 @@ Item {
 
     NewGamePage {
         id: newGamePage
+
         visible: false
         width: parent.width
         height: parent.height
@@ -26,7 +27,7 @@ Item {
 
         Image {
             id: logo
-            source: "./logo.png"
+            source: "./icons/logo.png"
             sourceSize.width: 113
             sourceSize.height: 127
             anchors {
