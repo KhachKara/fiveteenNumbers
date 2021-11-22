@@ -11,14 +11,16 @@ Rectangle {
     property alias txtGameMode: txtGameMode.text
 
 
-    width: 128
+    width: 140
     height: width
     color: "#845EC2"
+    radius: 8
 
     Column {
+        id: col
         spacing: spacingMargin
         anchors {
-            verticalCenter: parent.verticalCenter
+            centerIn: parent
         }
         Repeater {
             model: gameSize
@@ -32,9 +34,10 @@ Rectangle {
                     Rectangle {
                         id: rectGameMode
 
-                        width: (gameMode.width - gameSize * spacingMargin) / gameSize
+                        width: (gameMode.width - (gameSize + 1) * spacingMargin) / gameSize
                         height: width
-                        color: "#B0A8B9"
+                        color: "#20ffffff"
+                        radius: 2
                     }
                 }
             }
