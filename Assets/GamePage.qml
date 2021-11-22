@@ -10,12 +10,12 @@ Item {
 
     function startGame(size) {
         gameArea.initGame(size);
-        initOtherFields();
+//        initOtherFields();
     }
 
     function startGameArray(array) {
         gameArea.initGameArray(array);
-        initOtherFields();
+//        initOtherFields();
     }
 
     Rectangle {
@@ -27,8 +27,9 @@ Item {
         GameArea {
             id: gameArea
 
-            visible: false
-            anchors.centerIn: parent
+//            visible: false
+//            anchors.centerIn: parent
+            anchors.fill: parent
         }
     }
 }

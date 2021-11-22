@@ -10,6 +10,7 @@ Item {
 
     GamePage {
         id: gamePage
+        anchors.fill: parent
         visible: true
     }
 
@@ -84,6 +85,7 @@ Item {
                 onClicked: {
                     gamePage.visible = true
                     newGamePage.visible = false
+                    gamePage.startGame(3);
                 }
             }
         }

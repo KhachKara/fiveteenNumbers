@@ -7,22 +7,22 @@ Item {
 
     signal startedGame(int size)
 
-    implicitWidth: welcomePage.implicitWidth
-    implicitHeight: welcomePage.implicitHeight
+//    implicitWidth: welcomePage.implicitWidth
+//    implicitHeight: welcomePage.implicitHeight
 
     NewGamePage {
         id: newGamePage
 
+        anchors.fill: parent
         visible: false
-        width: parent.width
-        height: parent.height
+//        width: parent.width
+//        height: parent.height
     }
 
     Rectangle {
         id: welcomePage
 
         anchors.fill: parent
-
         color: "#4B4453"
 
         Image {
