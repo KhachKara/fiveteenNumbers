@@ -7,16 +7,12 @@ Item {
 
     signal startedGame(int size)
 
-//    implicitWidth: welcomePage.implicitWidth
-//    implicitHeight: welcomePage.implicitHeight
 
     NewGamePage {
         id: newGamePage
 
         anchors.fill: parent
         visible: false
-//        width: parent.width
-//        height: parent.height
     }
 
     Rectangle {
