@@ -43,7 +43,9 @@ Item {
                     cursorShape = Qt.ArrowCursor
                 }
                 onClicked: {
+                    // фукция обнуления игры которой еще нет
                     newGamePage.visible = true
+                    gamePage.visible = false
                 }
             }
         }
@@ -74,6 +76,7 @@ Item {
                     cursorShape = Qt.ArrowCursor
                 }
                 onClicked: {
+                    // фукция обнуления игры которой еще нет
                     welcomePage.visible = true
                 }
             }

@@ -15,6 +15,12 @@ Item {
         visible: false
     }
 
+    GamePage {
+        id: gamePage
+        anchors.fill: parent
+        visible: false
+    }
+
     Rectangle {
         id: welcomePage
 
@@ -77,6 +83,7 @@ Item {
                         onClicked: {
                             if (rectText.text === "New game") {
                                 welcomePage.visible = false
+                                gamePage.visible = false
                                 newGamePage.visible = true
                                 console.log("new game page")
                             } else if (rectText.text === "Rate") {
