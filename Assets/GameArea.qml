@@ -87,7 +87,7 @@ Item {
         let nullPoint = findFreePosition();
         if (stepPoint === nullPoint) {
             // Клик на пустую клетку.
-            return;
+            return false;
         }
 
         let i; // для циклов
@@ -126,8 +126,11 @@ Item {
                     }
                 }
             }
+        } else {
+            return false;
         }
-        return false;
+        ++p.stepsCount;
+        return true;
     }
 
     // Инициализирует игру.
@@ -148,6 +151,7 @@ Item {
             }
         }
         updateSquaresWidth();
+        p.initOtherFields();
     }
 
     // Инициализирует начальное положение клеток по порядку.
@@ -227,6 +231,19 @@ Item {
         [array[indOfv1], array[indOfv2]] = [
           array[indOfv2], array[indOfv1]];
         return checkArrayForGame(array);
+    }
+
+    QtObject {
+        id: p
+        property int stepsCount
+        property date gameStart
+        property date gameFinish
+
+        function initOtherFields() {
+            p.stepsCount = 0;
+            p.gameStart = Date.now();
+            p.gameFinish = null;
+        }
     }
 
     Component {
