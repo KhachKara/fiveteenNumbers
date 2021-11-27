@@ -30,6 +30,9 @@ Item {
             top: root.top
             bottom: root.bottom
         }
+        onFinished: {
+            console.log('Game Over! ! !')
+        }
     }
 
     InfoBoard {

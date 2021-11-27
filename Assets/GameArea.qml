@@ -4,11 +4,13 @@ import Common 43.21
 Item {
     id: root    // всегда пишем айди у корневого элемента и всегда называем его root.
 
-    // Наша матрица объектов.
-    property var squares: []
-    property int size: 4
+    readonly property alias stepCount: p.stepsCount
+    readonly property alias gameStart: p.gameStart
+    readonly property alias gameFinish: p.gameFinish
+    readonly property int squareWidth: gameArea.width / p.size
 
-    readonly property int squareWidth: gameArea.width / size
+    // При окончании игры.
+    signal finished()
 
     onSquareWidthChanged: p.updateSquaresWidth()
 
@@ -22,18 +24,24 @@ Item {
 
     // Инициализирует игру по последовательности array.
     function initGameArray(array) {
-        root.size = Math.sqrt(array.length);
-        for (let j = 0; j < size; ++j) {
-            squares.push([]);
-            for (let i = 0; i < size; ++i) {
+        console.log('init game', array.join(' '))
+        if (!checkArrayForGame(array)){
+            return;
+        }
+
+        p.size = Math.sqrt(array.length);
+        for (let j = 0; j < p.size; ++j) {
+            p.squares.push([]);
+            for (let i = 0; i < p.size; ++i) {
                 let sq = squareComponent.incubateObject(gameArea, {
-                                                            number: array[j * size + i]
+                                                            number: array[j * p.size + i]
                                                         }, Qt.Synchronous);
-                squares[j].push(sq.object);
+                p.squares[j].push(sq.object);
             }
         }
         p.updateSquaresWidth();
         p.initOtherFields();
+        p.checkToFinish();
     }
 
     // Инициализирует начальное положение клеток по порядку.
@@ -63,22 +71,30 @@ Item {
             console.log('Не верный формат аргументов');
             return false;
         }
+        let e = parseInt(indZero / size); // на какой строке пустая клетка начиная с 0
+
+        let rightPart = (size - 1) * (e - 1) + 1;
 
         let array = arrayOrig.slice(); // make copy array;
-
-        let N = parseInt(indZero / size); // на какой строке пустая клетка
         array.splice(indZero, 1); // удалил нолик из массива.
-        for(let i = 0; i < array.length; ++i) {
-            for (let j = 0; j < i; ++j) {
-                N += array[i] < array[j];
+
+        let summ = 0;
+
+        for (let i = 0; i < array.length - 1; ++i) {
+            for (let j = i; j < array.length; ++j) {
+                summ += array[i] > array[j];
             }
         }
-        return ((size % 2) && !(N % 2))
-                || (!(size % 2) && (N % 2));
+        let result = summ + rightPart;
+        console.log(size, e, rightPart, summ, result);
+        return result % 2;
     }
 
     QtObject {
         id: p
+        // Наша матрица объектов.
+        property var squares: []
+        property int size
         property int stepsCount
         property date gameStart
         property date gameFinish
@@ -87,6 +103,23 @@ Item {
             p.stepsCount = 0;
             p.gameStart = new Date;
             p.gameFinish = new Date(0);
+        }
+
+        function checkToFinish() {
+            let i, j;
+            for (i = 0; i < p.size; ++i) {
+                for (j = 0; j < p.size; ++j) {
+                    if (squares[i][j].number !== i * p.size + j + 1) {
+                        if (i === p.size - 1 && j === p.size - 1 && squares[i][j].number === 0) {
+                            continue;
+                        }
+                        return false;
+                    }
+                }
+            }
+            p.gameFinish = new Date;
+            root.finished();
+            return true;
         }
 
         // Находим пустую клетку.
@@ -204,6 +237,10 @@ Item {
                 return false;
             }
             ++p.stepsCount;
+            if (p.checkToFinish()) {
+                p.clearGame();
+            }
+
             return true;
         }
 
@@ -243,6 +280,16 @@ Item {
             [array[indOfv1], array[indOfv2]] = [
               array[indOfv2], array[indOfv1]];
             return checkArrayForGame(array);
+        }
+
+        function clearGame() {
+            for (let i = 0; i < size; ++i) {
+                for (let j = 0; j < size; ++ j) {
+                    squares[i][j].destroy();
+                }
+            }
+
+            squares = []
         }
     }
 
