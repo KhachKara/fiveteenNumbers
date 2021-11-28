@@ -17,6 +17,7 @@ Item {
     implicitWidth: gameArea.implicitWidth
     implicitHeight: gameArea.implicitHeight
 
+
     // Инициализирует игру.
     function initGame(size) {
         initGameRandom(size);
@@ -182,7 +183,7 @@ Item {
         // Поменять местами квадраты и обновить позиции.
         function swap2squares(p1, p2) {
             [squares[p1.y][p1.x], squares[p2.y][p2.x]] = [
-              squares[p2.y][p2.x], squares[p1.y][p1.x]];
+                                                           squares[p2.y][p2.x], squares[p1.y][p1.x]];
             updateOneSquarePositions(squares[p1.y][p1.x], p1.y, p1.x);
             updateOneSquarePositions(squares[p2.y][p2.x], p2.y, p2.x);
         }
@@ -238,7 +239,10 @@ Item {
             }
             ++p.stepsCount;
             if (p.checkToFinish()) {
-                p.clearGame();
+
+                // ----------- Khach --------------
+                //                p.clearGame();
+                ma.enabled = false;
             }
 
             return true;
@@ -247,21 +251,21 @@ Item {
         // Размешивает массив.
         // from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
         function shuffle(array) {
-          let currentIndex = array.length,  randomIndex;
+            let currentIndex = array.length,  randomIndex;
 
-          // While there remain elements to shuffle...
-          while (currentIndex !== 0) {
+            // While there remain elements to shuffle...
+            while (currentIndex !== 0) {
 
-            // Pick a remaining element...
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex--;
+                // Pick a remaining element...
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
 
-            // And swap it with the current element.
-            [array[currentIndex], array[randomIndex]] = [
-              array[randomIndex], array[currentIndex]];
-          }
+                // And swap it with the current element.
+                [array[currentIndex], array[randomIndex]] = [
+                                                              array[randomIndex], array[currentIndex]];
+            }
 
-          return array;
+            return array;
         }
 
         // Инициализирует последовательно массив начиная с startNum.
@@ -278,7 +282,7 @@ Item {
             let indOfv1 = array.indexOf(v);
             let indOfv2 = array.indexOf(v + 1);
             [array[indOfv1], array[indOfv2]] = [
-              array[indOfv2], array[indOfv1]];
+                                                 array[indOfv2], array[indOfv1]];
             return checkArrayForGame(array);
         }
 
@@ -301,8 +305,6 @@ Item {
     Rectangle {
         id: gameArea
 
-        implicitWidth: ProjectStyles.gameSide
-        implicitHeight: ProjectStyles.gameSide
         anchors.centerIn: parent
         width: Math.min(root.width, root.height)
         height: width

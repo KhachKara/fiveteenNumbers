@@ -2,12 +2,12 @@ import QtQuick 2.0
 
 Item {
     id: root
-    implicitHeight: gameArea.implicitHeight + infoBoard.implicitHeight
-    implicitWidth: gameArea.implicitWidth + infoBoard.implicitWidth
+    implicitHeight: gameArea.implicitHeight
+    implicitWidth: gameArea.implicitWidth
 
     function initOtherFields() {
         gameArea.visible = 1;
-        infoBoard.visible = 1;
+        //        infoBoard.visible = 1;
     }
 
     function startGame(size) {
@@ -23,27 +23,30 @@ Item {
     GameArea {
         id: gameArea
 
-        visible: false
         anchors {
-            left: root.left
-            right: infoBoard.left
-            top: root.top
-            bottom: root.bottom
+            fill: parent
+            leftMargin: 30
+            rightMargin: 30
+            topMargin: 259
+            bottomMargin: 81
         }
         onFinished: {
             console.log('Game Over! ! !')
+            txtGameOver.visible = true
         }
     }
 
-    InfoBoard {
-        id: infoBoard
+    // ---------------- Khach -----------------
 
-        visible: false
-        anchors {
-            bottom: root.bottom
-            top: root.top
-            right: root.right
-            margins: ProjectStyles.projectMargins
+    Text {
+        id: txtGameOver
+        text: qsTr("Game Over")
+        font {
+            pixelSize: 40
+            bold: true
         }
+        color: Qt.rgba(208,141,45,0.5)
+        visible: false
+        anchors.centerIn: gameArea
     }
 }

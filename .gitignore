@@ -75,4 +75,5 @@ Thumbs.db
 /.idea
 /build-*
 ~*
-
+*.user
+/fiveteenNumbers.pro.user
