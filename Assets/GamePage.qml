@@ -1,98 +1,49 @@
 import QtQuick 2.0
-import QtQuick.Controls 2.5
-import Common 43.21
 
 Item {
     id: root
+    implicitHeight: gameArea.implicitHeight + infoBoard.implicitHeight
+    implicitWidth: gameArea.implicitWidth + infoBoard.implicitWidth
 
-    implicitWidth: gamePage.implicitWidth
-    implicitHeight: gamePage.implicitHeight
+    function initOtherFields() {
+        gameArea.visible = 1;
+        infoBoard.visible = 1;
+    }
 
     function startGame(size) {
         gameArea.initGame(size);
+        initOtherFields();
     }
 
     function startGameArray(array) {
         gameArea.initGameArray(array);
+        initOtherFields();
     }
 
+    GameArea {
+        id: gameArea
 
-    Rectangle {
-        id: gamePage
-
-        anchors.fill: parent
-        color: "#4B4453"
-
-        Image {
-            id: back
-            source: "./icons/back.svg"
-            anchors {
-                left: parent.left
-                leftMargin: 30
-                verticalCenter: txtNewGame.verticalCenter
-            }
-            MouseArea {
-                anchors.fill: parent
-                hoverEnabled: true
-
-                onEntered: {
-                    cursorShape = Qt.PointingHandCursor
-                }
-
-                onExited: {
-                    cursorShape = Qt.ArrowCursor
-                }
-                onClicked: {
-                    // фукция обнуления игры которой еще нет
-                    newGamePage.visible = true
-                    gamePage.visible = false
-                }
-            }
+        visible: false
+        anchors {
+            left: root.left
+            right: infoBoard.left
+            top: root.top
+            bottom: root.bottom
         }
-
-        Text {
-            id: txtNewGame
-            text: qsTr("Home")
-            color: "#B0A8B9"
-            anchors {
-                horizontalCenter: parent.horizontalCenter
-                top: parent.top
-                topMargin: 32
-            }
-            font {
-                family: "Ubuntu"
-                pixelSize: 22
-            }
-
-            MouseArea {
-                anchors.fill: parent
-                hoverEnabled: true
-
-                onEntered: {
-                    cursorShape = Qt.PointingHandCursor
-                }
-
-                onExited: {
-                    cursorShape = Qt.ArrowCursor
-                }
-                onClicked: {
-                    // фукция обнуления игры которой еще нет
-                    welcomePage.visible = true
-                }
-            }
-
+        onFinished: {
+            console.log('Game Over! ! !')
         }
+    }
 
-        GameArea {
-            id: gameArea
+    InfoBoard {
+        id: infoBoard
 
-            anchors {
-                fill: parent
-                leftMargin: 30
-                rightMargin: 30
-                topMargin: 259
-                bottomMargin: 81
-            }
+        visible: false
+        anchors {
+            bottom: root.bottom
+            top: root.top
+            right: root.right
+            margins: ProjectStyles.projectMargins
         }
     }
 }
