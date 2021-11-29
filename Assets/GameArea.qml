@@ -9,6 +9,8 @@ Item {
     readonly property alias gameFinish: p.gameFinish
     readonly property int squareWidth: gameArea.width / p.size
 
+    property alias size: p.size  // khach
+
     // При окончании игры.
     signal finished()
 
@@ -276,7 +278,7 @@ Item {
             return array;
         }
 
-        // Попытка исправить игру. (Исли изначально игра с решением, то он делает ее нерешаемой)
+        // Попытка исправить игру. (Если изначально игра с решением, то он делает ее нерешаемой)
         function tryToFixArray(array) {
             let v = 1 + parseInt(Math.random() * (array.length - 2)); // 1..length - 1
             let indOfv1 = array.indexOf(v);
@@ -306,6 +308,7 @@ Item {
         id: gameArea
 
         anchors.centerIn: parent
+
         width: Math.min(root.width, root.height)
         height: width
 

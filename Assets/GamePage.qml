@@ -1,6 +1,8 @@
 import QtQuick 2.0
 
 Item {
+    Component.onCompleted: console.log(gameArea.size)
+
     id: root
     implicitHeight: gameArea.implicitHeight
     implicitWidth: gameArea.implicitWidth
@@ -45,7 +47,7 @@ Item {
             pixelSize: 40
             bold: true
         }
-        color: Qt.rgba(208,141,45,0.5)
+        color: Qt.rgba(255,255,255,0.8)
         visible: false
         anchors.centerIn: gameArea
     }
