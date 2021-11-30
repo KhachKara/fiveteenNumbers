@@ -117,6 +117,11 @@ Item {
                     onExited: {
                         cursorShape = Qt.ArrowCursor
                     }
+                    onClicked: {
+                        gamePage.visible = true
+                        newGamePage.visible = false
+                        gamePage.startGame(4);
+                    }
                 }
             }
 
@@ -137,62 +142,10 @@ Item {
                     onExited: {
                         cursorShape = Qt.ArrowCursor
                     }
-                }
-            }
-        }
-
-        Row {
-            id: secondRow
-
-            anchors {
-                horizontalCenter: parent.horizontalCenter
-                top: firstRow.bottom
-                topMargin: 10
-            }
-
-            spacing: 11
-
-            anchors {
-                horizontalCenter: parent.horizontalCenter
-                top: gameStyle3X3.bottom
-                topMargin: 10
-            }
-            GameStyleRect {
-                id: gameStyle6X6
-
-                gameSize: 6
-                txtGameMode: gameSize + "x" + gameSize
-
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-
-                    onEntered: {
-                        cursorShape = Qt.PointingHandCursor
-                    }
-
-                    onExited: {
-                        cursorShape = Qt.ArrowCursor
-                    }
-                }
-            }
-
-            GameStyleRect {
-                id: gameStyle7X7
-
-                gameSize: 7
-                txtGameMode: gameSize + "x" + gameSize
-
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-
-                    onEntered: {
-                        cursorShape = Qt.PointingHandCursor
-                    }
-
-                    onExited: {
-                        cursorShape = Qt.ArrowCursor
+                    onClicked: {
+                        gamePage.visible = true
+                        newGamePage.visible = false
+                        gamePage.startGame(5);
                     }
                 }
             }

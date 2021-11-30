@@ -1,11 +1,12 @@
 import QtQuick 2.0
 
-Item {
-    Component.onCompleted: console.log(gameArea.size)
-
+Rectangle {
     id: root
     implicitHeight: gameArea.implicitHeight
     implicitWidth: gameArea.implicitWidth
+
+    anchors.fill: parent
+    color: "#4B4453"
 
     function initOtherFields() {
         gameArea.visible = 1;
