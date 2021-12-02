@@ -89,6 +89,18 @@ Item {
         return result % 2;
     }
 
+    // Возвращает время игры от начала (до финиша, если был финиш) в формате h:mm
+    function gameTime() {
+        if (!p.gameFinish) {
+            p.gameFinish = new Date;
+        }
+        let different = p.gameFinish - p.gameStart;
+        let m = Math.floor(different / 60000);
+        let s = Math.round((different % 60000) / 1000);
+
+        return '%1:%2'.arg(m).arg(s > 9 ? s : '0' + s)
+    }
+
     QtObject {
         id: p
         // Наша матрица объектов.
