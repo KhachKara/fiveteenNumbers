@@ -8,25 +8,22 @@ import "./Assets/componentCreation.js" as SquareCreationScript
 Window {
     id: root
 
-    width: 400
-    height: 400
+    width: 360
+    height: 640
 
     visible: true
     title: qsTr("15 Numbers")
 
-    GamePage {
-        id: game
-        anchors.fill: parent
-    }
-
-
     WelcomePage {
         id: welcomePage
+
         anchors.fill: parent
         onStartedGame: function(size){
             game.startGame(size);
         }
     }
+
+
     Component.onCompleted: {
         console.log(_arguments);
         if (_arguments.length === 1) {

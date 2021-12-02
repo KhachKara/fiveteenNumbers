@@ -6,8 +6,12 @@
         <file>Assets/componentCreation.js</file>
         <file>Assets/GameArea.qml</file>
         <file>Assets/WelcomePage.qml</file>
-        <file>Assets/gradientFill.svg</file>
-        <file>Assets/InfoBoard.qml</file>
+        <file>Assets/icons/gradientFill.svg</file>
+        <file>Assets/icons/logo.png</file>
+        <file>Assets/NewGamePage.qml</file>
+        <file>Assets/GameStyleRect.qml</file>
+        <file>Assets/icons/back.svg</file>
+        <file>Assets/icons/pause.svg</file>
         <file>Assets/GamePage.qml</file>
     </qresource>
 </RCC>

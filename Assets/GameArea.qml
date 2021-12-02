@@ -8,6 +8,7 @@ Item {
     readonly property alias gameStart: p.gameStart
     readonly property alias gameFinish: p.gameFinish
     readonly property int squareWidth: gameArea.width / p.size
+    readonly property alias size: p.size  // khach
 
     // При окончании игры.
     signal finished()
@@ -247,21 +248,21 @@ Item {
         // Размешивает массив.
         // from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
         function shuffle(array) {
-          let currentIndex = array.length,  randomIndex;
+            let currentIndex = array.length,  randomIndex;
 
-          // While there remain elements to shuffle...
-          while (currentIndex !== 0) {
+            // While there remain elements to shuffle...
+            while (currentIndex !== 0) {
 
-            // Pick a remaining element...
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex--;
+                // Pick a remaining element...
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
 
-            // And swap it with the current element.
-            [array[currentIndex], array[randomIndex]] = [
-              array[randomIndex], array[currentIndex]];
-          }
+                // And swap it with the current element.
+                [array[currentIndex], array[randomIndex]] = [
+                  array[randomIndex], array[currentIndex]];
+            }
 
-          return array;
+            return array;
         }
 
         // Инициализирует последовательно массив начиная с startNum.
@@ -272,7 +273,7 @@ Item {
             return array;
         }
 
-        // Попытка исправить игру. (Исли изначально игра с решением, то он делает ее нерешаемой)
+        // Попытка исправить игру. (Если изначально игра с решением, то он делает ее нерешаемой)
         function tryToFixArray(array) {
             let v = 1 + parseInt(Math.random() * (array.length - 2)); // 1..length - 1
             let indOfv1 = array.indexOf(v);
@@ -301,9 +302,8 @@ Item {
     Rectangle {
         id: gameArea
 
-        implicitWidth: ProjectStyles.gameSide
-        implicitHeight: ProjectStyles.gameSide
         anchors.centerIn: parent
+
         width: Math.min(root.width, root.height)
         height: width
 
