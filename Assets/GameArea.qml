@@ -39,6 +39,7 @@ Item {
         }
         p.updateSquaresWidth();
         p.initOtherFields();
+        gameContinue();
         p.checkToFinish();
     }
 
@@ -89,13 +90,13 @@ Item {
     }
 
     function gamePause() {
-        p.timer.stop();
+        timer.stop();
         gameArea.enabled = false;
     }
 
     function gameContinue() {
         gameArea.enabled = true;
-        p.timer.start();
+        timer.start();
     }
 
     QtObject {
@@ -103,9 +104,9 @@ Item {
         // Наша матрица объектов.
         property var squares: []
         property int size
-        readonly property int squareWidth: p.size === 0 ? 0 : gameArea.width / size
-        property int stepsCount
-        property int gameTimeSec
+        readonly property int squareWidth: p.size === 0 ? 0 : gameArea.width / p.size
+        property int stepsCount: 0
+        property int gameTimeSec: 0
         property date gameStart
         property date gameFinish
 
@@ -130,6 +131,7 @@ Item {
                     }
                 }
             }
+            root.gamePause();
             p.gameFinish = new Date;
             root.finished();
             return true;
