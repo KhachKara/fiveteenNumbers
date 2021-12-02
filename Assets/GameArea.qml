@@ -5,8 +5,7 @@ Item {
     id: root    // всегда пишем айди у корневого элемента и всегда называем его root.
 
     readonly property alias stepCount: p.stepsCount
-    readonly property alias gameStart: p.gameStart
-    readonly property alias gameFinish: p.gameFinish
+    readonly property alias gameTimeSec: p.gameTimeSec
     readonly property alias size: p.size
 
     // При окончании игры.
@@ -89,20 +88,14 @@ Item {
         return result % 2;
     }
 
-    // Возвращает время игры от начала (до финиша, если был финиш) в формате h:mm
-    function gameTime() {
-        if (!p.gameStart) {
-            return '00:00';
-        }
+    function gamePause() {
+        p.timer.stop();
+        gameArea.enabled = false;
+    }
 
-        if (!p.gameFinish) {
-            p.gameFinish = new Date;
-        }
-        let different = p.gameFinish - p.gameStart;
-        let m = Math.floor(different / 60000);
-        let s = Math.round((different % 60000) / 1000);
-
-        return '%1:%2'.arg(m).arg(s > 9 ? s : '0' + s)
+    function gameContinue() {
+        gameArea.enabled = true;
+        p.timer.start();
     }
 
     QtObject {
@@ -112,6 +105,7 @@ Item {
         property int size
         readonly property int squareWidth: size === 0 ? 0 : gameArea.width / size
         property int stepsCount
+        property int gameTimeSec
         property date gameStart
         property date gameFinish
 
@@ -119,6 +113,7 @@ Item {
 
         function initOtherFields() {
             p.stepsCount = 0;
+            p.gameTimeSec = 0;
             p.gameStart = new Date;
             p.gameFinish = new Date(0);
         }
@@ -308,6 +303,15 @@ Item {
             }
 
             squares = []
+        }
+    }
+
+    Timer {
+        id: timer
+        interval: 1000
+        repeat: true
+        onTriggered: {
+            ++p.gameTimeSec;
         }
     }
 
