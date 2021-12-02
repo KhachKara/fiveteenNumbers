@@ -25,6 +25,7 @@ Item {
 
     // Инициализирует игру по последовательности array.
     function initGameArray(array) {
+        p.clearGame();
         console.log('init game', array.join(' '))
         if (!checkArrayForGame(array)){
             return;
