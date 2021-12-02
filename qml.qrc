@@ -13,5 +13,6 @@
         <file>Assets/icons/back.svg</file>
         <file>Assets/icons/pause.svg</file>
         <file>Assets/GamePage.qml</file>
+        <file>Assets/newSquare.qml</file>
     </qresource>
 </RCC>
