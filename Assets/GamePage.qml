@@ -124,7 +124,7 @@ Rectangle {
 
     Text {
         id: txtTimeValue
-        text: "00:00"
+        text: formatTime(gameArea.gameTimeSec)
 
         anchors {
             top: txtTime.bottom
@@ -168,6 +168,13 @@ Rectangle {
     function startGameArray(array) {
         gameArea.initGameArray(array);
         initOtherFields();
+    }
+
+    function formatTime(sec) {
+        let m = Math.floor(sec / 60);
+        let s = sec % 60;
+
+        return '%1:%2'.arg(m).arg(s > 9 ? s : '0' + s)
     }
 
     GameArea {
