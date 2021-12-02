@@ -38,6 +38,9 @@ Rectangle {
             onClicked: {
                 console.log("back")
                 newGamePage.visible = true
+                gameArea.enabled = true
+                txtGameOver.visible = false
+                txtTimeValue.text = "00:00"
             }
         }
     }
@@ -59,10 +62,9 @@ Rectangle {
         }
     }
 
-    property int stepsValue: 0
     Text {
         id: txtStepsValue
-        text: stepsValue
+        text: gameArea.stepCount
 
         anchors {
             top: txtSteps.bottom
@@ -94,10 +96,9 @@ Rectangle {
         }
     }
 
-    property string time: "03:24"
     Text {
         id: txtTimeValue
-        text: time
+        text: "00:00"
 
         anchors {
             top: txtTime.bottom
@@ -155,6 +156,9 @@ Rectangle {
         }
         onFinished: {
             console.log('Game Over! ! !')
+            txtGameOver.visible = true
+            txtTimeValue.text = gameArea.gameTime()
+            gameArea.enabled = false
             txtGameOver.visible = true
         }
     }
