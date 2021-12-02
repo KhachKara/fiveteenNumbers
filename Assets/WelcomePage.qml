@@ -96,6 +96,7 @@ Item {
                                 console.log("settings page")
                             } else {
                                 console.log("quit page")
+                                Qt.quit()
                             }
                         }
                     }

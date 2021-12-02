@@ -11,6 +11,7 @@ Item {
 
     property alias size: p.size  // khach
 
+
     // При окончании игры.
     signal finished()
 

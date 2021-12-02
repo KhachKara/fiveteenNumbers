@@ -61,6 +61,7 @@ Item {
             }
         }
 
+        // 3x3
         GameStyleRect {
             id: gameStyle3X3
 
@@ -86,67 +87,74 @@ Item {
                 onClicked: {
                     gamePage.visible = true
                     newGamePage.visible = false
-                    gamePage.startGame(3);
+                    gamePage.startGame(gameStyle3X3.gameSize)
+                    gamePage.gameSize = gameStyle3X3.gameSize
                 }
             }
         }
 
-        Row {
-            id: firstRow
-            spacing: 10
+        // 4x4
+        GameStyleRect {
+            id: gameStyle4X4
+
+            gameSize: 4
+            txtGameMode: gameSize + "x" + gameSize
 
             anchors {
                 horizontalCenter: parent.horizontalCenter
                 top: gameStyle3X3.bottom
                 topMargin: 8
             }
-            GameStyleRect {
-                id: gameStyle4X4
 
-                gameSize: 4
-                txtGameMode: gameSize + "x" + gameSize
+            MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
 
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
+                onEntered: {
+                    cursorShape = Qt.PointingHandCursor
+                }
 
-                    onEntered: {
-                        cursorShape = Qt.PointingHandCursor
-                    }
-
-                    onExited: {
-                        cursorShape = Qt.ArrowCursor
-                    }
-                    onClicked: {
-                        gamePage.visible = true
-                        newGamePage.visible = false
-                        gamePage.startGame(4);
-                    }
+                onExited: {
+                    cursorShape = Qt.ArrowCursor
+                }
+                onClicked: {
+                    gamePage.visible = true
+                    newGamePage.visible = false
+                    gamePage.startGame(gameStyle4X4.gameSize)
+                    gamePage.gameSize = gameStyle4X4.gameSize
                 }
             }
+        }
 
-            GameStyleRect {
-                id: gameStyle5X5
+        // 4x4
+        GameStyleRect {
+            id: gameStyle5X5
 
-                gameSize: 5
-                txtGameMode: gameSize + "x" + gameSize
+            gameSize: 5
+            txtGameMode: gameSize + "x" + gameSize
 
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                top: gameStyle4X4.bottom
+                topMargin: 8
+            }
 
-                    onEntered: {
-                        cursorShape = Qt.PointingHandCursor
-                    }
+            MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
 
-                    onExited: {
-                        cursorShape = Qt.ArrowCursor
-                    }
-                    onClicked: {
-                        gamePage.visible = true
-                        newGamePage.visible = false
-                        gamePage.startGame(5);
-                    }
+                onEntered: {
+                    cursorShape = Qt.PointingHandCursor
+                }
+
+                onExited: {
+                    cursorShape = Qt.ArrowCursor
+                }
+                onClicked: {
+                    gamePage.visible = true
+                    newGamePage.visible = false
+                    gamePage.startGame(gameStyle5X5.gameSize)
+                    gamePage.gameSize = gameStyle5X5.gameSize
                 }
             }
         }
