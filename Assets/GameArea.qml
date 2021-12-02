@@ -103,7 +103,7 @@ Item {
         // Наша матрица объектов.
         property var squares: []
         property int size
-        readonly property int squareWidth: size === 0 ? 0 : gameArea.width / size
+        readonly property int squareWidth: p.size === 0 ? 0 : gameArea.width / size
         property int stepsCount
         property int gameTimeSec
         property date gameStart

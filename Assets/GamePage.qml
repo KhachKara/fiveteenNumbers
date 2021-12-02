@@ -16,6 +16,32 @@ Rectangle {
 
 
     Image {
+        id: pause
+        source: "./icons/pause.svg"
+        anchors {
+            top: parent.top
+            left: back.right
+            leftMargin: 10
+            topMargin: 32
+        }
+        MouseArea {
+            anchors.fill: parent
+            hoverEnabled: true
+
+            onEntered: {
+                cursorShape = Qt.PointingHandCursor
+            }
+
+            onExited: {
+                cursorShape = Qt.ArrowCursor
+            }
+            onClicked: {
+                console.log("pause")
+            }
+        }
+    }
+
+    Image {
         id: back
         source: "./icons/back.svg"
         anchors {
@@ -157,7 +183,7 @@ Rectangle {
         onFinished: {
             console.log('Game Over! ! !')
             txtGameOver.visible = true
-            txtTimeValue.text = gameArea.gameTime()
+            txtTimeValue.text = toString(gameArea.gameTimeSec)
             gameArea.enabled = false
             txtGameOver.visible = true
         }
