@@ -91,6 +91,10 @@ Item {
 
     // Возвращает время игры от начала (до финиша, если был финиш) в формате h:mm
     function gameTime() {
+        if (!p.gameStart) {
+            return '00:00';
+        }
+
         if (!p.gameFinish) {
             p.gameFinish = new Date;
         }
