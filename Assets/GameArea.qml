@@ -240,7 +240,7 @@ Item {
             }
             ++p.stepsCount;
             if (p.checkToFinish()) {
-                p.clearGame();
+//                p.clearGame();
             }
 
             return true;
