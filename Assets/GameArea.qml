@@ -7,13 +7,10 @@ Item {
     readonly property alias stepCount: p.stepsCount
     readonly property alias gameStart: p.gameStart
     readonly property alias gameFinish: p.gameFinish
-    readonly property int squareWidth: gameArea.width / p.size
-    readonly property alias size: p.size  // khach
+    readonly property alias size: p.size
 
     // При окончании игры.
     signal finished()
-
-    onSquareWidthChanged: p.updateSquaresWidth()
 
     implicitWidth: gameArea.implicitWidth
     implicitHeight: gameArea.implicitHeight
@@ -97,9 +94,12 @@ Item {
         // Наша матрица объектов.
         property var squares: []
         property int size
+        readonly property int squareWidth: size === 0 ? 0 : gameArea.width / size
         property int stepsCount
         property date gameStart
         property date gameFinish
+
+        onSquareWidthChanged: updateSquaresWidth()
 
         function initOtherFields() {
             p.stepsCount = 0;
@@ -316,8 +316,8 @@ Item {
             anchors.fill: gameArea
 
             onClicked: {
-                let r = parseInt(mouseY / root.squareWidth);
-                let c = parseInt(mouseX / root.squareWidth);
+                let r = parseInt(mouseY / p.squareWidth);
+                let c = parseInt(mouseX / p.squareWidth);
                 p.gameStep(Qt.point(c, r));
             }
         }
