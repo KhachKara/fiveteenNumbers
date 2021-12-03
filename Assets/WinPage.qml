@@ -6,13 +6,13 @@ Rectangle {
 
     visible: false
 
-    opacity: 0.8
+//    opacity: 0.8
 
     radius: 15
     color: "#FFFFFF"
 
     Text {
-        id: youWin
+        id: youWinTxt
 
         text: qsTr("You'r win!")
         color: "#845EC2"
@@ -34,7 +34,7 @@ Rectangle {
 
         anchors {
             horizontalCenter: winPage.horizontalCenter
-            top: youWin.bottom
+            top: youWinTxt.bottom
             topMargin: 31
 
         }
@@ -43,7 +43,7 @@ Rectangle {
     Rectangle {
         id: continueBtn
 
-        height: 51
+        height: 71
 
         radius: 8
         color: "#845EC2"
@@ -54,7 +54,8 @@ Rectangle {
             right: parent.right
             leftMargin: 30
             rightMargin: 30
-            topMargin: 20
+            topMargin: 26
+
         }
 
         Text {
@@ -95,7 +96,7 @@ Rectangle {
     Rectangle {
         id: rateBtn
 
-        height: 51
+        height: 71
 
         radius: 8
         color: "#845EC2"
@@ -106,7 +107,7 @@ Rectangle {
             right: parent.right
             leftMargin: 30
             rightMargin: 30
-            topMargin: 10
+            topMargin: 12
         }
 
         MouseArea {
@@ -126,7 +127,7 @@ Rectangle {
                 ratePage.visible = true
             }
         }
-
+        // я предпочитаю не раотать с контурами
         Rectangle {
             radius: 5
             color: "#FFFFFF"
@@ -142,52 +143,6 @@ Rectangle {
                     pixelSize: 32
                 }
                 anchors.centerIn: parent
-            }
-        }
-    }
-
-    Rectangle {
-        id: quitBtn
-
-        height: 51
-
-        radius: 8
-        color: "#845EC2"
-
-        anchors {
-            top: rateBtn.bottom
-            left: parent.left
-            right: parent.right
-            leftMargin: 30
-            rightMargin: 30
-            topMargin: 10
-        }
-
-        Text {
-            text: qsTr("Quit")
-            color: "#FFFFFF"
-            font {
-                family: "Ubuntu"
-                pixelSize: 32
-            }
-            anchors.centerIn: parent
-        }
-
-        MouseArea {
-            anchors.fill: parent
-
-            hoverEnabled: true
-
-            onEntered: {
-                cursorShape = Qt.PointingHandCursor
-            }
-
-            onExited: {
-                cursorShape = Qt.ArrowCursor
-            }
-
-            onClicked: {
-                Qt.quit()
             }
         }
     }

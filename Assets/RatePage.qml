@@ -10,6 +10,18 @@ Item {
 
     property string nickName: "unknown"
 
+
+
+    GameArea {
+        id: gameArea
+        visible: false
+    }
+
+    GamePage {
+        id: gamePage
+        visible: false
+    }
+
     Rectangle {
         id: ratePage
 
@@ -40,13 +52,13 @@ Item {
                     console.log("back")
                     welcomePage.visible = true
                     gameArea.enabled = true
-                    txtTimeValue.text = "00:00"
+                    gameArea.time = "00:00"
                 }
             }
         }
 
         Text {
-            id: txtNewGame
+            id: txtRate
             text: qsTr("Rate")
             color: "#B0A8B9"
             anchors {
@@ -97,34 +109,57 @@ Item {
                         topMargin: 90
                     }
                     Rectangle {
+                        id: rateIndexRect
                         width: 20
                         height: width
 
-                        anchors.fill: parent
+                        anchors {
+                            top: parent.top
+                            left: parent.left
+                        }
 
                         Text {
-                            id: rate1
+                            id: rateTxt
 
                             anchors.centerIn: parent
                             text: index
                         }
                     }
                     Rectangle {
+                        id: nicknameRect
                         width: 30
                         height: 20
-                    }
-                    Text {
-                        id: nickTxt
-                        text: nickName
+
+                        anchors {
+                            top: parent.top
+                            left: rateIndexRect.right
+                        }
+
+                        Text {
+                            id: nickTxt
+
+                            anchors.fill: parent
+                            text: nickName
+                        }
                     }
                     Rectangle {
                         id: steps
                         height: 20
+
+                        anchors {
+                            top: parent.top
+                            left: nicknameRect.right
+                        }
                     }
                     Rectangle {
                         id: time
                         width: 60
                         height: 20
+
+                        anchors {
+                            top: parent.top
+                            left: steps.right
+                        }
                     }
                 }
             }

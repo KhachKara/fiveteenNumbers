@@ -6,6 +6,9 @@ Rectangle {
     implicitHeight: gameArea.implicitHeight
     implicitWidth: gameArea.implicitWidth
 
+    property alias time: txtTimeValue.text
+    property alias steps: txtStepsValue.text
+
     anchors.fill: parent
     color: "#4B4453"
 
@@ -66,7 +69,6 @@ Rectangle {
                 console.log("back")
                 newGamePage.visible = true
                 gameArea.enabled = true
-                txtGameOver.visible = false
                 txtTimeValue.text = "00:00"
             }
         }
@@ -236,5 +238,4 @@ Rectangle {
             rightMargin: 30
         }
     }
-
 }
