@@ -7,12 +7,18 @@
         <file>Assets/GameArea.qml</file>
         <file>Assets/WelcomePage.qml</file>
         <file>Assets/icons/gradientFill.svg</file>
-        <file>Assets/icons/logo.png</file>
         <file>Assets/NewGamePage.qml</file>
         <file>Assets/GameStyleRect.qml</file>
         <file>Assets/icons/back.svg</file>
         <file>Assets/icons/pause.svg</file>
         <file>Assets/GamePage.qml</file>
-        <file>Assets/newSquare.qml</file>
+        <file>Assets/NewSquare.qml</file>
+        <file>Assets/WinPage.qml</file>
+        <file>Assets/ScoreBoard.qml</file>
+        <file>Assets/icons/emptyStar.svg</file>
+        <file>Assets/icons/filledStar.svg</file>
+        <file>Assets/icons/logo.svg</file>
+        <file>Assets/RatePage.qml</file>
+        <file>Assets/icons/exit.svg</file>
     </qresource>
 </RCC>

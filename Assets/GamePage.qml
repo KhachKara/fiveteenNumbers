@@ -2,6 +2,7 @@ import QtQuick 2.15
 
 Rectangle {
     id: gamePage
+
     implicitHeight: gameArea.implicitHeight
     implicitWidth: gameArea.implicitWidth
 
@@ -67,6 +68,32 @@ Rectangle {
                 gameArea.enabled = true
                 txtGameOver.visible = false
                 txtTimeValue.text = "00:00"
+            }
+        }
+    }
+
+    Image {
+        id: exit
+        source: "./icons/exit.svg"
+        anchors {
+            top: parent.top
+            right: parent.right
+            rightMargin: 30
+            topMargin: 32
+        }
+        MouseArea {
+            anchors.fill: parent
+            hoverEnabled: true
+
+            onEntered: {
+                cursorShape = Qt.PointingHandCursor
+            }
+
+            onExited: {
+                cursorShape = Qt.ArrowCursor
+            }
+            onClicked: {
+                Qt.quit()
             }
         }
     }
@@ -183,30 +210,31 @@ Rectangle {
         anchors {
             fill: parent
             leftMargin: 30
-            rightMargin: 30
+            rightMargin: gameArea.leftMargin
             topMargin: 259
             bottomMargin: 81
         }
         onFinished: {
             console.log('Game Over! ! !')
-            txtGameOver.visible = true
             txtTimeValue.text = toString(gameArea.gameTimeSec)
             gameArea.enabled = false
-            txtGameOver.visible = true
+            winPage.visible = true
         }
     }
 
-    // ---------------- Khach -----------------
+    WinPage {
+        id: winPage
 
-    Text {
-        id: txtGameOver
-        text: qsTr("Game Over")
-        font {
-            pixelSize: 40
-            bold: true
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
+            topMargin: 134
+            bottomMargin: 60
+            left: parent.left
+            right: parent.right
+            leftMargin: 30
+            rightMargin: 30
         }
-        color: Qt.rgba(255,255,255,0.8)
-        visible: false
-        anchors.centerIn: gameArea
     }
+
 }

@@ -7,6 +7,13 @@ Item {
 
     signal startedGame(int size)
 
+    RatePage {
+        id: ratePage
+
+        anchors.fill: parent
+        visible: false
+    }
+
 
     NewGamePage {
         id: newGamePage
@@ -29,13 +36,16 @@ Item {
 
         Image {
             id: logo
-            source: "./icons/logo.png"
+            source: "./icons/logo.svg"
             sourceSize.width: 113
             sourceSize.height: 127
             anchors {
                 horizontalCenter: parent.horizontalCenter
                 top: parent.top
                 topMargin: 67
+            }
+            MouseArea {
+                anchors.fill: logo
             }
         }
 
@@ -87,8 +97,8 @@ Item {
                                 newGamePage.visible = true
                                 console.log("new game page")
                             } else if (rectText.text === "Rate") {
-                                // welcomePage.visible = false
-                                // rate.visible = true
+                                 welcomePage.visible = false
+                                 ratePage.visible = true
                                 console.log("rate page")
                             } else if (rectText.text === "Settings") {
                                 // welcomePage.visible = false

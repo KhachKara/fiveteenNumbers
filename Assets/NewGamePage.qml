@@ -46,6 +46,32 @@ Item {
             }
         }
 
+        Image {
+            id: exit
+            source: "./icons/exit.svg"
+            anchors {
+                top: parent.top
+                right: parent.right
+                rightMargin: 30
+                topMargin: 32
+            }
+            MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+
+                onEntered: {
+                    cursorShape = Qt.PointingHandCursor
+                }
+
+                onExited: {
+                    cursorShape = Qt.ArrowCursor
+                }
+                onClicked: {
+                    Qt.quit()
+                }
+            }
+        }
+
         Text {
             id: txtNewGame
             text: qsTr("New game")
