@@ -22,7 +22,7 @@ Item {  // прозрачный прямоугольник подложка
 
         anchors.centerIn: parent
 
-        color: "#FF8066"
+        color: "#FFAD9C"  // когда на своем месте такой цвет "#FF8066"
 
         Text {
             id: numberText
