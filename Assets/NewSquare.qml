@@ -1,28 +1,26 @@
 import Common 43.21
 import QtQuick 2.2
 
-// комменты после прочтения удали
-
-Item {  // прозрачный прямоугольник подложка
+Item {
     id: root
-    width: 100
+
+    property int number: 0
+
     height: width
 
     Rectangle {
         id: squareRect
 
-        property int number: 0
-
+        anchors.fill: parent
         visible: number > 0
-
-        width: parent.with * 0.7 // между квадратами должно быть 15 пикс
-                                 // поэтому подложка должна якорится к краю squareRect иначе между квадратами будет 30 пикс
-        height: width
-        radius: parent.width * 0.04  // может быть 5 пикс
-
-        anchors.centerIn: parent
-
-        color: "#FFAD9C"  // когда на своем месте такой цвет "#FF8066"
+        color: "transparent"
+        Rectangle {
+            anchors.centerIn: parent
+            width: 0.925926 * parent.width
+            height: width
+            color: "#FF8066"
+            radius: 0.08 * width
+        }
 
         Text {
             id: numberText
@@ -31,8 +29,8 @@ Item {  // прозрачный прямоугольник подложка
             text: number
             color: "#FFFFFF"
             font {
-                family: "Ubuntu"  // стоить создать библиатеку стилей типа TextNetrics
-                pixelSize: 32
+                family: "Ubuntu"
+                pixelSize: squareRect.height - 25 // \todo добавить минимальный размер
             }
         }
     }
