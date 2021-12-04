@@ -220,6 +220,7 @@ Rectangle {
             console.log('Game Over! ! !')
             txtTimeValue.text = toString(gameArea.gameTimeSec)
             gameArea.enabled = false
+            pause.visible = false
             winPage.visible = true
         }
     }

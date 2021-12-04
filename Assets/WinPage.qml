@@ -6,7 +6,7 @@ Rectangle {
 
     visible: false
 
-//    opacity: 0.8
+    //    opacity: 0.8
 
     radius: 15
     color: "#FFFFFF"
@@ -89,6 +89,7 @@ Rectangle {
                 newGamePage.visible = true
                 gameArea.enabled = true
                 txtTimeValue.text = "00:00"
+                pause.visible = true
             }
         }
     }
@@ -110,23 +111,7 @@ Rectangle {
             topMargin: 12
         }
 
-        MouseArea {
-            anchors.fill: parent
 
-        hoverEnabled: true
-
-        onEntered: {
-            cursorShape = Qt.PointingHandCursor
-        }
-
-        onExited: {
-            cursorShape = Qt.ArrowCursor
-        }
-
-            onClicked: {
-                ratePage.visible = true
-            }
-        }
         // я предпочитаю не раотать с контурами
         Rectangle {
             radius: 5
@@ -143,6 +128,24 @@ Rectangle {
                     pixelSize: 32
                 }
                 anchors.centerIn: parent
+            }
+
+            MouseArea {
+                anchors.fill: parent
+
+                hoverEnabled: true
+
+                onEntered: {
+                    cursorShape = Qt.PointingHandCursor
+                }
+
+                onExited: {
+                    cursorShape = Qt.ArrowCursor
+                }
+
+                onClicked: {
+                    ratePage.visible = true
+                }
             }
         }
     }

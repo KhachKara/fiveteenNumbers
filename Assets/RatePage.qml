@@ -10,8 +10,6 @@ Item {
 
     property string nickName: "unknown"
 
-
-
     GameArea {
         id: gameArea
         visible: false
@@ -52,7 +50,7 @@ Item {
                     console.log("back")
                     welcomePage.visible = true
                     gameArea.enabled = true
-                    gameArea.time = "00:00"
+                    //                    gameArea.time = "00:00"
                 }
             }
         }
@@ -99,68 +97,186 @@ Item {
         }
 
         Column {
+            id: rateColumn
+
+            spacing: 24
+
+            anchors {
+                top: parent.top
+                left: parent.left
+                topMargin: 87
+                leftMargin: 30
+            }
             Repeater {
                 model: 10
+
                 Row {
-                    anchors {
-                        top: parent.top
-                        left: parent.left
-                        leftMargin: 30
-                        topMargin: 90
-                    }
+                    id: rateRow
+
+                    spacing: 20
+
                     Rectangle {
                         id: rateIndexRect
-                        width: 20
-                        height: width
 
-                        anchors {
-                            top: parent.top
-                            left: parent.left
-                        }
+                        width: 20
+                        height: 20
+
+                        color: Qt.rgba(0,0,0,0)
 
                         Text {
                             id: rateTxt
 
-                            anchors.centerIn: parent
-                            text: index
+                            anchors.fill: parent
+                            verticalAlignment: Text.AlignVCenter
+                            text: index + 1
                         }
                     }
+
                     Rectangle {
                         id: nicknameRect
-                        width: 30
+
+                        width: 150
                         height: 20
 
-                        anchors {
-                            top: parent.top
-                            left: rateIndexRect.right
-                        }
+                        color: Qt.rgba(0,0,0,0)
 
                         Text {
                             id: nickTxt
 
                             anchors.fill: parent
+                            verticalAlignment: Text.AlignVCenter
                             text: nickName
                         }
                     }
+
                     Rectangle {
-                        id: steps
+                        id: stepsRect
+
+                        width: 35
                         height: 20
 
-                        anchors {
-                            top: parent.top
-                            left: nicknameRect.right
+                        color: Qt.rgba(0,0,0,0)
+
+                        Text {
+                            id: stepsTxt
+
+                            text: gameArea.stepCount
+                            anchors.fill: parent
+                            verticalAlignment: Text.AlignVCenter
                         }
                     }
+
                     Rectangle {
-                        id: time
-                        width: 60
+                        id: timeRect
+
+                        width: 35
                         height: 20
 
-                        anchors {
-                            top: parent.top
-                            left: steps.right
+                        color: Qt.rgba(0,0,0,0)
+
+                        Text {
+                            id: timeTxt
+
+                            text: gameArea.gameTimeSec
+                            anchors.fill: parent
+                            verticalAlignment: Text.AlignVCenter
                         }
                     }
+                }
+            }
+        }
+        Column {
+            id: threeDots
+
+            spacing: 0
+
+            Repeater {
+                model: 3
+                Rectangle {
+                    width: 3
+                    height: width
+                    Text {
+                        text: qsTr(".")
+                        font.pixelSize: 10
+                    }
+                }
+            }
+        }
+
+        Row {
+            id: myRate
+
+            spacing: 20
+            anchors {
+                top: threeDots.bottom
+                left: threeDots.left
+                topMargin: 5
+            }
+            Rectangle {
+                id: myRateIndexRect
+
+                width: 20
+                height: width
+
+                color: Qt.rgba(0,0,0,0)
+
+                Text {
+                    id: myRateTxt
+
+                    anchors.fill: parent
+                    verticalAlignment: Text.AlignVCenter
+                    text: index + 1
+                }
+            }
+
+            Rectangle {
+                id: myNicknameRect
+
+                width: 150
+                height: 20
+
+                color: Qt.rgba(0,0,0,0)
+
+                Text {
+                    id: myNickTxt
+
+                    anchors.fill: parent
+                    verticalAlignment: Text.AlignVCenter
+                    text: nickName
+                }
+            }
+
+            Rectangle {
+                id: myStepsRect
+
+                width: 35
+                height: 20
+
+                color: Qt.rgba(0,0,0,0)
+
+                Text {
+                    id: myStepsTxt
+
+                    text: gameArea.stepCount
+                    anchors.fill: parent
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+
+            Rectangle {
+                id: myTimeRect
+
+                width: 35
+                height: 20
+
+                color: Qt.rgba(0,0,0,0)
+
+                Text {
+                    id: myTimeTxt
+
+                    text: gameArea.gameTimeSec
+                    anchors.fill: parent
+                    verticalAlignment: Text.AlignVCenter
                 }
             }
         }
