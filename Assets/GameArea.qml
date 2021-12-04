@@ -2,11 +2,13 @@ import QtQuick 2.0
 import Common 43.21
 
 Item {
-    id: root    // всегда пишем айди у корневого элемента и всегда называем его root.
+    id: root
 
     readonly property alias stepCount: p.stepsCount
     readonly property alias gameTimeSec: p.gameTimeSec
     readonly property alias size: p.size
+    // Имя компонента!
+    property string squareUrl   // \todo in qt6 required
 
     // При окончании игры.
     signal finished()
@@ -21,6 +23,11 @@ Item {
 
     // Инициализирует игру по последовательности array.
     function initGameArray(array) {
+        if (root.squareUrl === '') {
+            console.log('Квадрат не объявлен!')
+            return
+        }
+
         p.clearGame();
         console.log('init game', array.join(' '))
         if (!checkArrayForGame(array)){
@@ -28,19 +35,14 @@ Item {
         }
 
         p.size = Math.sqrt(array.length);
-        for (let j = 0; j < p.size; ++j) {
-            p.squares.push([]);
-            for (let i = 0; i < p.size; ++i) {
-                let sq = squareComponent.incubateObject(gameArea, {
-                                                            number: array[j * p.size + i]
-                                                        }, Qt.Synchronous);
-                p.squares[j].push(sq.object);
-            }
+        p.array = array;
+        p.squareComponent = Qt.createComponent(root.squareUrl);
+
+        if (p.squareComponent.status === Component.Ready) {
+            p.createObjects();
+        } else {
+            p.squareComponent.statusChanged.connect(p.createObjects);
         }
-        p.updateSquaresWidth();
-        p.initOtherFields();
-        gameContinue();
-        p.checkToFinish();
     }
 
     // Инициализирует начальное положение клеток по порядку.
@@ -89,11 +91,13 @@ Item {
         return result % 2;
     }
 
+    // Останавливает время и диактивирует игровое поле.
     function gamePause() {
         timer.stop();
         gameArea.enabled = false;
     }
 
+    // Продолжает игру после остановки (gamePause).
     function gameContinue() {
         gameArea.enabled = true;
         timer.start();
@@ -101,9 +105,11 @@ Item {
 
     QtObject {
         id: p
-        // Наша матрица объектов.
+
         property var squares: []
         property int size
+        property var array
+        property var squareComponent
         readonly property int squareWidth: p.size === 0 ? 0 : gameArea.width / p.size
         property int stepsCount: 0
         property int gameTimeSec: 0
@@ -111,6 +117,26 @@ Item {
         property date gameFinish
 
         onSquareWidthChanged: updateSquaresWidth()
+
+        function createObjects() {
+            if (!p.squareComponent || p.squareComponent.status !== Component.Ready) {
+                console.log('что то не так с squareComponent', p.squareComponent);
+                return
+            }
+
+            for (let j = 0; j < p.size; ++j) {
+                p.squares.push([]);
+                for (let i = 0; i < p.size; ++i) {
+                    let sq = p.squareComponent.incubateObject(gameArea, {
+                                                                number: p.array[j * p.size + i]
+                                                            }, Qt.Synchronous);
+                    p.squares[j].push(sq.object);
+                }
+            }
+            p.updateSquaresWidth();
+            p.initOtherFields();
+            p.checkToFinish();
+        }
 
         function initOtherFields() {
             p.stepsCount = 0;
@@ -131,9 +157,6 @@ Item {
                     }
                 }
             }
-            root.gamePause();
-            p.gameFinish = new Date;
-            root.finished();
             return true;
         }
 
@@ -252,8 +275,13 @@ Item {
                 return false;
             }
             ++p.stepsCount;
+            if (!timer.running) {
+                timer.start();
+            }
             if (p.checkToFinish()) {
-//                p.clearGame();
+                root.gamePause();
+                p.gameFinish = new Date;
+                root.finished();
             }
 
             return true;
@@ -317,20 +345,12 @@ Item {
         }
     }
 
-    Component {
-        id: squareComponent
-        Square { }
-    }
-
-    Rectangle {
+    Item {
         id: gameArea
 
         anchors.centerIn: parent
-
         width: Math.min(root.width, root.height)
         height: width
-
-        color: 'skyblue'
 
         MouseArea {
             id: ma
