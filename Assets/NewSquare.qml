@@ -1,4 +1,3 @@
-import Common 43.21
 import QtQuick 2.2
 
 Item {
