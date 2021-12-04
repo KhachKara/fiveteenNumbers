@@ -216,6 +216,8 @@ Rectangle {
             topMargin: 259
             bottomMargin: 81
         }
+        squareUrl: "NewSquare.qml"
+
         onFinished: {
             console.log('Game Over! ! !')
             txtTimeValue.text = toString(gameArea.gameTimeSec)
