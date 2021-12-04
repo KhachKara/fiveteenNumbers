@@ -2,9 +2,9 @@ import Common 43.21
 import QtQuick 2.2
 
 Item {
-    property int number: 0
-    property alias squareRect: squareRect
+    id: root
 
+    property int number: 0
 
     height: width
 
@@ -12,7 +12,7 @@ Item {
         id: squareRect
 
         anchors.fill: parent
-        visible: number > 0 // Можно так же добавить как будет выглядеть пустая клетка.
+        visible: number > 0
         radius: parent.width * 0.1
         color: "red"
         border.width: ProjectStyles.borderThiknes

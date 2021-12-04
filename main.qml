@@ -22,21 +22,4 @@ Window {
             game.startGame(size);
         }
     }
-
-
-    Component.onCompleted: {
-        console.log(_arguments);
-        if (_arguments.length === 1) {
-            return;
-        }
-        let numbersStr = _arguments.slice(1);
-        let size = Math.sqrt(numbersStr.length)
-        if (size !== parseInt(size)) {
-            console.log('Не верный формат аргументов');
-            return;
-        }
-        let numbersInt = numbersStr.map(item => parseInt(item));
-        game.startGameArray(numbersInt);
-        welcomePage.visible = false;
-    }
 }

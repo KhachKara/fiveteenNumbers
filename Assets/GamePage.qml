@@ -212,7 +212,7 @@ Rectangle {
         anchors {
             fill: parent
             leftMargin: 30
-            rightMargin: gameArea.leftMargin
+            rightMargin: gameArea.anchors.leftMargin
             topMargin: 259
             bottomMargin: 81
         }
