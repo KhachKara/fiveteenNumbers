@@ -184,12 +184,6 @@ Item {
                     }
                 }
             }
-        }
-        Column {
-            id: threeDots
-
-            spacing: 0
-
             Repeater {
                 model: 3
                 Rectangle {
@@ -201,82 +195,81 @@ Item {
                     }
                 }
             }
-        }
+            Row {
+                id: myRate
 
-        Row {
-            id: myRate
-
-            spacing: 20
-            anchors {
-                top: threeDots.bottom
-                left: threeDots.left
-                topMargin: 5
-            }
-            Rectangle {
-                id: myRateIndexRect
-
-                width: 20
-                height: width
-
-                color: Qt.rgba(0,0,0,0)
-
-                Text {
-                    id: myRateTxt
-
-                    anchors.fill: parent
-                    verticalAlignment: Text.AlignVCenter
-                    text: index + 1
+                spacing: 20
+                anchors {
+                    top: threeDots.bottom
+                    left: threeDots.left
+                    topMargin: 5
                 }
-            }
+                Rectangle {
+                    id: myRateIndexRect
 
-            Rectangle {
-                id: myNicknameRect
+                    width: 20
+                    height: width
 
-                width: 150
-                height: 20
+                    color: Qt.rgba(0,0,0,0)
 
-                color: Qt.rgba(0,0,0,0)
+                    Text {
+                        id: myRateTxt
 
-                Text {
-                    id: myNickTxt
-
-                    anchors.fill: parent
-                    verticalAlignment: Text.AlignVCenter
-                    text: nickName
+                        anchors.fill: parent
+                        verticalAlignment: Text.AlignVCenter
+                        text: index + 1
+                    }
                 }
-            }
 
-            Rectangle {
-                id: myStepsRect
+                Rectangle {
+                    id: myNicknameRect
 
-                width: 35
-                height: 20
+                    width: 150
+                    height: 20
 
-                color: Qt.rgba(0,0,0,0)
+                    color: Qt.rgba(0,0,0,0)
 
-                Text {
-                    id: myStepsTxt
+                    Text {
+                        id: myNickTxt
 
-                    text: gameArea.stepCount
-                    anchors.fill: parent
-                    verticalAlignment: Text.AlignVCenter
+                        anchors.fill: parent
+                        verticalAlignment: Text.AlignVCenter
+                        text: nickName
+                    }
                 }
-            }
 
-            Rectangle {
-                id: myTimeRect
+                Rectangle {
+                    id: myStepsRect
 
-                width: 35
-                height: 20
+                    width: 35
+                    height: 20
 
-                color: Qt.rgba(0,0,0,0)
+                    color: Qt.rgba(0,0,0,0)
 
-                Text {
-                    id: myTimeTxt
+                    Text {
+                        id: myStepsTxt
 
-                    text: gameArea.gameTimeSec
-                    anchors.fill: parent
-                    verticalAlignment: Text.AlignVCenter
+                        text: gameArea.stepCount
+                        anchors.fill: parent
+                        verticalAlignment: Text.AlignVCenter
+                    }
+                }
+
+                Rectangle {
+                    id: myTimeRect
+
+                    width: 35
+                    height: 20
+
+                    color: Qt.rgba(0,0,0,0)
+
+                    Text {
+                        id: myTimeTxt
+
+                        text: gameArea.gameTimeSec
+                        anchors.fill: parent
+                        verticalAlignment: Text.AlignVCenter
+                    }
                 }
             }
         }
