@@ -42,6 +42,7 @@ Item {
                 onClicked: {
                     console.log("back")
                     welcomePage.visible = true
+                    visible = false
                 }
             }
         }

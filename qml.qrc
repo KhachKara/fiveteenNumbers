@@ -20,5 +20,6 @@
         <file>Assets/icons/logo.svg</file>
         <file>Assets/RatePage.qml</file>
         <file>Assets/icons/exit.svg</file>
+        <file>Assets/SettingsPage.qml</file>
     </qresource>
 </RCC>

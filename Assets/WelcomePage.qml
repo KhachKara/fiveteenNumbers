@@ -1,11 +1,19 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.5
+import QtQuick.Shapes 1.2
 import Common 43.21
 
 Item {
     id: root
 
     signal startedGame(int size)
+
+    SettingsPage {
+        id: settingsPage
+
+        anchors.fill: parent
+        visible: false
+    }
 
     RatePage {
         id: ratePage
@@ -36,6 +44,7 @@ Item {
 
         Image {
             id: logo
+
             source: "./icons/logo.svg"
             sourceSize.width: 113
             sourceSize.height: 127
@@ -44,9 +53,11 @@ Item {
                 top: parent.top
                 topMargin: 67
             }
-            MouseArea {
-                anchors.fill: logo
-            }
+
+            //            MouseArea {
+            //                anchors.fill: logo
+            //                onCanceled: aboutPage.visible = true
+            //            }
         }
 
         property var rectText: ["New game", "Rate", "Settings", "Quit"]
@@ -97,12 +108,12 @@ Item {
                                 newGamePage.visible = true
                                 console.log("new game page")
                             } else if (rectText.text === "Rate") {
-                                 welcomePage.visible = false
-                                 ratePage.visible = true
+                                welcomePage.visible = false
+                                ratePage.visible = true
                                 console.log("rate page")
                             } else if (rectText.text === "Settings") {
-                                // welcomePage.visible = false
-                                // setingPage.visible = true
+                                welcomePage.visible = false
+                                settingsPage.visible = true
                                 console.log("settings page")
                             } else {
                                 console.log("quit page")

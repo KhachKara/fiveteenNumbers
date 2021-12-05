@@ -12,11 +12,19 @@ Item {
 
     GameArea {
         id: gameArea
+
         visible: false
     }
 
     GamePage {
         id: gamePage
+
+        visible: false
+    }
+
+    NewGamePage {
+        id: newGamePage
+
         visible: false
     }
 
@@ -49,8 +57,7 @@ Item {
                 onClicked: {
                     console.log("back")
                     welcomePage.visible = true
-                    gameArea.enabled = true
-                    //                    gameArea.time = "00:00"
+                    newGamePage.visible = false
                 }
             }
         }
@@ -107,6 +114,7 @@ Item {
                 topMargin: 87
                 leftMargin: 30
             }
+
             Repeater {
                 model: 10
 
@@ -184,26 +192,21 @@ Item {
                     }
                 }
             }
-            Repeater {
-                model: 3
-                Rectangle {
-                    width: 3
-                    height: width
-                    Text {
-                        text: qsTr(".")
-                        font.pixelSize: 10
-                    }
-                }
+
+
+            Text {
+                width: 2
+                height: 2
+                text: qsTr("...")
+                font.pixelSize: 14
             }
+
+
             Row {
                 id: myRate
 
                 spacing: 20
-                anchors {
-                    top: threeDots.bottom
-                    left: threeDots.left
-                    topMargin: 5
-                }
+
                 Rectangle {
                     id: myRateIndexRect
 
@@ -217,7 +220,7 @@ Item {
 
                         anchors.fill: parent
                         verticalAlignment: Text.AlignVCenter
-                        text: index + 1
+                        text: "9999"
                     }
                 }
 
