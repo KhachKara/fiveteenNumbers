@@ -2,10 +2,14 @@ import QtQuick 2.0
 import QtQuick.Controls 2.5
 import QtQuick.Shapes 1.2
 
-Item {
-    id: root
+Rectangle {
+    id: welcomePage
+
+    anchors.fill: parent
 
     signal startedGame(int size)
+
+    color: Qt.rgba(0,0,0,0)
 
     Image {
         id: logo
@@ -67,6 +71,7 @@ Item {
                     }
                     onClicked: {
                         if (rectText.text === "New game") {
+                            templatePage.state = "newGamePage"
                             console.log("new game page")
                         } else if (rectText.text === "Rate") {
                             console.log("rate page")

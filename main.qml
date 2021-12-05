@@ -19,5 +19,7 @@ Window {
         onStartedGame: function(size){
             game.startGame(size);
         }
+        Component.onCompleted: templatePage.state = "welcomePage"
+
     }
 }
