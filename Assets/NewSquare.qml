@@ -33,4 +33,10 @@ Item {
             }
         }
     }
+    Behavior on x {
+        NumberAnimation { duration: 100 }
+    }
+    Behavior on y {
+        NumberAnimation { duration: 100 }
+    }
 }
