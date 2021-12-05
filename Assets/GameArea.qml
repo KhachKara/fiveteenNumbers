@@ -1,20 +1,38 @@
 import QtQuick 2.0
-import Common 43.21
 
 Item {
     id: root
 
+    // Имя компонента!
+    property string squareUrl   // \todo in qt6 required
+    property bool pause: false
     readonly property alias stepCount: p.stepsCount
     readonly property alias gameTimeSec: p.gameTimeSec
     readonly property alias size: p.size
-    // Имя компонента!
-    property string squareUrl   // \todo in qt6 required
+    readonly property alias areaSize: gameArea.width
 
     // При окончании игры.
     signal finished()
 
     implicitWidth: gameArea.implicitWidth
     implicitHeight: gameArea.implicitHeight
+    focus: true
+
+    Keys.onPressed: {
+        if (pause) {
+            return;
+        }
+
+        const keysArray = [Qt.Key_Left, Qt.Key_Right, Qt.Key_Up, Qt.Key_Down];
+        const indOfKey = keysArray.indexOf(event.key);
+        if (indOfKey === -1) {
+            return;
+        }
+        const funcsArray = [p.toLeft, p.toRight, p.toUp, p.toDown];
+        const funcsArrayInversion = [p.toRight, p.toLeft, p.toDown, p.toUp];
+        funcsArray[indOfKey]();
+        event.accepted = true;
+    }
 
     // Инициализирует игру.
     function initGame(size) {
@@ -38,7 +56,11 @@ Item {
         p.array = array;
         p.squareComponent = Qt.createComponent(root.squareUrl);
 
-        if (p.squareComponent.status === Component.Ready) {
+        console.log(p.squareComponent.status)
+        if (p.squareComponent.status === Component.Error) {
+            console.error('Ошибка в коде квадрата');
+            return;
+        } else if (p.squareComponent.status === Component.Ready) {
             p.createObjects();
         } else {
             p.squareComponent.statusChanged.connect(p.createObjects);
@@ -69,7 +91,7 @@ Item {
         let size = Math.sqrt(arrayOrig.length);
         let indZero = arrayOrig.indexOf(0);
         if (size !== parseInt(size) || indZero === -1) {
-            console.log('Не верный формат аргументов');
+            console.error('Не верный формат аргументов');
             return false;
         }
         let e = parseInt(indZero / size); // на какой строке пустая клетка начиная с 0
@@ -89,18 +111,6 @@ Item {
         let result = summ + rightPart;
         console.log(size, e, rightPart, summ, result);
         return result % 2;
-    }
-
-    // Останавливает время и диактивирует игровое поле.
-    function gamePause() {
-        timer.stop();
-        gameArea.enabled = false;
-    }
-
-    // Продолжает игру после остановки (gamePause).
-    function gameContinue() {
-        gameArea.enabled = true;
-        timer.start();
     }
 
     QtObject {
@@ -229,7 +239,7 @@ Item {
         // На входе принимает точку клика.
         // Возвращает true если шаг доступен.
         function gameStep(stepPoint) {
-            let nullPoint = findFreePosition();
+            const nullPoint = findFreePosition();
             if (stepPoint === nullPoint) {
                 // Клик на пустую клетку.
                 return false;
@@ -275,9 +285,6 @@ Item {
                 return false;
             }
             ++p.stepsCount;
-            if (!timer.running) {
-                timer.start();
-            }
             if (p.checkToFinish()) {
                 root.gamePause();
                 p.gameFinish = new Date;
@@ -317,29 +324,72 @@ Item {
 
         // Попытка исправить игру. (Если изначально игра с решением, то он делает ее нерешаемой)
         function tryToFixArray(array) {
-            let v = 1 + parseInt(Math.random() * (array.length - 2)); // 1..length - 1
-            let indOfv1 = array.indexOf(v);
-            let indOfv2 = array.indexOf(v + 1);
+            const v = 1 + parseInt(Math.random() * (array.length - 2)); // 1..length - 1
+            const indOfv1 = array.indexOf(v);
+            const indOfv2 = array.indexOf(v + 1);
             [array[indOfv1], array[indOfv2]] = [
               array[indOfv2], array[indOfv1]];
             return checkArrayForGame(array);
         }
 
+        // Очищает динамически созданные квадраты.
         function clearGame() {
             for (let i = 0; i < size; ++i) {
                 for (let j = 0; j < size; ++ j) {
                     squares[i][j].destroy();
                 }
             }
-
             squares = []
         }
+
+        // Перемещает квадрат влево (если слево свободно)
+        function toLeft() {
+            const freePoint = findFreePosition();
+            if (freePoint.x === p.size - 1) {
+                console.log("Левее некуда")
+                return false;
+            }
+            gameStep(Qt.point(freePoint.x + 1, freePoint.y));
+            return true;
+        }
+
+        function toRight() {
+            const freePoint = findFreePosition();
+            if (freePoint.x === 0) {
+                console.log("Правее некуда")
+                return false;
+            }
+            gameStep(Qt.point(freePoint.x - 1, freePoint.y));
+            return true;
+        }
+
+        function toUp() {
+            const freePoint = findFreePosition();
+            if (freePoint.y === p.size - 1) {
+                console.log("Выше некуда")
+                return false;
+            }
+            gameStep(Qt.point(freePoint.x, freePoint.y + 1));
+            return true;
+        }
+
+        function toDown() {
+            const freePoint = findFreePosition();
+            if (freePoint.y === 0) {
+                console.log("Выше некуда")
+                return false;
+            }
+            gameStep(Qt.point(freePoint.x, freePoint.y - 1));
+            return true;
+        }
+
     }
 
     Timer {
         id: timer
         interval: 1000
         repeat: true
+        running: !pause && stepCount > 0
         onTriggered: {
             ++p.gameTimeSec;
         }
@@ -354,12 +404,13 @@ Item {
 
         MouseArea {
             id: ma
+            enabled: !pause
 
             anchors.fill: gameArea
 
             onClicked: {
-                let r = parseInt(mouseY / p.squareWidth);
-                let c = parseInt(mouseX / p.squareWidth);
+                const r = parseInt(mouseY / p.squareWidth);
+                const c = parseInt(mouseX / p.squareWidth);
                 p.gameStep(Qt.point(c, r));
             }
         }
