@@ -286,7 +286,7 @@ Item {
             }
             ++p.stepsCount;
             if (p.checkToFinish()) {
-                root.gamePause();
+                root.pause = 1;
                 p.gameFinish = new Date;
                 root.finished();
             }
