@@ -1,4 +1,3 @@
-import Common 43.21
 import QtQuick 2.2
 
 Rectangle {
@@ -85,11 +84,7 @@ Rectangle {
             }
 
             onClicked: {
-                winPage.visible = false
-                newGamePage.visible = true
-                gameArea.enabled = true
-                txtTimeValue.text = "00:00"
-                pause.visible = true
+
             }
         }
     }
@@ -112,7 +107,6 @@ Rectangle {
         }
 
 
-        // я предпочитаю не раотать с контурами
         Rectangle {
             radius: 5
             color: "#FFFFFF"
@@ -144,7 +138,7 @@ Rectangle {
                 }
 
                 onClicked: {
-                    ratePage.visible = true
+
                 }
             }
         }

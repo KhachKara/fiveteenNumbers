@@ -12,12 +12,6 @@ Rectangle {
     anchors.fill: parent
     color: "#4B4453"
 
-    GameStyleRect {
-        id: gameStyleRect
-
-        visible: false
-    }
-
 
     Image {
         id: pause
@@ -67,8 +61,6 @@ Rectangle {
             }
             onClicked: {
                 console.log("back")
-                newGamePage.visible = true
-                gameArea.enabled = true
                 txtTimeValue.text = "00:00"
             }
         }
@@ -221,7 +213,6 @@ Rectangle {
         onFinished: {
             console.log('Game Over! ! !')
             txtTimeValue.text = toString(gameArea.gameTimeSec)
-            gameArea.enabled = false
             pause.visible = false
             winPage.visible = true
         }

@@ -1,4 +1,3 @@
-import Common 43.21
 import QtQuick 2.2
 
 
@@ -8,12 +7,6 @@ Item {
     implicitWidth: settingsPage.implicitWidth
     implicitHeight: settingsPage.implicitHeight
 
-
-    GameArea {
-        id: gameArea
-
-        visible: false
-    }
 
     Rectangle {
         id: settingsPage
@@ -43,9 +36,7 @@ Item {
                 }
                 onClicked: {
                     console.log("back")
-                    welcomePage.visible = true
-                    gameArea.enabled = true
-                    gameArea.time = "00:00"
+                    gameArea.gameTimeSec = "00:00"
                 }
             }
         }

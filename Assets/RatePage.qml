@@ -1,4 +1,3 @@
-import Common 43.21
 import QtQuick 2.2
 
 
@@ -9,24 +8,6 @@ Item {
     implicitHeight: ratePage.implicitHeight
 
     property string nickName: "unknown"
-
-    GameArea {
-        id: gameArea
-
-        visible: false
-    }
-
-    GamePage {
-        id: gamePage
-
-        visible: false
-    }
-
-    NewGamePage {
-        id: newGamePage
-
-        visible: false
-    }
 
     Rectangle {
         id: ratePage
@@ -56,8 +37,6 @@ Item {
                 }
                 onClicked: {
                     console.log("back")
-                    welcomePage.visible = true
-                    newGamePage.visible = false
                 }
             }
         }

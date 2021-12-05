@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.5
-import Common 43.21
 
 Item {
     id: root
@@ -8,11 +7,6 @@ Item {
     implicitWidth: newGamePage.implicitWidth
     implicitHeight: newGamePage.implicitHeight
 
-    GamePage {
-        id: gamePage
-        anchors.fill: parent
-        visible: true
-    }
 
     Rectangle {
         id: newGamePage
@@ -41,8 +35,6 @@ Item {
                 }
                 onClicked: {
                     console.log("back")
-                    welcomePage.visible = true
-                    visible = false
                 }
             }
         }
@@ -112,8 +104,6 @@ Item {
                     cursorShape = Qt.ArrowCursor
                 }
                 onClicked: {
-                    gamePage.visible = true
-                    newGamePage.visible = false
                     gamePage.startGame(gameStyle3X3.gameSize)
                     gamePage.gameSize = gameStyle3X3.gameSize
                 }
@@ -145,8 +135,6 @@ Item {
                     cursorShape = Qt.ArrowCursor
                 }
                 onClicked: {
-                    gamePage.visible = true
-                    newGamePage.visible = false
                     gamePage.startGame(gameStyle4X4.gameSize)
                     gamePage.gameSize = gameStyle4X4.gameSize
                 }
@@ -178,8 +166,6 @@ Item {
                     cursorShape = Qt.ArrowCursor
                 }
                 onClicked: {
-                    gamePage.visible = true
-                    newGamePage.visible = false
                     gamePage.startGame(gameStyle5X5.gameSize)
                     gamePage.gameSize = gameStyle5X5.gameSize
                 }
