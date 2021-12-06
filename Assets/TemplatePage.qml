@@ -91,6 +91,9 @@ Item {
                 onClicked: {
                     console.log("back")
                     welcomePage.visible = true
+                    aboutPage.visible = false
+                    newGamePage.visible = false
+                    gamePage.visible = false
                     gamePage.text = "00:00"
                 }
             }
@@ -152,13 +155,16 @@ Item {
                 PropertyChanges {
                     target: aboutPage
                     visible: true
-
+                }
+                PropertyChanges {
+                    target: welcomePage
+                    visible: false
                 }
                 PropertyChanges {
                     target: templatePage
                     back.visible: true
                     exit.visible: true
-                    pageName: "About"
+                    pageName: "Our team"
                 }
             },
             State {

@@ -12,6 +12,8 @@ Item {
         anchors.fill: parent
 
         Column {
+            id: staffColumn
+
             anchors {
                 top: parent.top
                 left: parent.left
@@ -47,5 +49,24 @@ Item {
                 }
             }
         }
+
+        FeedbackForm {
+            id: feedbackForm
+
+            anchors {
+                top: parent. bottom
+                left: parent.left
+                right: parent.right
+                leftMargin: 30
+                rightMargin: 30
+            }
+        }
     }
+    // #убрать ---------
+    Text {
+        id: name
+        anchors.top: aboutPage.bottom
+        text: qsTr("aboutPage")
+    }
+    // -----------------
 }

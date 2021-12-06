@@ -96,10 +96,12 @@ Rectangle {
                 }
             }
         }
-        // #убрать
+        // #убрать ---------
         Text {
             id: name
+            anchors.top: welcomePage.bottom
             text: qsTr("welcomePage")
         }
+        // -----------------
     }
 }
