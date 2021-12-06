@@ -14,22 +14,6 @@ Item {
         anchors.fill: parent
         color: "#4B4453"
 
-
-        Text {
-            id: txtNewGame
-            text: qsTr("New game")
-            color: "#B0A8B9"
-            anchors {
-                horizontalCenter: parent.horizontalCenter
-                top: parent.top
-                topMargin: 32
-            }
-            font {
-                family: "Ubuntu"
-                pixelSize: 22
-            }
-        }
-
         // 3x3
         GameStyleRect {
             id: gameStyle3X3

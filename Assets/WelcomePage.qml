@@ -24,6 +24,17 @@ Rectangle {
         }
 
         MouseArea {
+            anchors.fill: parent
+            hoverEnabled: true
+
+            onEntered: {
+                cursorShape = Qt.PointingHandCursor
+            }
+
+            onExited: {
+                cursorShape = Qt.ArrowCursor
+            }
+            onClicked: templatePage.state = "aboutPage"
 
         }
     }
@@ -85,6 +96,7 @@ Rectangle {
                 }
             }
         }
+        // #убрать
         Text {
             id: name
             text: qsTr("welcomePage")

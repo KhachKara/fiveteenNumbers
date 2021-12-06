@@ -20,5 +20,6 @@
         <file>Assets/icons/exit.svg</file>
         <file>Assets/SettingsPage.qml</file>
         <file>Assets/TemplatePage.qml</file>
+        <file>Assets/AboutPage.qml</file>
     </qresource>
 </RCC>

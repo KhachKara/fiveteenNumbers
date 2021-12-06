@@ -12,9 +12,16 @@ Item {
         property alias pause: pause
         property alias back: back
         property alias exit: exit
+        property alias pageName: pageName.text
 
         anchors.fill: parent
         color: "#4B4453"
+
+        AboutPage {
+            id: aboutPage
+
+            visible: false
+        }
 
         WelcomePage {
             id: welcomePage
@@ -83,14 +90,7 @@ Item {
                 }
                 onClicked: {
                     console.log("back")
-                    if(templatePage.state === "newGamePage") {
-                        newGamePage.visible = false
-                        back.visible = false
-                        pause.visible = false
-                        exit.visible = false
-                        welcomePage.visible = true
-                    }
-
+                    welcomePage.visible = true
                     gamePage.text = "00:00"
                 }
             }
@@ -123,12 +123,42 @@ Item {
             }
         }
 
+        Text {
+            id: pageName
+
+            color: "#B0A8B9"
+            anchors {
+                top: parent.top
+                horizontalCenter: parent.horizontalCenter
+                topMargin: 32
+            }
+
+            font {
+                family: "Ubuntu"
+                pixelSize: 22
+            }
+        }
+
         states: [
             State {
                 name: "welcomePage"
                 PropertyChanges {
                     target: welcomePage
                     visible: true
+                }
+            },
+            State {
+                name: "aboutPage"
+                PropertyChanges {
+                    target: aboutPage
+                    visible: true
+
+                }
+                PropertyChanges {
+                    target: templatePage
+                    back.visible: true
+                    exit.visible: true
+                    pageName: "About"
                 }
             },
             State {
@@ -145,8 +175,14 @@ Item {
                     target: templatePage
                     back.visible: true
                     exit.visible: true
+                    pageName: "New game"
                 }
             }
         ]
+    }
+    // #убрать
+    Text {
+        id: name
+        text: qsTr("tamplatePage")
     }
 }
