@@ -14,56 +14,6 @@ Item {
         anchors.fill: parent
         color: "#4B4453"
 
-        Image {
-            id: back
-            source: "./icons/back.svg"
-            anchors {
-                left: parent.left
-                leftMargin: 30
-                verticalCenter: txtNewGame.verticalCenter
-            }
-            MouseArea {
-                anchors.fill: parent
-                hoverEnabled: true
-
-                onEntered: {
-                    cursorShape = Qt.PointingHandCursor
-                }
-
-                onExited: {
-                    cursorShape = Qt.ArrowCursor
-                }
-                onClicked: {
-                    console.log("back")
-                }
-            }
-        }
-
-        Image {
-            id: exit
-            source: "./icons/exit.svg"
-            anchors {
-                top: parent.top
-                right: parent.right
-                rightMargin: 30
-                topMargin: 32
-            }
-            MouseArea {
-                anchors.fill: parent
-                hoverEnabled: true
-
-                onEntered: {
-                    cursorShape = Qt.PointingHandCursor
-                }
-
-                onExited: {
-                    cursorShape = Qt.ArrowCursor
-                }
-                onClicked: {
-                    Qt.quit()
-                }
-            }
-        }
 
         Text {
             id: txtNewGame
@@ -170,6 +120,10 @@ Item {
                     gamePage.gameSize = gameStyle5X5.gameSize
                 }
             }
-        }
+        }        
+    }
+    Text {
+        id: name
+        text: qsTr("newGamePage")
     }
 }

@@ -85,5 +85,9 @@ Rectangle {
                 }
             }
         }
+        Text {
+            id: name
+            text: qsTr("welcomePage")
+        }
     }
 }

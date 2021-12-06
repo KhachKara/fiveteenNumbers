@@ -10,6 +10,8 @@ Item {
         id: templatePage
 
         property alias pause: pause
+        property alias back: back
+        property alias exit: exit
 
         anchors.fill: parent
         color: "#4B4453"
@@ -21,6 +23,13 @@ Item {
 
         NewGamePage {
             id: newGamePage
+
+            anchors.horizontalCenter: parent.horizontalCenter
+            visible: false
+        }
+
+        GamePage {
+            id: gamePage
             visible: false
         }
 
@@ -74,7 +83,15 @@ Item {
                 }
                 onClicked: {
                     console.log("back")
-                    txtTimeValue.text = "00:00"
+                    if(templatePage.state === "newGamePage") {
+                        newGamePage.visible = false
+                        back.visible = false
+                        pause.visible = false
+                        exit.visible = false
+                        welcomePage.visible = true
+                    }
+
+                    gamePage.text = "00:00"
                 }
             }
         }
@@ -123,6 +140,11 @@ Item {
                 PropertyChanges {
                     target: welcomePage
                     visible: false
+                }
+                PropertyChanges {
+                    target: templatePage
+                    back.visible: true
+                    exit.visible: true
                 }
             }
         ]

@@ -8,6 +8,7 @@ Rectangle {
 
     property alias time: txtTimeValue.text
     property alias steps: txtStepsValue.text
+    property alias text: txtTimeValue.text
 
     anchors.fill: parent
     color: "#4B4453"
