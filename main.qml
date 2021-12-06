@@ -16,10 +16,5 @@ Window {
         id: templatePage
 
         anchors.fill: parent
-        onStartedGame: function(size){
-            game.startGame(size);
-        }
-        Component.onCompleted: templatePage.state = "welcomePage"
-
     }
 }

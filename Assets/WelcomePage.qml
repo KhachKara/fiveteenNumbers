@@ -2,14 +2,12 @@ import QtQuick 2.0
 import QtQuick.Controls 2.5
 import QtQuick.Shapes 1.2
 
-Rectangle {
+Item {
     id: welcomePage
 
     anchors.fill: parent
 
     signal startedGame(int size)
-
-    color: Qt.rgba(0,0,0,0)
 
     Image {
         id: logo
@@ -96,12 +94,5 @@ Rectangle {
                 }
             }
         }
-        // #убрать ---------
-        Text {
-            id: name
-            anchors.top: welcomePage.bottom
-            text: qsTr("welcomePage")
-        }
-        // -----------------
     }
 }

@@ -1,7 +1,7 @@
 import QtQuick 2.15
 
 Rectangle {
-    id: gamePage
+    id: root
 
     implicitHeight: gameArea.implicitHeight
     implicitWidth: gameArea.implicitWidth

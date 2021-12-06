@@ -1,76 +1,65 @@
 import QtQuick 2.0
 
-Item {
+Rectangle {
     id: root
 
-    signal startedGame(int size)
-    property alias state: templatePage.state
+    color: "#4B4453"
+    state: p.stateWelcome
 
-    Rectangle {
-        id: templatePage
+    QtObject {
+        id: p
+        readonly property string stateWelcome: "WelcomePage"
+        readonly property string stateLevels: "LevelsPage"
+        readonly property string stateGame: "GamePage"
+        readonly property string stateAbout: "AboutPage"
+    }
 
-        property alias pause: pause
-        property alias back: back
-        property alias exit: exit
-        property alias pageName: pageName.text
+    AboutPage {
+        id: aboutPage
+        anchors.fill: parent
+        visible: false
+    }
+
+    WelcomePage {
+        id: welcomePage
+        anchors.fill: parent
+        visible: false
+    }
+
+    // Переименуй компонент в LevelsPage
+    NewGamePage {
+        id: levelsPage
 
         anchors.fill: parent
-        color: "#4B4453"
+        visible: false
+    }
 
-        AboutPage {
-            id: aboutPage
+    GamePage {
+        id: gamePage
+        anchors.fill: parent
+        visible: false
+    }
 
-            visible: false
-        }
+    // \todo вынести в отдельный компонент.
+    Item {
+        id: header
 
-        WelcomePage {
-            id: welcomePage
-            visible: false
-        }
+        property alias pageName: pageName.text
+        property alias backVisible: back.visible
+        property alias exitVisible: exit.visible
+        property alias backIsPause: back.isPause
 
-        NewGamePage {
-            id: newGamePage
-
-            anchors.horizontalCenter: parent.horizontalCenter
-            visible: false
-        }
-
-        GamePage {
-            id: gamePage
-            visible: false
-        }
-
-        Image {
-            id: pause
-            source: "./icons/pause.svg"
-            visible: false
-            anchors {
-                top: parent.top
-                left: back.right
-                leftMargin: 10
-                topMargin: 32
-            }
-            MouseArea {
-                anchors.fill: parent
-                hoverEnabled: true
-
-                onEntered: {
-                    cursorShape = Qt.PointingHandCursor
-                }
-
-                onExited: {
-                    cursorShape = Qt.ArrowCursor
-                }
-                onClicked: {
-                    console.log("pause")
-                }
-            }
+        height: 65
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
         }
 
         Image {
             id: back
-            source: "./icons/back.svg"
-            visible: false
+            property bool isPause: false
+            source: isPause ? "./icons/pause.svg" : "./icons/back.svg"
             anchors {
                 top: parent.top
                 left: parent.left
@@ -89,12 +78,7 @@ Item {
                     cursorShape = Qt.ArrowCursor
                 }
                 onClicked: {
-                    console.log("back")
-                    welcomePage.visible = true
-                    aboutPage.visible = false
-                    newGamePage.visible = false
-                    gamePage.visible = false
-                    gamePage.text = "00:00"
+                    console.log("back", "pause =", back.isPause)
                 }
             }
         }
@@ -102,7 +86,6 @@ Item {
         Image {
             id: exit
             source: "./icons/exit.svg"
-            visible: false
             anchors {
                 top: parent.top
                 right: parent.right
@@ -141,54 +124,44 @@ Item {
                 pixelSize: 22
             }
         }
+    }
 
-        states: [
-            State {
-                name: "welcomePage"
-                PropertyChanges {
-                    target: welcomePage
-                    visible: true
-                }
-            },
-            State {
-                name: "aboutPage"
-                PropertyChanges {
-                    target: aboutPage
-                    visible: true
-                }
-                PropertyChanges {
-                    target: welcomePage
-                    visible: false
-                }
-                PropertyChanges {
-                    target: templatePage
-                    back.visible: true
-                    exit.visible: true
-                    pageName: "Our team"
-                }
-            },
-            State {
-                name: "newGamePage"
-                PropertyChanges {
-                    target: newGamePage
-                    visible: true
-                }
-                PropertyChanges {
-                    target: welcomePage
-                    visible: false
-                }
-                PropertyChanges {
-                    target: templatePage
-                    back.visible: true
-                    exit.visible: true
-                    pageName: "New game"
-                }
+    states: [
+        State {
+            name: p.stateWelcome
+            PropertyChanges {
+                target: welcomePage
+                visible: true
             }
-        ]
-    }
-    // #убрать
-    Text {
-        id: name
-        text: qsTr("tamplatePage")
-    }
+            PropertyChanges {
+                target: header
+                backVisible: false
+                exitVisible: false
+            }
+        },
+        State {
+            name: p.stateLevels
+            PropertyChanges {
+                target: levelsPage
+                visible: true
+            }
+            PropertyChanges {
+                target: header
+                pageName: "New game"
+            }
+        },
+        State {
+            name: p.stateGame
+            PropertyChanges {
+                target: gamePage
+                visible: true
+            }
+            PropertyChanges {
+                target: header
+                pageName: "gamePage.gameSize нужно добавить"
+                backIsPause: true
+            }
+        }
+        // и тд
+    ]
 }
