@@ -3,11 +3,15 @@ import QtQuick.Controls 2.5
 import QtQuick.Shapes 1.2
 
 Item {
-    id: welcomePage
+    id: root
 
     anchors.fill: parent
 
+    property alias index: rep.index
+
     signal startedGame(int size)
+    signal logoClicked()
+    signal repClicked()
 
     Image {
         id: logo
@@ -28,11 +32,12 @@ Item {
             onEntered: {
                 cursorShape = Qt.PointingHandCursor
             }
-
             onExited: {
                 cursorShape = Qt.ArrowCursor
             }
-            onClicked: templatePage.state = "aboutPage"
+            onClicked: {
+                root.logoClicked()
+            }
 
         }
     }
@@ -47,6 +52,8 @@ Item {
             topMargin: 243
         }
         Repeater {
+            id: rep
+
             model: 4
             Rectangle {
                 id: rectButton
@@ -79,17 +86,7 @@ Item {
                         cursorShape = Qt.ArrowCursor
                     }
                     onClicked: {
-                        if (rectText.text === "New game") {
-                            templatePage.state = "p.stateLevels"
-                            console.log("new game page")
-                        } else if (rectText.text === "Rate") {
-                            console.log("rate page")
-                        } else if (rectText.text === "Settings") {
-                            console.log("settings page")
-                        } else {
-                            console.log("quit page")
-                            Qt.quit()
-                        }
+                        root.repClicked()
                     }
                 }
             }

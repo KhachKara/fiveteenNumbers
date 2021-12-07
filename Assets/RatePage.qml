@@ -4,10 +4,16 @@ import QtQuick 2.2
 Item {
     id: root
 
-    implicitWidth: ratePage.implicitWidth
-    implicitHeight: ratePage.implicitHeight
+    anchors.fill: parent
 
     property string nickName: "unknown"
+
+    GameArea {
+        id: gameArea
+
+        visible: false
+    }
+
 
     Rectangle {
         id: ratePage

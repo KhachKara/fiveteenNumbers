@@ -1,12 +1,14 @@
 import QtQuick 2.0
 
 Item {
-    id: header
+    id: root
 
     property alias pageName: pageName.text
     property alias backVisible: back.visible
     property alias exitVisible: exit.visible
     property alias backIsPause: back.isPause
+
+    signal backClicked()
 
     anchors.fill: parent
 
@@ -32,7 +34,7 @@ Item {
                 cursorShape = Qt.ArrowCursor
             }
             onClicked: {
-                console.log("back", "pause =", back.isPause)
+                root.backClicked();
             }
         }
     }
