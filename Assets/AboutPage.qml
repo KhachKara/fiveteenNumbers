@@ -9,6 +9,7 @@ Item {
         id: aboutPage
 
         anchors.fill: parent
+        color: "#4B4453"
 
         Column {
             id: staffColumn
@@ -24,6 +25,7 @@ Item {
                 id: design
                 text: qsTr("design")
 
+                color: "#B0A8B9"
                 font {
                     family: "Ubuntu"
                     pixelSize: 22
@@ -31,8 +33,9 @@ Item {
             }
             Text {
                 id: backend
-                text: qsTr("backend")
 
+                color: "#B0A8B9"
+                text: qsTr("backend")
                 font {
                     family: "Ubuntu"
                     pixelSize: 22
@@ -40,8 +43,9 @@ Item {
             }
             Text {
                 id: frontend
-                text: qsTr("frontend")
 
+                text: qsTr("frontend")
+                color: "#B0A8B9"
                 font {
                     family: "Ubuntu"
                     pixelSize: 22

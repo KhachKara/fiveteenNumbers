@@ -5,13 +5,12 @@ import QtQuick.Shapes 1.2
 Item {
     id: root
 
-    anchors.fill: parent
-
-    property alias index: rep.index
-
-    signal startedGame(int size)
     signal logoClicked()
-    signal repClicked()
+
+    signal newGameClicked()
+    signal rateClicked()
+    signal settingsClicked()
+    signal quitClicked()
 
     Image {
         id: logo
@@ -42,8 +41,6 @@ Item {
         }
     }
 
-    property var rectText: ["New game", "Rate", "Settings", "Quit"]
-
     Column {
         spacing: 11
         anchors {
@@ -54,7 +51,10 @@ Item {
         Repeater {
             id: rep
 
-            model: 4
+            readonly property var signalsButton: [root.newGameClicked, root.rateClicked,
+                                                  root.settingsClicked, root.quitClicked]
+
+            model: ["New game", "Rate", "Settings", "Quit"]
             Rectangle {
                 id: rectButton
                 width: 300
@@ -65,7 +65,7 @@ Item {
                     id: rectText
                     anchors.centerIn: parent
                     color: "#FFFFFF"
-                    text: welcomePage.rectText[index]
+                    text: modelData
                     font {
                         family: "Ubuntu"
                         pixelSize: 32
@@ -86,7 +86,7 @@ Item {
                         cursorShape = Qt.ArrowCursor
                     }
                     onClicked: {
-                        root.repClicked()
+                        rep.signalsButton[index]();
                     }
                 }
             }

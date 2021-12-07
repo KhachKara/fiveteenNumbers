@@ -21,73 +21,6 @@ Item {
         anchors.fill: parent
         color: "#4B4453"
 
-        Image {
-            id: back
-            source: "./icons/back.svg"
-            anchors {
-                top: parent.top
-                left: parent.left
-                leftMargin: 30
-                topMargin: 32
-            }
-            MouseArea {
-                anchors.fill: parent
-                hoverEnabled: true
-
-                onEntered: {
-                    cursorShape = Qt.PointingHandCursor
-                }
-
-                onExited: {
-                    cursorShape = Qt.ArrowCursor
-                }
-                onClicked: {
-                    console.log("back")
-                }
-            }
-        }
-
-        Text {
-            id: txtRate
-            text: qsTr("Rate")
-            color: "#B0A8B9"
-            anchors {
-                horizontalCenter: parent.horizontalCenter
-                top: parent.top
-                topMargin: 32
-            }
-            font {
-                family: "Ubuntu"
-                pixelSize: 22
-            }
-        }
-
-        Image {
-            id: exit
-            source: "./icons/exit.svg"
-            anchors {
-                top: parent.top
-                right: parent.right
-                rightMargin: 30
-                topMargin: 32
-            }
-            MouseArea {
-                anchors.fill: parent
-                hoverEnabled: true
-
-                onEntered: {
-                    cursorShape = Qt.PointingHandCursor
-                }
-
-                onExited: {
-                    cursorShape = Qt.ArrowCursor
-                }
-                onClicked: {
-                    Qt.quit()
-                }
-            }
-        }
-
         Column {
             id: rateColumn
 
@@ -119,6 +52,7 @@ Item {
                         Text {
                             id: rateTxt
 
+                            color: "#B0A8B9"
                             anchors.fill: parent
                             verticalAlignment: Text.AlignVCenter
                             text: index + 1
@@ -136,6 +70,7 @@ Item {
                         Text {
                             id: nickTxt
 
+                            color: "#B0A8B9"
                             anchors.fill: parent
                             verticalAlignment: Text.AlignVCenter
                             text: nickName
@@ -153,6 +88,7 @@ Item {
                         Text {
                             id: stepsTxt
 
+                            color: "#B0A8B9"
                             text: gameArea.stepCount
                             anchors.fill: parent
                             verticalAlignment: Text.AlignVCenter
@@ -170,6 +106,7 @@ Item {
                         Text {
                             id: timeTxt
 
+                            color: "#B0A8B9"
                             text: gameArea.gameTimeSec
                             anchors.fill: parent
                             verticalAlignment: Text.AlignVCenter
@@ -182,6 +119,7 @@ Item {
             Text {
                 width: 2
                 height: 2
+                color: "#B0A8B9"
                 text: qsTr("...")
                 font.pixelSize: 14
             }
@@ -203,6 +141,7 @@ Item {
                     Text {
                         id: myRateTxt
 
+                        color: "#B0A8B9"
                         anchors.fill: parent
                         verticalAlignment: Text.AlignVCenter
                         text: "9999"
@@ -220,6 +159,7 @@ Item {
                     Text {
                         id: myNickTxt
 
+                        color: "#B0A8B9"
                         anchors.fill: parent
                         verticalAlignment: Text.AlignVCenter
                         text: nickName
@@ -237,6 +177,7 @@ Item {
                     Text {
                         id: myStepsTxt
 
+                        color: "#B0A8B9"
                         text: gameArea.stepCount
                         anchors.fill: parent
                         verticalAlignment: Text.AlignVCenter
@@ -254,6 +195,7 @@ Item {
                     Text {
                         id: myTimeTxt
 
+                        color: "#B0A8B9"
                         text: gameArea.gameTimeSec
                         anchors.fill: parent
                         verticalAlignment: Text.AlignVCenter
