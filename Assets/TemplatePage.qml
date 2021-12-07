@@ -8,6 +8,7 @@ Rectangle {
 
     QtObject {
         id: p
+        readonly property string stateHeader: "Header"
         readonly property string stateWelcome: "WelcomePage"
         readonly property string stateLevels: "LevelsPage"
         readonly property string stateGame: "GamePage"
@@ -46,11 +47,18 @@ Rectangle {
         id: header
 
         anchors.fill: parent
-        visible: false
+        visible: true
     }
 
 
     states: [
+        State {
+            name: p.stateHeader
+            PropertyChanges {
+                target: header
+                visible: true
+            }
+        },
         State {
             name: p.stateWelcome
             PropertyChanges {
@@ -59,9 +67,8 @@ Rectangle {
             }
             PropertyChanges {
                 target: header
-                pageName: "New Game"
-                backVisible: true
-                exitVisible: true
+                backVisible: false
+                exitVisible: false
             }
         },
         State {

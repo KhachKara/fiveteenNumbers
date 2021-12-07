@@ -80,7 +80,7 @@ Item {
                     }
                     onClicked: {
                         if (rectText.text === "New game") {
-                            templatePage.state = "p.stateWelcome"
+                            templatePage.state = "p.stateLevels"
                             console.log("new game page")
                         } else if (rectText.text === "Rate") {
                             console.log("rate page")

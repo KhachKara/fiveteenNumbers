@@ -4,9 +4,7 @@ import QtQuick.Controls 2.5
 Item {
     id: root
 
-    implicitWidth: newGamePage.implicitWidth
-    implicitHeight: newGamePage.implicitHeight
-
+    anchors.fill: parent
 
     Rectangle {
         id: newGamePage
