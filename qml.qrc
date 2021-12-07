@@ -5,7 +5,7 @@
         <file>Assets/GameArea.qml</file>
         <file>Assets/WelcomePage.qml</file>
         <file>Assets/icons/gradientFill.svg</file>
-        <file>Assets/NewGamePage.qml</file>
+        <file>Assets/LevelsPage.qml</file>
         <file>Assets/icons/back.svg</file>
         <file>Assets/icons/pause.svg</file>
         <file>Assets/GamePage.qml</file>
@@ -22,5 +22,6 @@
         <file>Assets/TemplatePage.qml</file>
         <file>Assets/AboutPage.qml</file>
         <file>Assets/FeedbackForm.qml</file>
+        <file>Assets/Header.qml</file>
     </qresource>
 </RCC>

@@ -75,7 +75,7 @@ Item {
             }
         }
 
-        // 4x4
+        // 5x5
         GameStyleRect {
             id: gameStyle5X5
 
@@ -105,9 +105,5 @@ Item {
                 }
             }
         }        
-    }
-    Text {
-        id: name
-        text: qsTr("newGamePage")
     }
 }

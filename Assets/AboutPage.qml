@@ -3,8 +3,7 @@ import QtQuick 2.0
 Item {
     id: root
 
-    implicitWidth: aboutPage.implicitWidth
-    implicitHeight: aboutPage.implicitHeight
+    anchors.fill: parent
 
     Rectangle {
         id: aboutPage
@@ -62,11 +61,4 @@ Item {
             }
         }
     }
-    // #убрать ---------
-    Text {
-        id: name
-        anchors.top: aboutPage.bottom
-        text: qsTr("aboutPage")
-    }
-    // -----------------
 }

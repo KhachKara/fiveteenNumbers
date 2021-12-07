@@ -45,20 +45,3 @@ Item {
 
     }
 }
-
-
-//    Rectangle {
-//        id: feedbackForm
-
-//        anchors.fill: parent
-//        Text {
-//            id: nickname
-//            text: qsTr("Nickname")
-//        }
-//        TextInput {
-//            id: inputMessage
-
-//        }
-
-//    }
-
