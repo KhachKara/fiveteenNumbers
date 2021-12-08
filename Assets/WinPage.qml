@@ -3,9 +3,8 @@ import QtQuick 2.2
 Rectangle {
     id: winPage
 
-    visible: false
-
-    //    opacity: 0.8
+    property alias steps: scoreBoard.steps
+    property alias time: scoreBoard.time
 
     radius: 15
     color: "#FFFFFF"
@@ -13,6 +12,11 @@ Rectangle {
     Text {
         id: youWinTxt
 
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            top: parent.top
+            topMargin: 36
+        }
         text: qsTr("You'r win!")
         color: "#845EC2"
         font {
@@ -21,11 +25,6 @@ Rectangle {
             pixelSize: 32
         }
 
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            top: parent.top
-            topMargin: 36
-        }
     }
 
     ScoreBoard {
@@ -41,11 +40,6 @@ Rectangle {
     Rectangle {
         id: continueBtn
 
-        height: 71
-
-        radius: 8
-        color: "#845EC2"
-
         anchors {
             top: scoreBoard.bottom
             left: parent.left
@@ -53,12 +47,15 @@ Rectangle {
             leftMargin: 30
             rightMargin: 30
             topMargin: 26
-
         }
+        height: 71
+        radius: 8
+        color: "#845EC2"
 
         Text {
             id: contiueTxt
 
+            anchors.centerIn: parent
             text: qsTr("Continue")
             color: "#FFFFFF"
             font {
@@ -66,7 +63,6 @@ Rectangle {
                 pixelSize: 32
             }
 
-            anchors.centerIn: parent
         }
 
         MouseArea {

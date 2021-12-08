@@ -145,7 +145,11 @@ Item {
             }
             p.updateSquaresWidth();
             p.initOtherFields();
-            p.checkToFinish();
+            if (p.checkToFinish()) {
+                root.pause = 1;
+                p.gameFinish = new Date;
+                root.finished();
+            }
         }
 
         function initOtherFields() {

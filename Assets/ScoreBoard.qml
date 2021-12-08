@@ -6,53 +6,47 @@ Item {
     property alias steps: txtStepsValue.text
     property alias time: txtTimeValue.text
 
-
     width: 162
     height: 135
 
-    GameArea {
-        id: gameArea
-        visible: false
-    }
-
     Image {
         id: firstStar
-        source: "./icons/filledStar.svg"
         anchors {
             top: parent.top
             left: parent.left
             topMargin: 10
         }
+        source: "./icons/filledStar.svg"
     }
 
     Image {
         id: secondStar
-        source: "./icons/filledStar.svg"
         anchors {
             horizontalCenter: parent.horizontalCenter
             top: parent.top
         }
+        source: "./icons/filledStar.svg"
     }
 
     Image {
         id: thirdtStar
-        source: "./icons/emptyStar.svg"
         anchors {
             top: parent.top
             right: parent.right
             topMargin: 10
         }
+        source: "./icons/emptyStar.svg"
     }
 
     Text {
         id: txtSteps
-        text: qsTr("Steps")
 
         anchors {
             top: firstStar.bottom
             left: firstStar.left
             topMargin: 21
         }
+        text: qsTr("Steps")
         color: "#B0A8B9"
         font {
             family: "Ubuntu"
@@ -62,7 +56,6 @@ Item {
 
     Text {
         id: txtStepsValue
-        text: gameArea.stepCount
 
         anchors {
             top: txtSteps.bottom
@@ -78,13 +71,13 @@ Item {
 
     Text {
         id: txtTime
-        text: qsTr("Time")
 
         anchors {
             top: thirdtStar.bottom
             right: thirdtStar.right
             topMargin: 21
         }
+        text: qsTr("Time")
         color: "#B0A8B9"
         font {
             family: "Ubuntu"
@@ -94,7 +87,6 @@ Item {
 
     Text {
         id: txtTimeValue
-        text: gamePage.formatTime(gameArea.gameTimeSec)
 
         anchors {
             top: txtTime.bottom

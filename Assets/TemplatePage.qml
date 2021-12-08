@@ -88,7 +88,6 @@ Rectangle {
     RatePage {
         id: ratePage
 
-
         anchors.fill: parent
         visible: false
     }
@@ -113,6 +112,11 @@ Rectangle {
             leftMargin: 30
             rightMargin: 30
         }
+        visible: false
+
+        time: gamePage.time
+        steps: gamePage.steps
+
     }
 
     ScoreBoard {

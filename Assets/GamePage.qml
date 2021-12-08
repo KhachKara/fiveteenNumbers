@@ -9,7 +9,15 @@ Rectangle {
     anchors.fill: parent
 
     property alias steps: txtStepsValue.text
-    property alias text: txtTimeValue.text
+    property alias time: txtTimeValue.text
+
+    onStepsChanged: {
+        console.info('steps', steps)
+    }
+
+    onTimeChanged: {
+        console.info('time', time)
+    }
 
     color: "#4B4453"
 
@@ -134,7 +142,7 @@ Rectangle {
 
         onFinished: {
             console.log('Game Over! ! !')
-            txtTimeValue.text = toString(gameArea.gameTimeSec)
+//            txtTimeValue.text = toString(gameArea.gameTimeSec)
             root.finished()
         }
     }
