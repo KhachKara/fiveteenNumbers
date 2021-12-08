@@ -1,10 +1,13 @@
 import QtQuick 2.2
 
 Rectangle {
-    id: winPage
+    id: root
 
     property alias steps: scoreBoard.steps
     property alias time: scoreBoard.time
+
+    signal continueClicked()
+    signal rateClicked()
 
     radius: 15
     color: "#FFFFFF"
@@ -79,7 +82,7 @@ Rectangle {
             }
 
             onClicked: {
-
+                root.continueClicked()
             }
         }
     }
@@ -133,7 +136,8 @@ Rectangle {
                 }
 
                 onClicked: {
-
+                    root.rateClicked()
+                    console.log("Rate clicked")
                 }
             }
         }

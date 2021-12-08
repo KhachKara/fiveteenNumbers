@@ -117,6 +117,14 @@ Rectangle {
         time: gamePage.time
         steps: gamePage.steps
 
+        onContinueClicked: {
+            root.state = p.stateLevels
+        }
+
+        onRateClicked: {
+            root.state = p.stateRate
+        }
+
     }
 
     ScoreBoard {
@@ -132,6 +140,7 @@ Rectangle {
 
         onBackClicked: {
             root.state = p.stateWelcome
+            winPage.visible = false
         }
     }
 
@@ -175,8 +184,17 @@ Rectangle {
             PropertyChanges {
                 target: header
                 pageName: "New game"
+                enabled: true
                 backVisible: true
                 exitVisible: true
+            }
+            PropertyChanges {
+                target: winPage
+                visible: false
+            }
+            PropertyChanges {
+                target: welcomePage
+                visible: true
             }
         },
         State {
@@ -200,6 +218,15 @@ Rectangle {
             PropertyChanges {
                 target: header
                 pageName: "Rate"
+            }
+            PropertyChanges {
+                target: winPage
+                visible: false
+            }
+            PropertyChanges {
+                target: header
+                enabled: true
+                backIsPause: false
             }
         },
         State {
