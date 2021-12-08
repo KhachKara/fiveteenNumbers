@@ -3,9 +3,11 @@ import QtQuick 2.15
 Rectangle {
     id: root
 
+    signal started()
+    signal finished()
+
     anchors.fill: parent
 
-    property alias time: txtTimeValue.text
     property alias steps: txtStepsValue.text
     property alias text: txtTimeValue.text
 
@@ -103,6 +105,7 @@ Rectangle {
     function startGame(size) {
         gameArea.initGame(size);
         initOtherFields();
+        root.started()
     }
 
     function startGameArray(array) {
@@ -132,23 +135,7 @@ Rectangle {
         onFinished: {
             console.log('Game Over! ! !')
             txtTimeValue.text = toString(gameArea.gameTimeSec)
-            pause.visible = false
-            winPage.visible = true
-        }
-    }
-
-    WinPage {
-        id: winPage
-
-        anchors {
-            top: parent.top
-            bottom: parent.bottom
-            topMargin: 134
-            bottomMargin: 60
-            left: parent.left
-            right: parent.right
-            leftMargin: 30
-            rightMargin: 30
+            root.finished()
         }
     }
 }

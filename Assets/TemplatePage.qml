@@ -17,6 +17,12 @@ Rectangle {
         readonly property string stateSettings: "SettingsPage"
     }
 
+    GameArea {
+        id: gameArea
+
+        visible: false
+    }
+
     AboutPage {
         id: aboutPage
 
@@ -49,7 +55,6 @@ Rectangle {
         onQuitClicked: {
             Qt.quit()
         }
-
     }
 
     LevelsPage {
@@ -57,6 +62,10 @@ Rectangle {
 
         anchors.fill: parent
         visible: false
+
+        onGameStyleClicked: {
+            root.state = p.stateGame
+        }
     }
 
     GamePage {
@@ -64,10 +73,19 @@ Rectangle {
 
         anchors.fill: parent
         visible: false
+
+        onStarted: {
+            header.backIsPause = true
+        }
+        onFinished: {
+            header.enabled = false
+            winPage.visible = true
+        }
     }
 
     RatePage {
         id: ratePage
+
 
         anchors.fill: parent
         visible: false
@@ -77,6 +95,27 @@ Rectangle {
         id: settingsPage
 
         anchors.fill: parent
+        visible: false
+    }
+
+    WinPage {
+        id: winPage
+
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
+            topMargin: 134
+            bottomMargin: 60
+            left: parent.left
+            right: parent.right
+            leftMargin: 30
+            rightMargin: 30
+        }
+    }
+
+    ScoreBoard {
+        id: scoreBoard
+
         visible: false
     }
 
@@ -91,14 +130,16 @@ Rectangle {
     }
 
     states: [
-        State {  // Header
+        State {
+            // Header
             name: p.stateHeader
             PropertyChanges {
                 target: header
                 visible: true
             }
         },
-        State {  // WelcomePage
+        State {
+            // WelcomePage
             name: p.stateWelcome
             PropertyChanges {
                 target: welcomePage
@@ -117,9 +158,9 @@ Rectangle {
                 target: gamePage
                 visible: false
             }
-
         },
-        State {  // levelsPage
+        State {
+            // levelsPage
             name: p.stateLevels
             PropertyChanges {
                 target: levelsPage
@@ -132,7 +173,8 @@ Rectangle {
                 exitVisible: true
             }
         },
-        State {  // stateGame
+        State {
+            // stateGame
             name: p.stateGame
             PropertyChanges {
                 target: levelsPage
@@ -140,10 +182,10 @@ Rectangle {
             }
             PropertyChanges {
                 target: header
-                pageName: "New game"
             }
         },
-        State {  // stateRate
+        State {
+            // stateRate
             name: p.stateRate
             PropertyChanges {
                 target: ratePage
@@ -154,7 +196,8 @@ Rectangle {
                 pageName: "Rate"
             }
         },
-        State {  // stateAbout
+        State {
+            // stateAbout
             name: p.stateAbout
             PropertyChanges {
                 target: aboutPage
@@ -166,7 +209,8 @@ Rectangle {
                 pageName: "Our team"
             }
         },
-        State {  // stateSettings
+        State {
+            // stateSettings
             name: p.stateSettings
             PropertyChanges {
                 target: settingsPage

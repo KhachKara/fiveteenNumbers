@@ -4,6 +4,8 @@ import QtQuick.Controls 2.5
 Item {
     id: root
 
+    signal gameStyleClicked()
+
     anchors.fill: parent
 
     Rectangle {
@@ -42,6 +44,7 @@ Item {
                         onClicked: {
                             gamePage.startGame(gameStyle.gameSize)
                             gamePage.gameSize = gameStyle.gameSize
+                            gamePage.visible = true
                         }
                     }
                 }

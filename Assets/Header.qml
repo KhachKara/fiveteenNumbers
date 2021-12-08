@@ -7,6 +7,7 @@ Item {
     property alias backVisible: back.visible
     property alias exitVisible: exit.visible
     property alias backIsPause: back.isPause
+    property alias textColor: pageName.color
 
     signal backClicked()
 

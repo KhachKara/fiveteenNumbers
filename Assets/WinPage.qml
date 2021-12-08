@@ -35,7 +35,6 @@ Rectangle {
             horizontalCenter: winPage.horizontalCenter
             top: youWinTxt.bottom
             topMargin: 31
-
         }
     }
 

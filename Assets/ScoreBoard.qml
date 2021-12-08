@@ -6,6 +6,11 @@ Item {
     width: 162
     height: 135
 
+GameArea {
+id: gameArea
+visible: false
+}
+
     Image {
         id: firstStar
         source: "./icons/filledStar.svg"
@@ -85,7 +90,7 @@ Item {
 
     Text {
         id: txtTimeValue
-        text: formatTime(gameArea.gameTimeSec)
+        text: gameArea.gameTimeSec
 
         anchors {
             top: txtTime.bottom
