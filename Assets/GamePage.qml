@@ -11,14 +11,6 @@ Rectangle {
     property alias steps: txtStepsValue.text
     property alias time: txtTimeValue.text
 
-    onStepsChanged: {
-        console.info('steps', steps)
-    }
-
-    onTimeChanged: {
-        console.info('time', time)
-    }
-
     color: "#4B4453"
 
     Text {
@@ -142,7 +134,6 @@ Rectangle {
 
         onFinished: {
             console.log('Game Over! ! !')
-//            txtTimeValue.text = toString(gameArea.gameTimeSec)
             root.finished()
         }
     }
