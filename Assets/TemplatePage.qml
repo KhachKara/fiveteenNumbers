@@ -78,6 +78,8 @@ Rectangle {
             header.backIsPause = true
         }
         onFinished: {
+            scoreBoard.steps = gameArea.stepCount
+            scoreBoard.time = formatTime(gameArea.gameTimeSec)
             header.enabled = false
             winPage.visible = true
         }

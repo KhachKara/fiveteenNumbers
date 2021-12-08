@@ -3,13 +3,17 @@ import QtQuick 2.2
 Item {
     id: root
 
+    property alias steps: txtStepsValue.text
+    property alias time: txtTimeValue.text
+
+
     width: 162
     height: 135
 
-GameArea {
-id: gameArea
-visible: false
-}
+    GameArea {
+        id: gameArea
+        visible: false
+    }
 
     Image {
         id: firstStar
@@ -90,7 +94,7 @@ visible: false
 
     Text {
         id: txtTimeValue
-        text: gameArea.gameTimeSec
+        text: gamePage.formatTime(gameArea.gameTimeSec)
 
         anchors {
             top: txtTime.bottom
