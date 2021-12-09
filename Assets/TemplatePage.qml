@@ -17,6 +17,7 @@ Rectangle {
         readonly property string stateSettings: "SettingsPage"
     }
 
+    // СТРАНИЦЫ ____________________________________________________
     GameArea {
         id: gameArea
 
@@ -144,6 +145,7 @@ Rectangle {
         }
     }
 
+    // СТЕЙТЫ ___________________________________________________________
     states: [
         State {
             // Header
@@ -193,8 +195,8 @@ Rectangle {
                 visible: false
             }
             PropertyChanges {
-                target: welcomePage
-                visible: true
+                target: gamePage
+                visible: false
             }
         },
         State {
@@ -203,9 +205,6 @@ Rectangle {
             PropertyChanges {
                 target: levelsPage
                 visible: true
-            }
-            PropertyChanges {
-                target: header
             }
         },
         State {
