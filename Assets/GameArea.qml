@@ -146,7 +146,7 @@ Item {
             p.updateSquaresWidth();
             p.initOtherFields();
             if (p.checkToFinish()) {
-                root.pause = 1;
+                root.pause = true;
                 p.gameFinish = new Date;
                 root.finished();
             }
@@ -155,6 +155,7 @@ Item {
         function initOtherFields() {
             p.stepsCount = 0;
             p.gameTimeSec = 0;
+            root.pause = false;
             p.gameStart = new Date;
             p.gameFinish = new Date(0);
         }
