@@ -4,7 +4,7 @@ Rectangle {
     id: root
 
     color: "#4B4453"
-    state: p.stateLogin
+    state: p.stateWelcome
 
     QtObject {
         id: p
@@ -21,50 +21,6 @@ Rectangle {
     }
 
     // СТРАНИЦЫ ____________________________________________________
-    LoginPage {
-        id: loginPage
-
-        anchors.fill: parent
-        visible: false
-
-        onLogoClicked: {
-            root.state = p.stateAbout
-        }
-
-        onSignInButton: {
-            root.state = p.stateSignIn
-        }
-
-        onLoginButton: {}
-
-        onSkip: {
-            root.state = p.stateWelcome
-        }
-    }
-
-    SignInPage {
-        id: signInPage
-
-        anchors.fill: parent
-        visible: false
-
-        onLogoClicked: {
-            root.state = p.stateAbout
-        }
-
-        onEnterButton: {}
-    }
-
-    SocialNetwork {
-        id: socialNetwork
-
-        anchors.fill: parent
-        visible: false
-
-        onFacebookClicked: {}
-        onGoogleClicked: {}
-        onAppleClicked: {}
-    }
 
     GameArea {
         id: gameArea
@@ -72,8 +28,8 @@ Rectangle {
         visible: false
     }
 
-    AboutPage {
-        id: aboutPage
+    Header {
+        id: header
 
         anchors.fill: parent
         visible: false
@@ -129,20 +85,6 @@ Rectangle {
         }
     }
 
-    RatePage {
-        id: ratePage
-
-        anchors.fill: parent
-        visible: false
-    }
-
-    SettingsPage {
-        id: settingsPage
-
-        anchors.fill: parent
-        visible: false
-    }
-
     WinPage {
         id: winPage
 
@@ -158,9 +100,6 @@ Rectangle {
         }
         visible: false
 
-        time: gamePage.time
-        steps: gamePage.steps
-
         onContinueClicked: {
             root.state = p.stateLevels
         }
@@ -168,58 +107,10 @@ Rectangle {
         onRateClicked: {
             root.state = p.stateRate
         }
-
-    }
-
-    Header {
-        id: header
-
-        anchors.fill: parent
-        visible: true
-
-        onBackClicked: {
-            root.state = p.stateWelcome
-            winPage.visible = false
-        }
     }
 
     // СТЕЙТЫ ___________________________________________________________
     states: [
-
-        // Login ------------------
-        State {
-            name: p.stateLogin
-            PropertyChanges {
-                target: loginPage
-                visible: true
-            }
-            PropertyChanges {
-                target: header
-                visible: false
-            }
-        },
-
-        // SignIn ------------------
-        State {
-            name: p.stateSignIn
-            PropertyChanges {
-                target: signInPage
-                visible: true
-            }
-            PropertyChanges {
-                target: header
-                visible: false
-            }
-        },
-
-        // Header ------------------
-        State {
-            name: p.stateHeader
-            PropertyChanges {
-                target: header
-                visible: true
-            }
-        },
 
         // WelcomePage ------------------
         State {
@@ -257,14 +148,6 @@ Rectangle {
                 backVisible: true
                 exitVisible: true
             }
-//            PropertyChanges {
-//                target: winPage
-//                visible: false
-//            }
-//            PropertyChanges {
-//                target: gamePage
-//                visible: false
-//            }
         },
 
         // stateGame ------------------
@@ -277,66 +160,6 @@ Rectangle {
             PropertyChanges {
                 target: header
                 visible: true
-            }
-        },
-
-        // scoreBoard ------------------
-        State {
-            name: p.stateScoreBoard
-            PropertyChanges {
-                target: header
-                visible: true
-                enabled: false
-            }
-            PropertyChanges {
-                target: winPage
-                visible: true
-            }
-        },
-
-        // stateRate ------------------
-        State {
-            name: p.stateRate
-            PropertyChanges {
-                target: ratePage
-                visible: true
-            }
-            PropertyChanges {
-                target: header
-                pageName: "Rate"
-            }
-            PropertyChanges {
-                target: header
-                enabled: true
-                backIsPause: false
-            }
-        },
-
-        // stateAbout ------------------
-        State {
-            name: p.stateAbout
-            PropertyChanges {
-                target: aboutPage
-                visible: true
-            }
-            PropertyChanges {
-                target: header
-                visible: true
-                pageName: "Our team"
-            }
-        },
-
-        // stateSettings ------------------
-        State {
-            name: p.stateSettings
-            PropertyChanges {
-                target: settingsPage
-                visible: true
-            }
-            PropertyChanges {
-                target: header
-                visible: true
-                pageName: "Settings"
             }
         }
     ]

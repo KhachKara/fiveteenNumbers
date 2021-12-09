@@ -3,9 +3,6 @@ import QtQuick 2.2
 Rectangle {
     id: root
 
-    property alias steps: scoreBoard.steps
-    property alias time: scoreBoard.time
-
     signal continueClicked()
     signal rateClicked()
 
@@ -26,17 +23,6 @@ Rectangle {
             family: "Ubuntu"
             bold: true
             pixelSize: 32
-        }
-
-    }
-
-    ScoreBoard {
-        id: scoreBoard
-
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            top: youWinTxt.bottom
-            topMargin: 31
         }
     }
 
@@ -65,15 +51,6 @@ Rectangle {
                 family: "Ubuntu"
                 pixelSize: 32
             }
-
-        }
-
-        CursorShapeMouseArea {
-            anchors.fill: parent
-
-            onClicked: {
-                root.continueClicked()
-            }
         }
     }
 
@@ -94,7 +71,6 @@ Rectangle {
             topMargin: 12
         }
 
-
         Rectangle {
             radius: 5
             color: "#FFFFFF"
@@ -110,14 +86,6 @@ Rectangle {
                     pixelSize: 32
                 }
                 anchors.centerIn: parent
-            }
-
-            CursorShapeMouseArea {
-                anchors.fill: parent
-
-                onClicked: {
-                    root.rateClicked()
-                }
             }
         }
     }
