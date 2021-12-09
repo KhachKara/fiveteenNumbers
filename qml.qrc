@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>Assets/Square.qml</file>
         <file>Assets/GameArea.qml</file>
         <file>Assets/WelcomePage.qml</file>
         <file>Assets/icons/gradientFill.svg</file>
@@ -12,26 +11,16 @@
         <file>Assets/NewSquare.qml</file>
         <file>Assets/GameStyleRect.qml</file>
         <file>Assets/WinPage.qml</file>
-        <file>Assets/ScoreBoard.qml</file>
         <file>Assets/icons/emptyStar.svg</file>
         <file>Assets/icons/filledStar.svg</file>
         <file>Assets/icons/logo.svg</file>
-        <file>Assets/RatePage.qml</file>
         <file>Assets/icons/exit.svg</file>
-        <file>Assets/SettingsPage.qml</file>
         <file>Assets/TemplatePage.qml</file>
-        <file>Assets/AboutPage.qml</file>
-        <file>Assets/FeedbackForm.qml</file>
-        <file>Assets/Header.qml</file>
-        <file>Assets/LoginPage.qml</file>
-        <file>Assets/SignInPage.qml</file>
-        <file>Assets/SocialNetwork.qml</file>
         <file>Assets/icons/apple.svg</file>
         <file>Assets/icons/bronzeStar.svg</file>
         <file>Assets/icons/facebook.svg</file>
         <file>Assets/icons/goldStar.svg</file>
         <file>Assets/icons/Google.svg</file>
         <file>Assets/icons/silverStar.svg</file>
-        <file>Assets/CursorShapeMouseArea.qml</file>
     </qresource>
 </RCC>
