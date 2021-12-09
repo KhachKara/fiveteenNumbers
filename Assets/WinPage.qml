@@ -34,7 +34,7 @@ Rectangle {
         id: scoreBoard
 
         anchors {
-            horizontalCenter: winPage.horizontalCenter
+            horizontalCenter: parent.horizontalCenter
             top: youWinTxt.bottom
             topMargin: 31
         }
@@ -68,18 +68,8 @@ Rectangle {
 
         }
 
-        MouseArea {
+        CursorShapeMouseArea {
             anchors.fill: parent
-
-            hoverEnabled: true
-
-            onEntered: {
-                cursorShape = Qt.PointingHandCursor
-            }
-
-            onExited: {
-                cursorShape = Qt.ArrowCursor
-            }
 
             onClicked: {
                 root.continueClicked()
@@ -122,22 +112,11 @@ Rectangle {
                 anchors.centerIn: parent
             }
 
-            MouseArea {
+            CursorShapeMouseArea {
                 anchors.fill: parent
-
-                hoverEnabled: true
-
-                onEntered: {
-                    cursorShape = Qt.PointingHandCursor
-                }
-
-                onExited: {
-                    cursorShape = Qt.ArrowCursor
-                }
 
                 onClicked: {
                     root.rateClicked()
-                    console.log("Rate clicked")
                 }
             }
         }

@@ -32,5 +32,6 @@
         <file>Assets/icons/goldStar.svg</file>
         <file>Assets/icons/Google.svg</file>
         <file>Assets/icons/silverStar.svg</file>
+        <file>Assets/CursorShapeMouseArea.qml</file>
     </qresource>
 </RCC>

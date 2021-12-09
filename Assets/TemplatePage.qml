@@ -112,8 +112,9 @@ Rectangle {
         anchors.fill: parent
         visible: false
 
-        onGameStyleClicked: {
-            root.state = p.stateGame
+        onStartGameClicked: function(size) {
+            root.state = p.stateGame;
+            gamePage.startGame(size);
         }
     }
 
@@ -123,16 +124,8 @@ Rectangle {
         anchors.fill: parent
         visible: false
 
-        onStarted: {
-            root.state = p.stateGame
-//            header.backIsPause = true
-        }
         onFinished: {
             root.state = p.stateScoreBoard
-//            scoreBoard.steps = gameArea.stepCount
-//            scoreBoard.time = formatTime(gameArea.gameTimeSec)
-//            header.enabled = false
-//            winPage.visible = true
         }
     }
 
@@ -176,12 +169,6 @@ Rectangle {
             root.state = p.stateRate
         }
 
-    }
-
-    ScoreBoard {
-        id: scoreBoard
-
-        visible: false
     }
 
     Header {
@@ -270,14 +257,14 @@ Rectangle {
                 backVisible: true
                 exitVisible: true
             }
-            PropertyChanges {
-                target: winPage
-                visible: false
-            }
-            PropertyChanges {
-                target: gamePage
-                visible: false
-            }
+//            PropertyChanges {
+//                target: winPage
+//                visible: false
+//            }
+//            PropertyChanges {
+//                target: gamePage
+//                visible: false
+//            }
         },
 
         // stateGame ------------------
@@ -296,12 +283,6 @@ Rectangle {
         // scoreBoard ------------------
         State {
             name: p.stateScoreBoard
-            PropertyChanges {
-                target: scoreBoard
-                visible: false
-                steps: gameArea.stepCount
-                time: formatTime(gameArea.gameTimeSec)
-            }
             PropertyChanges {
                 target: header
                 visible: true
@@ -323,10 +304,6 @@ Rectangle {
             PropertyChanges {
                 target: header
                 pageName: "Rate"
-            }
-            PropertyChanges {
-                target: winPage
-                visible: false
             }
             PropertyChanges {
                 target: header

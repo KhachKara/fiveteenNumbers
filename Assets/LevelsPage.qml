@@ -4,7 +4,7 @@ import QtQuick.Controls 2.5
 Item {
     id: root
 
-    signal gameStyleClicked()
+    signal startGameClicked(int size)
 
     anchors.fill: parent
 
@@ -13,7 +13,6 @@ Item {
 
         anchors.fill: parent
         color: "#4B4453"
-
 
         Column {
             anchors {
@@ -26,25 +25,15 @@ Item {
                 model: 3
                 GameStyleRect {
                     id: gameStyle
+                    width: 140
 
                     gameSize: index + 2
                     txtGameMode: gameSize + "x" + gameSize
 
-                    MouseArea {
+                    CursorShapeMouseArea {
                         anchors.fill: parent
-                        hoverEnabled: true
-
-                        onEntered: {
-                            cursorShape = Qt.PointingHandCursor
-                        }
-
-                        onExited: {
-                            cursorShape = Qt.ArrowCursor
-                        }
                         onClicked: {
-                            gamePage.startGame(gameStyle.gameSize)
-                            gamePage.gameSize = gameStyle.gameSize
-                            gamePage.visible = true
+                            root.startGameClicked(gameStyle.gameSize)
                         }
                     }
                 }

@@ -10,24 +10,23 @@ Rectangle {
     property alias txtGameMode: txtGameMode.text
 
 
-    width: 140
     height: width
     color: "#845EC2"
     radius: 8
 
     Column {
         id: col
-        spacing: spacingMargin
         anchors {
             centerIn: parent
         }
+        spacing: spacingMargin
         Repeater {
             model: gameSize
             Row {
-                spacing: spacingMargin
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                 }
+                spacing: spacingMargin
                 Repeater {
                     model: gameSize
                     Rectangle {
@@ -46,11 +45,11 @@ Rectangle {
     Text {
         id: txtGameMode
 
+        anchors.centerIn: parent
         color: "#FFFFFF"
         font {
             family: "Ubuntu"
             pixelSize: 30
         }
-        anchors.centerIn: parent
     }
 }

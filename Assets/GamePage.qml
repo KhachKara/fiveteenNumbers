@@ -97,15 +97,9 @@ Rectangle {
         }
     }
 
-
-    function initOtherFields() {
-        gameArea.visible = 1;
-    }
-
     function startGame(size) {
-        gameArea.initGame(size);
-        initOtherFields();
         root.started()
+        gameArea.initGame(size);
     }
 
     function startGameArray(array) {
@@ -133,7 +127,6 @@ Rectangle {
         squareUrl: "NewSquare.qml"
 
         onFinished: {
-            console.log('Game Over! ! !')
             root.finished()
         }
     }
