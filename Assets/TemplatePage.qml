@@ -4,10 +4,11 @@ Rectangle {
     id: root
 
     color: "#4B4453"
-    state: p.stateWelcome
+    state: p.stateLogin
 
     QtObject {
         id: p
+        readonly property string stateLogin: "Login"
         readonly property string stateHeader: "Header"
         readonly property string stateWelcome: "WelcomePage"
         readonly property string stateLevels: "LevelsPage"
@@ -18,6 +19,41 @@ Rectangle {
     }
 
     // СТРАНИЦЫ ____________________________________________________
+    LoginPage {
+        id: loginPage
+
+        anchors.fill: parent
+        visible: false
+
+        onLogoClicked: {}
+        onSignInButton: {}
+        onLoginButton: {}
+        onSkip: {}
+    }
+
+    SignInPage {
+        id: signInPage
+
+        anchors.fill: parent
+        visible: false
+
+        onLogoClicked: {}
+        onEnterButton: {}
+        onSkip: {}
+
+    }
+
+    SocialNetwork {
+        id: socialNetwork
+
+        anchors.fill: parent
+        visible: false
+
+        onFacebookClicked: {}
+        onGoogleClicked: {}
+        onAppleClicked: {}
+    }
+
     GameArea {
         id: gameArea
 
@@ -147,6 +183,18 @@ Rectangle {
 
     // СТЕЙТЫ ___________________________________________________________
     states: [
+        State {
+            // Login
+            name: p.stateLogin
+            PropertyChanges {
+                target: loginPage
+                visible: true
+            }
+            PropertyChanges {
+                target: header
+                visible: false
+            }
+        },
         State {
             // Header
             name: p.stateHeader
