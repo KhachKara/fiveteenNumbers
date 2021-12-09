@@ -42,12 +42,11 @@ Item {
     // Инициализирует игру по последовательности array.
     function initGameArray(array) {
         if (root.squareUrl === '') {
-            console.log('Квадрат не объявлен!')
+            console.error('Квадрат не объявлен!')
             return
         }
 
         p.clearGame();
-        console.log('init game', array.join(' '))
         if (!checkArrayForGame(array)){
             return;
         }
@@ -56,7 +55,6 @@ Item {
         p.array = array;
         p.squareComponent = Qt.createComponent(root.squareUrl);
 
-        console.log(p.squareComponent.status)
         if (p.squareComponent.status === Component.Error) {
             console.error('Ошибка в коде квадрата');
             return;
@@ -79,8 +77,8 @@ Item {
         let randomArray = p.shuffle(p.iota(Array(size * size)));
         if (!checkArrayForGame(randomArray)
                 && !p.tryToFixArray(randomArray)) {
-            console.log("Не смог исправить игру");
-            console.log(randomArray);
+            console.error("Не смог исправить игру");
+            console.error(randomArray);
         }
 
         initGameArray(randomArray);
@@ -109,7 +107,6 @@ Item {
             }
         }
         let result = summ + rightPart;
-        console.log(size, e, rightPart, summ, result);
         return result % 2;
     }
 
@@ -130,7 +127,7 @@ Item {
 
         function createObjects() {
             if (!p.squareComponent || p.squareComponent.status !== Component.Ready) {
-                console.log('что то не так с squareComponent', p.squareComponent);
+                console.error('что то не так с squareComponent', p.squareComponent);
                 return
             }
 
@@ -185,7 +182,7 @@ Item {
                     }
                 }
             }
-            console.log('Не смог найти пустую строку')
+            console.error('Не смог найти пустую строку')
             console.assert(false);
         }
 
@@ -351,7 +348,6 @@ Item {
         function toLeft() {
             const freePoint = findFreePosition();
             if (freePoint.x === p.size - 1) {
-                console.log("Левее некуда")
                 return false;
             }
             gameStep(Qt.point(freePoint.x + 1, freePoint.y));
@@ -361,7 +357,6 @@ Item {
         function toRight() {
             const freePoint = findFreePosition();
             if (freePoint.x === 0) {
-                console.log("Правее некуда")
                 return false;
             }
             gameStep(Qt.point(freePoint.x - 1, freePoint.y));
@@ -371,7 +366,6 @@ Item {
         function toUp() {
             const freePoint = findFreePosition();
             if (freePoint.y === p.size - 1) {
-                console.log("Выше некуда")
                 return false;
             }
             gameStep(Qt.point(freePoint.x, freePoint.y + 1));
@@ -381,7 +375,6 @@ Item {
         function toDown() {
             const freePoint = findFreePosition();
             if (freePoint.y === 0) {
-                console.log("Выше некуда")
                 return false;
             }
             gameStep(Qt.point(freePoint.x, freePoint.y - 1));
