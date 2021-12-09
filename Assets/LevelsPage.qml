@@ -27,7 +27,7 @@ Item {
                 GameStyleRect {
                     id: gameStyle
 
-                    gameSize: index + 3
+                    gameSize: index + 2
                     txtGameMode: gameSize + "x" + gameSize
 
                     MouseArea {

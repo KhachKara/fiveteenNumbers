@@ -9,10 +9,12 @@ Rectangle {
     QtObject {
         id: p
         readonly property string stateLogin: "Login"
+        readonly property string stateSignIn: "SignIn"
         readonly property string stateHeader: "Header"
         readonly property string stateWelcome: "WelcomePage"
         readonly property string stateLevels: "LevelsPage"
         readonly property string stateGame: "GamePage"
+        readonly property string stateScoreBoard: "ScoreBoard"
         readonly property string stateAbout: "AboutPage"
         readonly property string stateRate: "RatePage"
         readonly property string stateSettings: "SettingsPage"
@@ -25,10 +27,19 @@ Rectangle {
         anchors.fill: parent
         visible: false
 
-        onLogoClicked: {}
-        onSignInButton: {}
+        onLogoClicked: {
+            root.state = p.stateAbout
+        }
+
+        onSignInButton: {
+            root.state = p.stateSignIn
+        }
+
         onLoginButton: {}
-        onSkip: {}
+
+        onSkip: {
+            root.state = p.stateWelcome
+        }
     }
 
     SignInPage {
@@ -37,10 +48,11 @@ Rectangle {
         anchors.fill: parent
         visible: false
 
-        onLogoClicked: {}
-        onEnterButton: {}
-        onSkip: {}
+        onLogoClicked: {
+            root.state = p.stateAbout
+        }
 
+        onEnterButton: {}
     }
 
     SocialNetwork {
@@ -78,7 +90,7 @@ Rectangle {
         }
 
         onNewGameClicked: {
-            root.state = p.stateGame
+            root.state = p.stateLevels
         }
 
         onRateClicked: {
@@ -112,13 +124,15 @@ Rectangle {
         visible: false
 
         onStarted: {
-            header.backIsPause = true
+            root.state = p.stateGame
+//            header.backIsPause = true
         }
         onFinished: {
-            scoreBoard.steps = gameArea.stepCount
-            scoreBoard.time = formatTime(gameArea.gameTimeSec)
-            header.enabled = false
-            winPage.visible = true
+            root.state = p.stateScoreBoard
+//            scoreBoard.steps = gameArea.stepCount
+//            scoreBoard.time = formatTime(gameArea.gameTimeSec)
+//            header.enabled = false
+//            winPage.visible = true
         }
     }
 
@@ -174,6 +188,7 @@ Rectangle {
         id: header
 
         anchors.fill: parent
+        visible: true
 
         onBackClicked: {
             root.state = p.stateWelcome
@@ -183,8 +198,9 @@ Rectangle {
 
     // СТЕЙТЫ ___________________________________________________________
     states: [
+
+        // Login ------------------
         State {
-            // Login
             name: p.stateLogin
             PropertyChanges {
                 target: loginPage
@@ -195,16 +211,31 @@ Rectangle {
                 visible: false
             }
         },
+
+        // SignIn ------------------
         State {
-            // Header
+            name: p.stateSignIn
+            PropertyChanges {
+                target: signInPage
+                visible: true
+            }
+            PropertyChanges {
+                target: header
+                visible: false
+            }
+        },
+
+        // Header ------------------
+        State {
             name: p.stateHeader
             PropertyChanges {
                 target: header
                 visible: true
             }
         },
+
+        // WelcomePage ------------------
         State {
-            // WelcomePage
             name: p.stateWelcome
             PropertyChanges {
                 target: welcomePage
@@ -212,8 +243,8 @@ Rectangle {
             }
             PropertyChanges {
                 target: header
-                backVisible: false
-                exitVisible: false
+                backVisible: true
+                exitVisible: true
             }
             PropertyChanges {
                 target: ratePage
@@ -224,8 +255,9 @@ Rectangle {
                 visible: false
             }
         },
+
+        // levelsPage ------------------
         State {
-            // levelsPage
             name: p.stateLevels
             PropertyChanges {
                 target: levelsPage
@@ -247,16 +279,42 @@ Rectangle {
                 visible: false
             }
         },
+
+        // stateGame ------------------
         State {
-            // stateGame
             name: p.stateGame
             PropertyChanges {
-                target: levelsPage
+                target: gamePage
+                visible: true
+            }
+            PropertyChanges {
+                target: header
                 visible: true
             }
         },
+
+        // scoreBoard ------------------
         State {
-            // stateRate
+            name: p.stateScoreBoard
+            PropertyChanges {
+                target: scoreBoard
+                visible: false
+                steps: gameArea.stepCount
+                time: formatTime(gameArea.gameTimeSec)
+            }
+            PropertyChanges {
+                target: header
+                visible: true
+                enabled: false
+            }
+            PropertyChanges {
+                target: winPage
+                visible: true
+            }
+        },
+
+        // stateRate ------------------
+        State {
             name: p.stateRate
             PropertyChanges {
                 target: ratePage
@@ -276,8 +334,9 @@ Rectangle {
                 backIsPause: false
             }
         },
+
+        // stateAbout ------------------
         State {
-            // stateAbout
             name: p.stateAbout
             PropertyChanges {
                 target: aboutPage
@@ -289,8 +348,9 @@ Rectangle {
                 pageName: "Our team"
             }
         },
+
+        // stateSettings ------------------
         State {
-            // stateSettings
             name: p.stateSettings
             PropertyChanges {
                 target: settingsPage

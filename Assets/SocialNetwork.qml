@@ -19,6 +19,14 @@ Item {
             MouseArea {
                 anchors.fill: parent
 
+                hoverEnabled: true
+                onEntered: {
+                    cursorShape = Qt.PointingHandCursor
+                }
+                onExited: {
+                    cursorShape = Qt.ArrowCursor
+                }
+
                 onClicked: {
                     facebookClicked()
                 }
@@ -32,6 +40,14 @@ Item {
             MouseArea {
                 anchors.fill: parent
 
+                hoverEnabled: true
+                onEntered: {
+                    cursorShape = Qt.PointingHandCursor
+                }
+                onExited: {
+                    cursorShape = Qt.ArrowCursor
+                }
+
                 onClicked: {
                     googleClicked()
                 }
@@ -44,6 +60,14 @@ Item {
 
             MouseArea {
                 anchors.fill: parent
+
+                hoverEnabled: true
+                onEntered: {
+                    cursorShape = Qt.PointingHandCursor
+                }
+                onExited: {
+                    cursorShape = Qt.ArrowCursor
+                }
 
                 onClicked: {
                     appleClicked()

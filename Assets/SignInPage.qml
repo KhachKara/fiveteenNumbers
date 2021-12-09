@@ -192,53 +192,5 @@ Item {
             }
         }
     }
-
-    Rectangle {
-        id: skipRect
-
-        width: 300
-        height: 37
-        color: Qt.rgba(0,0,0,0)
-
-        anchors {
-            top: entreBtn.bottom
-            left: parent.left
-            right: parent.right
-            topMargin: 11
-            leftMargin: 30
-            rightMargin: 30
-        }
-        Text {
-            id: skipTxt
-
-            anchors.centerIn: parent
-            text: qsTr("skip")
-            color: "#FFFFFF"
-            font {
-                family: "Ubuntu"
-                pixelSize: 32
-            }
-        }
-
-        MouseArea {
-            anchors.fill: parent
-
-            hoverEnabled: true
-
-            onEntered: {
-                skipTxt.color = "#8400C2"
-                cursorShape = Qt.PointingHandCursor
-            }
-
-            onExited: {
-                skipTxt.color = "#CCCCCC"
-                cursorShape = Qt.ArrowCursor
-            }
-
-            onClicked: {
-                root.skip()
-            }
-        }
-    }
 }
 
