@@ -3,15 +3,37 @@ import QtQuick 2.15
 Rectangle {
     id: root
 
+    property alias steps: txtStepsValue.text
+    property alias time: txtTimeValue.text
+    readonly property alias areaSize: p.areaSize
+
     signal started()
     signal finished()
 
-    anchors.fill: parent
-
-    property alias steps: txtStepsValue.text
-    property alias time: txtTimeValue.text
-
     color: "#4B4453"
+
+    function startGame(size) {
+        p.areaSize = size;
+        gameArea.initGame(size);
+        root.started()
+    }
+
+    function startGameArray(array) {
+        gameArea.initGameArray(array);
+        initOtherFields();
+    }
+
+    function formatTime(sec) {
+        let m = Math.floor(sec / 60);
+        let s = sec % 60;
+
+        return '%1:%2'.arg(m).arg(s > 9 ? s : '0' + s)
+    }
+
+    QtObject {
+        id: p
+        property int areaSize: -1
+    }
 
     Text {
         id: txtSteps
@@ -79,39 +101,6 @@ Rectangle {
             family: "Ubuntu"
             pixelSize: 18
         }
-    }
-
-    property string gameSize: ""
-    Text {
-        id: txtGameStyle
-        text: gameSize + " x " + gameSize
-        color: "#B0A8B9"
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            top: parent.top
-            topMargin: 32
-        }
-        font {
-            family: "Ubuntu"
-            pixelSize: 22
-        }
-    }
-
-    function startGame(size) {
-        root.started()
-        gameArea.initGame(size);
-    }
-
-    function startGameArray(array) {
-        gameArea.initGameArray(array);
-        initOtherFields();
-    }
-
-    function formatTime(sec) {
-        let m = Math.floor(sec / 60);
-        let s = sec % 60;
-
-        return '%1:%2'.arg(m).arg(s > 9 ? s : '0' + s)
     }
 
     GameArea {

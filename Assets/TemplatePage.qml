@@ -14,27 +14,13 @@ Rectangle {
         readonly property string stateWelcome: "WelcomePage"
         readonly property string stateLevels: "LevelsPage"
         readonly property string stateGame: "GamePage"
-        readonly property string stateScoreBoard: "ScoreBoard"
+        readonly property string stateWin: "WinPage"
         readonly property string stateAbout: "AboutPage"
         readonly property string stateRate: "RatePage"
         readonly property string stateSettings: "SettingsPage"
     }
 
     // СТРАНИЦЫ ____________________________________________________
-
-    GameArea {
-        id: gameArea
-
-        visible: false
-    }
-
-    Header {
-        id: header
-
-        anchors.fill: parent
-        visible: false
-    }
-
     WelcomePage {
         id: welcomePage
 
@@ -81,7 +67,7 @@ Rectangle {
         visible: false
 
         onFinished: {
-            root.state = p.stateScoreBoard
+            root.state = p.stateWin
         }
     }
 
@@ -109,6 +95,13 @@ Rectangle {
         }
     }
 
+    Header {
+        id: header
+
+        anchors.fill: parent
+        visible: false
+    }
+
     // СТЕЙТЫ ___________________________________________________________
     states: [
 
@@ -118,19 +111,6 @@ Rectangle {
             PropertyChanges {
                 target: welcomePage
                 visible: true
-            }
-            PropertyChanges {
-                target: header
-                backVisible: true
-                exitVisible: true
-            }
-            PropertyChanges {
-                target: ratePage
-                visible: false
-            }
-            PropertyChanges {
-                target: gamePage
-                visible: false
             }
         },
 
@@ -143,14 +123,12 @@ Rectangle {
             }
             PropertyChanges {
                 target: header
+                visible: true
                 pageName: "New game"
-                enabled: true
-                backVisible: true
-                exitVisible: true
             }
         },
 
-        // stateGame ------------------
+        // gamePage ------------------
         State {
             name: p.stateGame
             PropertyChanges {
@@ -160,7 +138,18 @@ Rectangle {
             PropertyChanges {
                 target: header
                 visible: true
+                pageName: "%1x%1".arg(gamePage.areaSize)
+                backIsPause: true
+            }
+        },
+
+        State {
+            name: p.stateWin
+            PropertyChanges {
+                target: winPage
+                visible: true
             }
         }
+
     ]
 }

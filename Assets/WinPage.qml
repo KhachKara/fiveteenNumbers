@@ -30,7 +30,6 @@ Rectangle {
         id: continueBtn
 
         anchors {
-            top: scoreBoard.bottom
             left: parent.left
             right: parent.right
             leftMargin: 30
