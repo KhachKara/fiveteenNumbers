@@ -26,5 +26,6 @@
         <file>Assets/Header.qml</file>
         <file>Assets/ScoreBoard.qml</file>
         <file>Assets/PausePage.qml</file>
+        <file>Assets/RatePage.qml</file>
     </qresource>
 </RCC>

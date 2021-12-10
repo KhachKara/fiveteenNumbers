@@ -1,19 +1,15 @@
 import QtQuick 2.2
 
-
 Item {
     id: root
 
     anchors.fill: parent
 
     property string nickName: "unknown"
-
-    GameArea {
-        id: gameArea
-
-        visible: false
-    }
-
+//    readonly property alias steps: stepsTxt.text
+//    readonly property alias time: timeTxt.text
+//    readonly property alias myTime: myTimeTxt.text
+//    readonly property alias mySteps: myStepsTxt.text
 
     Rectangle {
         id: ratePage
@@ -89,7 +85,6 @@ Item {
                             id: stepsTxt
 
                             color: "#B0A8B9"
-                            text: gameArea.stepCount
                             anchors.fill: parent
                             verticalAlignment: Text.AlignVCenter
                         }
@@ -107,7 +102,6 @@ Item {
                             id: timeTxt
 
                             color: "#B0A8B9"
-                            text: gameArea.gameTimeSec
                             anchors.fill: parent
                             verticalAlignment: Text.AlignVCenter
                         }
@@ -178,7 +172,6 @@ Item {
                         id: myStepsTxt
 
                         color: "#B0A8B9"
-                        text: gameArea.stepCount
                         anchors.fill: parent
                         verticalAlignment: Text.AlignVCenter
                     }
@@ -196,7 +189,6 @@ Item {
                         id: myTimeTxt
 
                         color: "#B0A8B9"
-                        text: gameArea.gameTimeSec
                         anchors.fill: parent
                         verticalAlignment: Text.AlignVCenter
                     }

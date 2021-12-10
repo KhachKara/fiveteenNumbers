@@ -112,10 +112,15 @@ Rectangle {
                 root.state = p.stateWelcome
             }
         }
-
     }
         PausePage {
             id: pausePage
+
+            anchors.centerIn: parent
+            visible: false
+        }
+        RatePage {
+            id: ratePage
 
             anchors.centerIn: parent
             visible: false
@@ -183,6 +188,19 @@ Rectangle {
             name: p.statePause
             PropertyChanges {
                 target: pausePage
+                visible: true
+            }
+        },
+
+        // ratePage ------------------
+        State {
+            name: p.stateRate
+            PropertyChanges {
+                target: ratePage
+                visible: true
+            }
+            PropertyChanges {
+                target: header
                 visible: true
             }
         }
