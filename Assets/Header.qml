@@ -23,20 +23,14 @@ Item {
             leftMargin: 30
             topMargin: 32
         }
-        MouseArea {
+
+        CursorShapeMouseArea {
             anchors.fill: parent
-            hoverEnabled: true
 
-            onEntered: {
-                cursorShape = Qt.PointingHandCursor
-            }
-
-            onExited: {
-                cursorShape = Qt.ArrowCursor
-            }
             onClicked: {
                 root.backClicked();
             }
+
         }
     }
 
@@ -49,17 +43,9 @@ Item {
             rightMargin: 30
             topMargin: 32
         }
-        MouseArea {
+        CursorShapeMouseArea {
             anchors.fill: parent
-            hoverEnabled: true
 
-            onEntered: {
-                cursorShape = Qt.PointingHandCursor
-            }
-
-            onExited: {
-                cursorShape = Qt.ArrowCursor
-            }
             onClicked: {
                 Qt.quit()
             }

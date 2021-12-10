@@ -69,7 +69,7 @@ Rectangle {
                 pixelSize: 32
             }
         }
-        MouseArea {
+        CursorShapeMouseArea {
             anchors.fill: parent
 
             onClicked: {
@@ -111,7 +111,7 @@ Rectangle {
                 }
                 anchors.centerIn: parent
             }
-            MouseArea {
+            CursorShapeMouseArea {
                 anchors.fill: parent
 
                 onClicked: {

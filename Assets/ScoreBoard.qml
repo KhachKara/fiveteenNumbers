@@ -5,7 +5,7 @@ Item {
 
     function rate (gameSize, steps) {
         gameSize = gamePage.areaSize
-        steps = GameArea.stepCount
+        steps = gamePage.steps
 
         if (gameSize === 3 && steps <= 30 ) {
             return 3

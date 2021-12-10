@@ -99,14 +99,7 @@ Rectangle {
         }
     }
 
-    PausePage {
-        id: pausePage
-
-        anchors.centerIn: parent
-        visible: false
-    }
-
-    Header {
+        Header {
         id: header
 
         anchors.fill: parent
@@ -115,10 +108,18 @@ Rectangle {
         onBackClicked: {
             if (backIsPause === true) {
                 root.state = p.statePause
+            } else {
+                root.state = p.stateWelcome
             }
         }
 
     }
+        PausePage {
+            id: pausePage
+
+            anchors.centerIn: parent
+            visible: false
+        }
 
     // СТЕЙТЫ ___________________________________________________________
     states: [
@@ -156,7 +157,7 @@ Rectangle {
             PropertyChanges {
                 target: header
                 visible: true
-                pageName: "%1x%1".arg(gamePage.areaSize)
+                pageName: "%1 x %1".arg(gamePage.areaSize)
                 backIsPause: true
             }
         },
@@ -167,6 +168,13 @@ Rectangle {
             PropertyChanges {
                 target: winPage
                 visible: true
+            }
+            PropertyChanges {
+                target: header
+                visible: true
+                pageName: "%1 x %1".arg(gamePage.areaSize)
+                backIsPause: false
+                enabled: false
             }
         },
 

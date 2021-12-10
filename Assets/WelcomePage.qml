@@ -22,16 +22,9 @@ Item {
             topMargin: 67
         }
 
-        MouseArea {
+        CursorShapeMouseArea {
             anchors.fill: parent
-            hoverEnabled: true
 
-            onEntered: {
-                cursorShape = Qt.PointingHandCursor
-            }
-            onExited: {
-                cursorShape = Qt.ArrowCursor
-            }
             onClicked: {
                 root.logoClicked()
             }
@@ -70,19 +63,9 @@ Item {
                     }
                 }
 
-                MouseArea {
+                CursorShapeMouseArea {
                     anchors.fill: parent
-                    hoverEnabled: true
 
-                    onEntered: {
-                        rectButton.color = "#8400C2"
-                        cursorShape = Qt.PointingHandCursor
-                    }
-
-                    onExited: {
-                        rectButton.color = "#845EC2"
-                        cursorShape = Qt.ArrowCursor
-                    }
                     onClicked: {
                         rep.signalsButton[index]();
                     }
