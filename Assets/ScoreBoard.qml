@@ -3,11 +3,44 @@ import QtQuick 2.2
 Item {
     id: root
 
+    function rate (gameSize, steps) {
+        gameSize = gamePage.areaSize
+        steps = GameArea.stepCount
+
+        if (gameSize === 3 && steps <= 30 ) {
+            return 3
+        } else if (gameSize === 3 && steps > 30 && steps <= 40 ) {
+            return 2
+        } else if (gameSize === 3 && steps > 40 && steps <= 50 ) {
+            return 1
+        } else if (gameSize === 3 && steps > 50 ) {
+            return 0
+        } else if (gameSize === 4 && steps <= 100 ) {
+            return 3
+        } else if (gameSize === 4 && steps > 100 && steps <= 200 ) {
+            return 2
+        } else if (gameSize === 4 && steps > 200 && steps <= 300 ) {
+            return 1
+        } else if (gameSize === 4 && steps > 300 ) {
+            return 0
+        } else if (gameSize === 5 && steps <= 350 ) {
+            return 3
+        } else if (gameSize === 5 && steps > 350 && steps <= 450 ) {
+            return 2
+        } else if (gameSize === 5 && steps > 450 && steps <= 550 ) {
+            return 1
+        } else if (gameSize === 5 && steps > 550 ) {
+            return 0
+        } else {
+            return 3
+        }
+    }
+
     property alias steps: txtStepsValue.text
     property alias time: txtTimeValue.text
 
     width: 162
-    height: 135
+    height: 135   
 
     Image {
         id: firstStar
@@ -16,7 +49,13 @@ Item {
             left: parent.left
             topMargin: 10
         }
-        source: "./icons/filledStar.svg"
+        source: {
+            if (rate() >= 1) {
+                "./icons/filledStar.svg"
+            } else {
+                "./icons/emptyStar.svg"
+            }
+        }
     }
 
     Image {
@@ -25,7 +64,14 @@ Item {
             horizontalCenter: parent.horizontalCenter
             top: parent.top
         }
-        source: "./icons/filledStar.svg"
+        source: {
+            if (rate() >= 2) {
+                "./icons/filledStar.svg"
+            } else {
+                "./icons/emptyStar.svg"
+            }
+        }
+
     }
 
     Image {
@@ -35,7 +81,13 @@ Item {
             right: parent.right
             topMargin: 10
         }
-        source: "./icons/emptyStar.svg"
+        source: {
+            if (rate() === 3) {
+                "./icons/filledStar.svg"
+            } else {
+                "./icons/emptyStar.svg"
+            }
+        }
     }
 
     Text {

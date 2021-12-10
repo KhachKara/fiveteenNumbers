@@ -24,5 +24,7 @@
         <file>Assets/icons/silverStar.svg</file>
         <file>Assets/CursorShapeMouseArea.qml</file>
         <file>Assets/Header.qml</file>
+        <file>Assets/ScoreBoard.qml</file>
+        <file>Assets/PausePage.qml</file>
     </qresource>
 </RCC>

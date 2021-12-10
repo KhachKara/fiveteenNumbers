@@ -15,6 +15,7 @@ Rectangle {
         readonly property string stateLevels: "LevelsPage"
         readonly property string stateGame: "GamePage"
         readonly property string stateWin: "WinPage"
+        readonly property string statePause: "PausePage"
         readonly property string stateAbout: "AboutPage"
         readonly property string stateRate: "RatePage"
         readonly property string stateSettings: "SettingsPage"
@@ -74,6 +75,9 @@ Rectangle {
     WinPage {
         id: winPage
 
+        steps: gamePage.steps
+        time: gamePage.time
+
         anchors {
             top: parent.top
             bottom: parent.bottom
@@ -84,7 +88,7 @@ Rectangle {
             leftMargin: 30
             rightMargin: 30
         }
-        visible: false
+        visible: false        
 
         onContinueClicked: {
             root.state = p.stateLevels
@@ -95,11 +99,25 @@ Rectangle {
         }
     }
 
+    PausePage {
+        id: pausePage
+
+        anchors.centerIn: parent
+        visible: false
+    }
+
     Header {
         id: header
 
         anchors.fill: parent
         visible: false
+
+        onBackClicked: {
+            if (backIsPause === true) {
+                root.state = p.statePause
+            }
+        }
+
     }
 
     // СТЕЙТЫ ___________________________________________________________
@@ -143,10 +161,20 @@ Rectangle {
             }
         },
 
+        // winPage ------------------
         State {
             name: p.stateWin
             PropertyChanges {
                 target: winPage
+                visible: true
+            }
+        },
+
+        // pausePage ------------------
+        State {
+            name: p.statePause
+            PropertyChanges {
+                target: pausePage
                 visible: true
             }
         }

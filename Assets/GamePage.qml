@@ -3,8 +3,8 @@ import QtQuick 2.15
 Rectangle {
     id: root
 
-    property alias steps: txtStepsValue.text
-    property alias time: txtTimeValue.text
+    readonly property alias steps: txtStepsValue.text
+    readonly property alias time: txtTimeValue.text
     readonly property alias areaSize: p.areaSize
 
     signal started()

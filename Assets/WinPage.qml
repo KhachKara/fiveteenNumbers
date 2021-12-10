@@ -1,7 +1,11 @@
 import QtQuick 2.2
+import QtQuick.Controls 2.15
 
 Rectangle {
     id: root
+
+    property int steps: 0
+    property string time: ""
 
     signal continueClicked()
     signal rateClicked()
@@ -26,10 +30,24 @@ Rectangle {
         }
     }
 
+    ScoreBoard {
+        id: scoreBoard
+
+        steps: root.steps
+        time: root.time
+
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            top: youWinTxt.bottom
+            topMargin: 26
+        }
+    }
+
     Rectangle {
         id: continueBtn
 
         anchors {
+            top: scoreBoard.bottom
             left: parent.left
             right: parent.right
             leftMargin: 30
@@ -49,6 +67,13 @@ Rectangle {
             font {
                 family: "Ubuntu"
                 pixelSize: 32
+            }
+        }
+        MouseArea {
+            anchors.fill: parent
+
+            onClicked: {
+                continueClicked()
             }
         }
     }
@@ -85,6 +110,13 @@ Rectangle {
                     pixelSize: 32
                 }
                 anchors.centerIn: parent
+            }
+            MouseArea {
+                anchors.fill: parent
+
+                onClicked: {
+                    rateClicked()
+                }
             }
         }
     }
