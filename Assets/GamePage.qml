@@ -7,6 +7,8 @@ Rectangle {
     readonly property alias time: txtTimeValue.text
     readonly property alias areaSize: p.areaSize
 
+    property alias  pause: gameArea.pause
+
     signal started()
     signal finished()
 

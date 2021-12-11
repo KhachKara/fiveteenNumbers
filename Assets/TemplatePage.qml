@@ -22,6 +22,7 @@ Rectangle {
     }
 
     // СТРАНИЦЫ ____________________________________________________
+
     WelcomePage {
         id: welcomePage
 
@@ -88,7 +89,7 @@ Rectangle {
             leftMargin: 30
             rightMargin: 30
         }
-        visible: false        
+        visible: false
 
         onContinueClicked: {
             root.state = p.stateLevels
@@ -110,6 +111,7 @@ Rectangle {
         onBackClicked: {
             if (backIsPause === true) {
                 root.state = p.statePause
+                gamePage.pause = true
             } else {
                 root.state = p.stateWelcome
             }
@@ -118,8 +120,22 @@ Rectangle {
         PausePage {
             id: pausePage
 
-            anchors.centerIn: parent
+            anchors {
+                top: parent.top
+                horizontalCenter: parent.horizontalCenter
+                topMargin: 80
+            }
             visible: false
+
+            onPlayClicked: {
+                gamePage.pause = false
+                gamePage.enabled = false
+
+                gamePage.enabled = true
+                pausePage.visible = false
+
+                root.state = p.stateGame
+            }
         }
         RatePage {
             id: ratePage
@@ -191,7 +207,7 @@ Rectangle {
             }
             PropertyChanges {
                 target: header
-                visible: true
+                visible: false
                 pageName: "%1 x %1".arg(gamePage.areaSize)
                 backIsPause: false
                 enabled: false
@@ -209,6 +225,10 @@ Rectangle {
                 target: header
                 visible: true
                 pageName: "Pause"
+            }
+            PropertyChanges {
+                target: gamePage
+                visible: true
             }
         },
 
