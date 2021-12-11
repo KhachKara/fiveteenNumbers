@@ -52,17 +52,5 @@ Item {
                 }
             }
         }
-
-        FeedbackForm {
-            id: feedbackForm
-
-            anchors {
-                top: parent. bottom
-                left: parent.left
-                right: parent.right
-                leftMargin: 30
-                rightMargin: 30
-            }
-        }
     }
 }

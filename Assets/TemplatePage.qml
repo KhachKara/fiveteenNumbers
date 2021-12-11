@@ -105,6 +105,8 @@ Rectangle {
         anchors.fill: parent
         visible: false
 
+        z: 1
+
         onBackClicked: {
             if (backIsPause === true) {
                 root.state = p.statePause
@@ -125,9 +127,22 @@ Rectangle {
             anchors.centerIn: parent
             visible: false
         }
+        SettingsPage {
+            id: settingsPage
+
+            anchors.centerIn: parent
+            visible: false
+        }
+        AboutPage {
+            id: aboutPage
+
+            anchors.centerIn: parent
+            visible: false
+        }
 
     // СТЕЙТЫ ___________________________________________________________
-    states: [
+
+        states: [
 
         // WelcomePage ------------------
         State {
@@ -190,6 +205,11 @@ Rectangle {
                 target: pausePage
                 visible: true
             }
+            PropertyChanges {
+                target: header
+                visible: true
+                pageName: "Pause"
+            }
         },
 
         // ratePage ------------------
@@ -202,8 +222,36 @@ Rectangle {
             PropertyChanges {
                 target: header
                 visible: true
+                pageName: "Rate"
             }
-        }
+        },
 
+        // settingsPage ------------------
+        State {
+            name: p.stateSettings
+            PropertyChanges {
+                target: settingsPage
+                visible: true
+            }
+            PropertyChanges {
+                target: header
+                visible: true
+                pageName: "Settings"
+            }
+        },
+
+            // aboutPage ------------------
+            State {
+                name: p.stateAbout
+                PropertyChanges {
+                    target: aboutPage
+                    visible: true
+                }
+                PropertyChanges {
+                    target: header
+                    visible: true
+                    pageName: "Our team"
+                }
+            }
     ]
 }
