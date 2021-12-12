@@ -8,7 +8,7 @@ Rectangle {
     height: 80
     radius: 8
 
-    color: Qt.rgba(0,0,0,0.5)
+    color: "#b0a8b9"
 
     Image {
         id: pauseBtn
@@ -23,6 +23,5 @@ Rectangle {
             }
         }
     }
-
 }
 

@@ -30,5 +30,6 @@
         <file>Assets/SettingsPage.qml</file>
         <file>Assets/AboutPage.qml</file>
         <file>Assets/icons/play.svg</file>
+        <file>Assets/FeedbackForm.qml</file>
     </qresource>
 </RCC>

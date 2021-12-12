@@ -52,5 +52,21 @@ Item {
                 }
             }
         }
+
+        FeedbackForm {
+            id: feedbackForm
+
+            width: 300
+            height: 300
+
+            anchors {
+                top: staffColumn.bottom
+                left: parent.left
+                right: parent.right
+                topMargin: 20
+                rightMargin: 30
+                leftMargin: 30
+            }
+        }
     }
 }
