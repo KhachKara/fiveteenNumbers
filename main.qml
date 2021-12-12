@@ -17,4 +17,9 @@ Window {
 
         anchors.fill: parent
     }
+    AdvertisePage {
+        id: advertise
+
+        anchors.fill: parent
+    }
 }

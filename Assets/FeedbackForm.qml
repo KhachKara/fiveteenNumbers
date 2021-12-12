@@ -1,5 +1,6 @@
-import QtQuick 2.4
-import QtQuick.Controls 2.15
+import QtQuick 2.12
+import QtQuick.Window 2.12
+import QtQuick.Controls 2.12
 
 Item {
     id: root
@@ -11,10 +12,12 @@ Item {
     property alias message: messageArea.text
 
     Rectangle {
+        id: feedbackRect
+
         anchors.fill: parent
         radius: 8
-        color: "#b0a8b9"
 
+        color: "#b0a8b9"
         Text {
             id: feedBackTxt
             text: qsTr("Feedback")
@@ -180,6 +183,52 @@ Item {
 
                 onClicked: {
                     root.sendClicked()
+                    messageBoxRect.visible = true
+                }
+            }
+        }
+        Rectangle {
+            id: messageBoxRect
+
+            visible: false
+            height: 80
+            color: "#4B4453"
+            anchors {
+                verticalCenter: feedbackRect.verticalCenter
+                left: feedbackRect.left
+                right: feedbackRect.right
+                leftMargin: 30
+                rightMargin: 30
+            }
+            radius: 8
+
+            Text {
+                id: messageBoxTxt
+                text: "Your mesage was\nsuccessfuly sent"
+                color: "#b0a8b9"
+                anchors.centerIn: parent
+                font {
+                    family: "Ubuntu"
+                    pixelSize: 18
+                }
+            }
+            Image {
+                id: close
+                source: "./icons/close.svg"
+                anchors {
+                    top: parent.top
+                    right: parent.right
+                    topMargin: 10
+                    rightMargin: 10
+                }
+                CursorShapeMouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        messageBoxRect.visible = false
+                        nameInp.text = ""
+                        e_mailInp.text = ""
+                        messageArea.text = ""
+                    }
                 }
             }
         }
