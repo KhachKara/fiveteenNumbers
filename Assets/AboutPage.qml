@@ -3,6 +3,7 @@ import QtQuick 2.0
 Item {
     id: root
 
+
     anchors.fill: parent
 
     Rectangle {
@@ -56,7 +57,6 @@ Item {
         FeedbackForm {
             id: feedbackForm
 
-            width: 300
             height: 300
 
             anchors {

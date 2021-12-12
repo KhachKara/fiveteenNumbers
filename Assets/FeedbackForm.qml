@@ -2,9 +2,13 @@ import QtQuick 2.4
 import QtQuick.Controls 2.15
 
 Item {
-    id: feedbackForm
+    id: root
 
-    signal onSendClicked()
+    signal sendClicked()
+
+    property alias nickName: nameInp.text
+    property alias e_mail: e_mailInp.text
+    property alias message: messageArea.text
 
     Rectangle {
         anchors.fill: parent
@@ -57,6 +61,7 @@ Item {
                 }
                 verticalAlignment: TextInput.AlignVCenter
                 text: "name"
+
                 property int k: 0
                 onFocusChanged: {
                     if(k === 0) {
@@ -66,7 +71,6 @@ Item {
                     color = "#000000"
                 }
             }
-
         }
 
         Rectangle {
@@ -84,7 +88,6 @@ Item {
                 leftMargin: 30
                 rightMargin: 30
             }
-
 
             TextInput {
                 id: e_mailInp
