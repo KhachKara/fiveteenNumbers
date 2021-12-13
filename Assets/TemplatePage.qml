@@ -82,8 +82,8 @@ Rectangle {
         anchors {
             top: parent.top
             bottom: parent.bottom
-            topMargin: 134
-            bottomMargin: 60
+            topMargin: 100
+            bottomMargin: 100
             left: parent.left
             right: parent.right
             leftMargin: 30

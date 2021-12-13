@@ -33,5 +33,6 @@
         <file>Assets/FeedbackForm.qml</file>
         <file>Assets/icons/close.svg</file>
         <file>Assets/AdvertisePage.qml</file>
+        <file>Assets/icons/success_close.svg</file>
     </qresource>
 </RCC>

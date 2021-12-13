@@ -24,32 +24,32 @@ Item {
             spacing: 5
             Text {
                 id: design
-                text: qsTr("design")
+                text: qsTr("Design by Anastasia Karapeian")
 
                 color: "#B0A8B9"
                 font {
                     family: "Ubuntu"
-                    pixelSize: 22
+                    pixelSize: 16
                 }
             }
             Text {
                 id: backend
 
                 color: "#B0A8B9"
-                text: qsTr("backend")
+                text: qsTr("Backend  by Mher Karapetian")
                 font {
                     family: "Ubuntu"
-                    pixelSize: 22
+                    pixelSize: 16
                 }
             }
             Text {
                 id: frontend
 
-                text: qsTr("frontend")
+                text: qsTr("Frontend by Khachatur Karapetian")
                 color: "#B0A8B9"
                 font {
                     family: "Ubuntu"
-                    pixelSize: 22
+                    pixelSize: 16
                 }
             }
         }

@@ -11,6 +11,9 @@ Item {
     property alias e_mail: e_mailInp.text
     property alias message: messageArea.text
 
+    readonly property string correctFill: "Feel the form correctly"
+    readonly property string success: "Your mesage was\nsuccessfuly sent"
+
     Rectangle {
         id: feedbackRect
 
@@ -138,9 +141,6 @@ Item {
                     id: messageArea
 
                     placeholderTextColor: "#b0a8b9"
-                    anchors {
-                        fill: parent
-                    }
                     placeholderText: "messagge"
                 }
                 onFocusChanged: {
@@ -184,6 +184,10 @@ Item {
                 onClicked: {
                     root.sendClicked()
                     messageBoxRect.visible = true
+
+                    if (!nameInp.text || !e_mailInp.text || !messageArea.text) {
+                        messageBoxTxt.text = correctFill
+                    } else {messageBoxTxt.text = success}
                 }
             }
         }
@@ -204,7 +208,6 @@ Item {
 
             Text {
                 id: messageBoxTxt
-                text: "Your mesage was\nsuccessfuly sent"
                 color: "#b0a8b9"
                 anchors.centerIn: parent
                 font {
@@ -214,7 +217,11 @@ Item {
             }
             Image {
                 id: close
-                source: "./icons/close.svg"
+                source: {
+                    if(messageBoxTxt.text === success) {
+                        "./icons/success_close.svg"
+                    } else {"./icons/close.svg"}
+                }
                 anchors {
                     top: parent.top
                     right: parent.right
@@ -224,10 +231,12 @@ Item {
                 CursorShapeMouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        messageBoxRect.visible = false
-                        nameInp.text = ""
-                        e_mailInp.text = ""
-                        messageArea.text = ""
+                        if(messageBoxTxt.text === success) {
+                            messageBoxRect.visible = false
+                            nameInp.text = ""
+                            e_mailInp.text = ""
+                            messageArea.text = ""
+                        } else {messageBoxRect.visible = false}
                     }
                 }
             }
