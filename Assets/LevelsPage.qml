@@ -5,6 +5,7 @@ Item {
     id: root
 
     signal startGameClicked(int size)
+    property alias topM: col.anchors.topMargin
 
     anchors.fill: parent
 
@@ -15,6 +16,7 @@ Item {
         color: "#4B4453"
 
         Column {
+            id: col
             anchors {
                 horizontalCenter: parent.horizontalCenter
                 top: parent.top

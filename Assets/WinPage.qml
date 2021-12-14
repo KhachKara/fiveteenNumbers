@@ -10,6 +10,9 @@ Rectangle {
     signal continueClicked()
     signal rateClicked()
 
+    property alias topY: youWinTxt.anchors.topMargin
+    property alias topS: scoreBoard.anchors.topMargin
+
     radius: 15
     color: "#FFFFFF"
 

@@ -5,6 +5,8 @@ Item {
 
     anchors.fill: parent
 
+//    property alias rowS: rateRow.spacing
+
     property string nickName: "unknown"
 //    readonly property alias steps: stepsTxt.text
 //    readonly property alias time: timeTxt.text

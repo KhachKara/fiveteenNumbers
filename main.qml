@@ -24,4 +24,5 @@ Window {
 
         anchors.fill: parent
     }
+    onHeightChanged: console.log(height)
 }

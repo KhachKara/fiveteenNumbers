@@ -6,6 +6,16 @@ Rectangle {
     color: "#4B4453"
     state: p.stateWelcome
 
+    onHeightChanged: {
+        if(height < 600) {
+            welcomePage.topMargin = 30
+            levelsPage.topM = 70
+            winPage.topS = 10
+            winPage.topY = 20
+            ratePage.rowS = 18
+        }
+    }
+
     QtObject {
         id: p
         readonly property string stateLogin: "Login"
