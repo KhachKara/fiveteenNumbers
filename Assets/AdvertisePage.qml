@@ -17,12 +17,12 @@ Item {
 
         Text {
             id: adverTxt
-            text: qsTr("advertisement ")
+            text: qsTr("реклама ")
             font {
                 family: "Ubuntu"
                 pixelSize: 32
             }
-            anchors.verticalCenter: parent.verticalCenter
+            anchors.centerIn: parent
         }
     }
 }

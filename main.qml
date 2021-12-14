@@ -6,6 +6,8 @@ import QtQuick.Window 2.15
 Window {
     id: root
 
+    signal widthChange()
+
     width: 360
     height: 640
 

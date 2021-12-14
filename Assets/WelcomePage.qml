@@ -10,6 +10,8 @@ Item {
     signal settingsClicked()
     signal quitClicked()
 
+    property int topMargin: 50
+
     Image {
         id: logo
 
@@ -19,7 +21,7 @@ Item {
         anchors {
             horizontalCenter: parent.horizontalCenter
             top: parent.top
-            topMargin: 67
+            topMargin: topMargin
         }
 
         CursorShapeMouseArea {
@@ -36,8 +38,8 @@ Item {
         spacing: 11
         anchors {
             horizontalCenter: parent.horizontalCenter
-            top: parent.top
-            topMargin: 243
+            top: logo.bottom
+            topMargin: topMargin
         }
         Repeater {
             id: rep
