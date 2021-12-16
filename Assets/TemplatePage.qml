@@ -12,7 +12,6 @@ Rectangle {
             levelsPage.topM = 70
             winPage.topS = 10
             winPage.topY = 20
-            ratePage.rowS = 18
         }
     }
 
