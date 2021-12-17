@@ -34,5 +34,8 @@
         <file>Assets/icons/close.svg</file>
         <file>Assets/AdvertisePage.qml</file>
         <file>Assets/icons/success_close.svg</file>
+        <file>Assets/icons/back.png</file>
+        <file>Assets/icons/exit.png</file>
+        <file>Assets/icons/pause.png</file>
     </qresource>
 </RCC>
