@@ -24,19 +24,18 @@ Item {
             spacing: 5
             Text {
                 id: design
-                text: "<a href = 'https://www.behance.net/bo4koanast8de6'><u><i>Design by Anastacia Karapetyan</i></u></a>"
-
+                text: "Design by Anastacia Karapetyan"
                 color: "#B0A8B9"
                 font {
                     family: "Ubuntu"
                     pixelSize: 16
                 }
-//                CursorShapeMouseArea {
-//                    anchors.fill: parent
-//                    onClicked: {
-
-//                    }
-//                }
+                CursorShapeMouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        Qt.openUrlExternally("https://www.behance.net/bo4koanast8de6")
+                    }
+                }
             }
             Text {
                 id: backend

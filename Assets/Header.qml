@@ -16,7 +16,7 @@ Item {
     Image {
         id: back
         property bool isPause: false
-        source: isPause ? "./icons/pause.png" : "./icons/back.png"
+        source: isPause ? "./icons/pause.svg" : "./icons/back.svg"
         anchors {
             top: parent.top
             left: parent.left
@@ -36,7 +36,7 @@ Item {
 
     Image {
         id: exit
-        source: "./icons/exit.png"
+        source: "./icons/exit.svg"
         anchors {
             top: parent.top
             right: parent.right
