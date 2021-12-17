@@ -2,27 +2,31 @@ import "./Assets"
 
 import QtQuick 2.15
 import QtQuick.Window 2.15
+import QtQuick.Controls 2.5
 
 Window {
     id: root
 
-    signal widthChange()
+    readonly property color mainBgColor: "#4B4453"
+    readonly property color grayBgColor: "#B0A8B9"
+    readonly property color carrotBgColor: "#C34A36"
+    readonly property color lightCarrotBgColor: "#FF8066"
 
     width: 360
     height: 640
+    color: mainBgColor
 
     visible: true
     title: qsTr("15 Numbers")
 
-    TemplatePage {
-        id: templatePage
-
+    StackView {
+        id: stackView
         anchors.fill: parent
+        initialItem: "qrc:/Assets/TemplatePage.qml"
     }
     AdvertisePage {
         id: advertise
 
         anchors.fill: parent
     }
-    onHeightChanged: console.log(height)
 }
