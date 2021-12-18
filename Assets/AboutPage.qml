@@ -24,7 +24,7 @@ Item {
             spacing: 5
             Text {
                 id: design
-                text: "Design by Anastacia Karapetyan"
+                text: "<i><u>Design by Anastacia Karapetyan</u></i>"
                 color: "#B0A8B9"
                 font {
                     family: "Ubuntu"
@@ -41,7 +41,7 @@ Item {
                 id: backend
 
                 color: "#B0A8B9"
-                text: qsTr("Backend  by Mher Karapetian")
+                text: qsTr("Backend  by Mher Karapetyan")
                 font {
                     family: "Ubuntu"
                     pixelSize: 16
@@ -50,7 +50,7 @@ Item {
             Text {
                 id: frontend
 
-                text: qsTr("Frontend by Khachatur Karapetian")
+                text: qsTr("Frontend by Khachatur Karapetyan")
                 color: "#B0A8B9"
                 font {
                     family: "Ubuntu"

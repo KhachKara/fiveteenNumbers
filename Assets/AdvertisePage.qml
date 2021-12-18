@@ -1,28 +1,18 @@
 import QtQuick 2.0
 
-Item {
-    id: root
+Rectangle {
+    id: advertisement
+
+    color: "yellow"
     anchors.fill: parent
-
-    Rectangle {
-        id: advertisement
-
-        height: 75
-        color: "yellow"
-        anchors {
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
+    Text {
+        id: adverTxt
+        text: qsTr("реклама ")
+        font {
+            family: "Ubuntu"
+            pixelSize: 32
         }
-
-        Text {
-            id: adverTxt
-            text: qsTr("реклама ")
-            font {
-                family: "Ubuntu"
-                pixelSize: 32
-            }
-            anchors.centerIn: parent
-        }
+        anchors.centerIn: parent
     }
 }
+
