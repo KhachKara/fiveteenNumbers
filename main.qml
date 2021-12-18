@@ -7,7 +7,6 @@ import QtQuick.Controls 2.5
 Window {
     id: root
 
-    signal logoClicked()
     readonly property int topMargin: 30
 
     readonly property color mainBgColor: "#4B4453"
@@ -28,7 +27,6 @@ Window {
         anchors {
             bottomMargin: parent.height - 100 - 2 * topMargin
         }
-        //        color: "purple"
 
         Image {
             id: logo
@@ -40,9 +38,9 @@ Window {
                 anchors.fill: parent
 
                 onClicked: {
-                    logoClicked()
+                    stackView.push("qrc:/Assets/AboutPage.qml")
+                    logo.visible = false
                 }
-
             }
         }
     }

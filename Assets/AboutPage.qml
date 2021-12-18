@@ -18,7 +18,6 @@ Item {
             anchors {
                 top: parent.top
                 left: parent.left
-                topMargin: 87
                 leftMargin: 30
             }
             spacing: 5
