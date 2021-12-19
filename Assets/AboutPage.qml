@@ -1,24 +1,17 @@
 import QtQuick 2.0
 
-Item {
-    id: root
 
-
-    anchors.fill: parent
-
-    Rectangle {
+Rectangle {
         id: aboutPage
 
-        anchors.fill: parent
         color: "#4B4453"
 
         Column {
             id: staffColumn
 
             anchors {
+                horizontalCenter: parent.horizontalCenter
                 top: parent.top
-                left: parent.left
-                leftMargin: 30
             }
             spacing: 5
             Text {
@@ -73,4 +66,4 @@ Item {
             }
         }
     }
-}
+

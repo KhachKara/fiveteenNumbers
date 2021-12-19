@@ -1,5 +1,5 @@
 import "./Assets"
-
+import QtQml 2.2
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.5
@@ -21,6 +21,19 @@ Window {
     visible: true
     title: qsTr("15 Numbers")
 
+    HeaderPage {
+        id: headerPage
+
+        anchors.fill: parent
+        anchors.topMargin: -80
+
+        visible: false
+
+        onBackClicked: {
+            stackView.pop()
+        }
+    }
+
     Item {
         id: header
         anchors.fill: parent
@@ -40,6 +53,9 @@ Window {
                 onClicked: {
                     stackView.push("qrc:/Assets/AboutPage.qml")
                     logo.visible = false
+                    headerPage.visible = true
+                    headerPage.pageName = "Oue team"
+
                 }
             }
         }
@@ -64,7 +80,6 @@ Window {
 
         anchors.fill: parent
         anchors.topMargin: parent.height - 75
-        //        color: "gold"
 
         AdvertisePage {
             id: advertise
