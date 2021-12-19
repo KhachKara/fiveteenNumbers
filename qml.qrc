@@ -2,5 +2,13 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>Assets/HeaderPage.qml</file>
+        <file>Assets/CursorShapeMouseArea.qml</file>
+        <file>Assets/icons/exit.svg</file>
+        <file>Assets/icons/back.svg</file>
+        <file>Assets/icons/pause.svg</file>
+        <file>Assets/WelcomePage.qml</file>
+        <file>Assets/icons/logo.svg</file>
+        <file>Assets/AdvertisePage.qml</file>
+        <file>Assets/LogoPage.qml</file>
     </qresource>
 </RCC>

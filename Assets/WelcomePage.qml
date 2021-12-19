@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.5
 
-Item {
+Item  {
     id: root
 
     signal newGameClicked()
@@ -29,8 +29,11 @@ Item {
         id: listView
 
         anchors.fill: parent
+
         spacing: 12
         ScrollBar.vertical: ScrollBar{}
+
+
         model: listModel
         delegate: Rectangle {
             id: rectButton
@@ -70,3 +73,5 @@ Item {
         }
     }
 }
+
+

@@ -11,8 +11,6 @@ Item {
 
     signal backClicked()
 
-    anchors.fill: parent
-
     Image {
         id: back
         property bool isPause: false
