@@ -9,6 +9,8 @@ Item  {
     signal settingsClicked()
     signal quitClicked()
 
+    anchors.bottom: advertisePage.top
+
     ListModel {
         id: listModel
         ListElement {
