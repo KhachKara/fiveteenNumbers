@@ -1,41 +1,5 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>Assets/GameArea.qml</file>
-        <file>Assets/WelcomePage.qml</file>
-        <file>Assets/icons/gradientFill.svg</file>
-        <file>Assets/LevelsPage.qml</file>
-        <file>Assets/icons/back.svg</file>
-        <file>Assets/icons/pause.svg</file>
-        <file>Assets/GamePage.qml</file>
-        <file>Assets/NewSquare.qml</file>
-        <file>Assets/GameStyleRect.qml</file>
-        <file>Assets/WinPage.qml</file>
-        <file>Assets/icons/emptyStar.svg</file>
-        <file>Assets/icons/filledStar.svg</file>
-        <file>Assets/icons/logo.svg</file>
-        <file>Assets/icons/exit.svg</file>
-        <file>Assets/TemplatePage.qml</file>
-        <file>Assets/icons/apple.svg</file>
-        <file>Assets/icons/bronzeStar.svg</file>
-        <file>Assets/icons/facebook.svg</file>
-        <file>Assets/icons/goldStar.svg</file>
-        <file>Assets/icons/Google.svg</file>
-        <file>Assets/icons/silverStar.svg</file>
-        <file>Assets/CursorShapeMouseArea.qml</file>
-        <file>Assets/HeaderPage.qml</file>
-        <file>Assets/ScoreBoard.qml</file>
-        <file>Assets/PausePage.qml</file>
-        <file>Assets/RatePage.qml</file>
-        <file>Assets/SettingsPage.qml</file>
-        <file>Assets/AboutPage.qml</file>
-        <file>Assets/icons/play.svg</file>
-        <file>Assets/FeedbackForm.qml</file>
-        <file>Assets/icons/close.svg</file>
-        <file>Assets/AdvertisePage.qml</file>
-        <file>Assets/icons/success_close.svg</file>
-        <file>Assets/icons/back.png</file>
-        <file>Assets/icons/exit.png</file>
-        <file>Assets/icons/pause.png</file>
     </qresource>
 </RCC>
