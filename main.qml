@@ -54,6 +54,9 @@ Window {
         id: levelsPage
 
         visible: false
+        onStartGameClicked: {
+            stackView.push(gamePage)
+        }
     }
 
     GamePage {
