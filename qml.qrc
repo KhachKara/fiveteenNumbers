@@ -11,9 +11,11 @@
         <file>Assets/AdvertisePage.qml</file>
         <file>Assets/LogoPage.qml</file>
         <file>Assets/AboutPage.qml</file>
-        <file>Assets/FeedbackForm.qml</file>
         <file>Assets/icons/success_close.svg</file>
         <file>Assets/icons/close.svg</file>
-        <file>Assets/TeamMemebersPage.qml</file>
+        <file>Assets/GameArea.qml</file>
+        <file>Assets/GamePage.qml</file>
+        <file>Assets/LevelsPage.qml</file>
+        <file>Assets/GameStyleRect.qml</file>
     </qresource>
 </RCC>

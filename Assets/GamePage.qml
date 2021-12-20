@@ -12,6 +12,7 @@ Rectangle {
     signal started()
     signal finished()
 
+//    anchors.fill: parent
     color: "#4B4453"
 
     function startGame(size) {

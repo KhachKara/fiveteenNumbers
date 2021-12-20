@@ -1,4 +1,5 @@
 import "./Assets"
+
 import QtQml 2.2
 import QtQuick 2.15
 import QtQuick.Window 2.15
@@ -16,7 +17,10 @@ Window {
 
     width: 360
     height: 640
-    color: mainBgColor
+    color: mainBgColor   
+    visible: true
+    title: qsTr("15 Numbers")
+
 
     HeaderPage {
         id: headerPage
@@ -36,6 +40,27 @@ Window {
         visible: false
         anchors.top: parent.top
         anchors.topMargin: 160
+
+        onNewGameClicked: {
+            stackView.push("qrc:/Assets/LevelsPage.qml")
+            headerPage.visible = true
+            headerPage.z = 1
+            headerPage.pageName = "New game"
+            logoPage.visible = false
+        }
+    }
+
+    LevelsPage {
+        id: levelsPage
+
+        visible: false
+    }
+
+    GamePage {
+        id: gamePage
+
+        anchors.fill: parent
+        visible: false
     }
 
     LogoPage {
@@ -46,19 +71,11 @@ Window {
         z: 1
 
         onLogoClicked: {
-            stackView.push(aboutPage)
+            stackView.push("qrc:/Assets/AboutPage.qml")
             logoPage.visible = false
-            aboutPage.anchors.topMargin = 80
             headerPage.visible = true
             headerPage.pageName = "Our team"
         }
-    }
-
-    AboutPage {
-        id: aboutPage
-
-        anchors.fill: parent
-        visible: false
     }
 
     StackView {
@@ -67,9 +84,6 @@ Window {
         anchors.fill: parent
         initialItem: welcomePage
     }
-
-    visible: true
-    title: qsTr("15 Numbers")
 
     AdvertisePage {
         id: advertisePage

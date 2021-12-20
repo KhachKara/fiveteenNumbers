@@ -7,8 +7,6 @@ Item {
     signal startGameClicked(int size)
     property alias topM: col.anchors.topMargin
 
-    anchors.fill: parent
-
     Rectangle {
         id: newGamePage
 

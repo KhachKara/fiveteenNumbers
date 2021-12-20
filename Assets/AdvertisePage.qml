@@ -5,8 +5,7 @@ Rectangle {
 
     width: parent.width
     height: 75
-//    color: "yellow"
-    color: Qt.rgba(0,0,0,0)
+    color: "yellow"
     Text {
         id: adverTxt
         text: qsTr("реклама ")
