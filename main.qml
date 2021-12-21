@@ -2,7 +2,6 @@ import "./Assets"
 
 import QtQml 2.2
 import QtQuick 2.15
-import QtQuick.Window 2.15
 import QtQuick.Controls 2.5
 
 Window {
@@ -28,12 +27,26 @@ Window {
         visible: false
 
         onBackClicked: {
-            stackView.pop()
-            headerPage.visible = false
-            logoPage.visible = true
+            console.log(stackView.currentItem)
+            if(stackView.currentItem === levelsPage || stackView.currentItem === aboutPage)
+            {
+                stackView.pop()
+                headerPage.visible = false
+                logoPage.visible = true
+            } else if (stackView.currentItem === gamePage) {
+                stackView.pop()
+                headerPage.visible = true
+                headerPage.pageName = "New game"
+                logoPage.visible = false
+            }
         }
     }
 
+    AboutPage {
+        id: aboutPage
+
+        visible: false
+    }
 
     WelcomePage {
         id: welcomePage
@@ -57,7 +70,6 @@ Window {
         visible: false
         onStartGameClicked: {
             stackView.push(gamePage)
-            gamePage.started()
             headerPage.visible = true
             logoPage.visible = false
         }
@@ -69,7 +81,6 @@ Window {
         visible: false
     }
 
-
     LogoPage {
         id: logoPage
 
@@ -78,10 +89,11 @@ Window {
         z: 1
 
         onLogoClicked: {
-            stackView.push("qrc:/Assets/AboutPage.qml")
+            stackView.push(aboutPage)
             logoPage.visible = false
             headerPage.visible = true
             headerPage.pageName = "Our team"
+            headerPage.z = 1
         }
     }
 
