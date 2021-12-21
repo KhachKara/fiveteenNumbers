@@ -24,21 +24,12 @@ ApplicationWindow {
     HeaderPage {
         id: headerPage
         anchors.fill: parent
-        visible: false
+        z: 1
+        visible: stackView.depth > 1
 
         onBackClicked: {
             console.log("Out of " + stackView.currentItem)
-            if(stackView.currentItem === levelsPage || stackView.currentItem === aboutPage)
-            {
-                stackView.pop()
-                headerPage.visible = false
-                logoPage.visible = true
-            } else if (stackView.currentItem === gamePage) {
-                stackView.pop()
-                headerPage.visible = true
-                headerPage.pageName = "New game"
-                logoPage.visible = false
-            }
+            stackView.pop()
         }
     }
 
@@ -58,10 +49,8 @@ ApplicationWindow {
         onNewGameClicked: {
             console.log("Frome " + stackView.currentItem)
             stackView.push(levelsPage)
-            headerPage.visible = true
-            headerPage.z = 1
             headerPage.pageName = "New game"
-            logoPage.visible = false
+//            logoPage.visible = false
         }
     }
 
@@ -72,9 +61,8 @@ ApplicationWindow {
         onStartGameClicked: function (size) {
             console.log("From " + stackView.currentItem)
             stackView.push(gamePage)
-            headerPage.visible = true
             headerPage.pageName = "%1 x %1".arg(size)
-            logoPage.visible = false
+//            logoPage.visible = false
             gamePage.startGame(size)
         }
     }
@@ -96,7 +84,6 @@ ApplicationWindow {
             console.log("From " + stackView.currentItem)
             stackView.push(aboutPage)
             logoPage.visible = false
-            headerPage.visible = true
             headerPage.pageName = "Our team"
             headerPage.z = 1
         }
