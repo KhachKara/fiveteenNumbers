@@ -71,6 +71,7 @@ Window {
         onStartGameClicked: {
             stackView.push(gamePage)
             headerPage.visible = true
+            headerPage.pageName = "%1 x %1".arg(gamePage.areaSize)
             logoPage.visible = false
         }
     }

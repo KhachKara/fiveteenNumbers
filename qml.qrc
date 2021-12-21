@@ -17,5 +17,6 @@
         <file>Assets/GamePage.qml</file>
         <file>Assets/LevelsPage.qml</file>
         <file>Assets/GameStyleRect.qml</file>
+        <file>Assets/NewSquare.qml</file>
     </qresource>
 </RCC>
