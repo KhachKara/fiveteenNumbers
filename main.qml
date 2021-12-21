@@ -1,10 +1,10 @@
-import "./Assets"
-
 import QtQml 2.2
 import QtQuick 2.15
 import QtQuick.Controls 2.5
 
-Window {
+import "./Assets"
+
+ApplicationWindow {
     id: root
 
     readonly property int topMargin: 30
@@ -69,12 +69,13 @@ Window {
         id: levelsPage
 
         visible: false
-        onStartGameClicked: {
+        onStartGameClicked: function (size) {
             console.log("From " + stackView.currentItem)
             stackView.push(gamePage)
             headerPage.visible = true
-            headerPage.pageName = "%1 x %1".arg(gamePage.areaSize)
+            headerPage.pageName = "%1 x %1".arg(size)
             logoPage.visible = false
+            gamePage.startGame(size)
         }
     }
 
