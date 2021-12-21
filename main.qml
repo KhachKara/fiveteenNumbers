@@ -27,7 +27,7 @@ Window {
         visible: false
 
         onBackClicked: {
-            console.log(stackView.currentItem)
+            console.log("Out of " + stackView.currentItem)
             if(stackView.currentItem === levelsPage || stackView.currentItem === aboutPage)
             {
                 stackView.pop()
@@ -56,6 +56,7 @@ Window {
         anchors.topMargin: 160
 
         onNewGameClicked: {
+            console.log("Frome " + stackView.currentItem)
             stackView.push(levelsPage)
             headerPage.visible = true
             headerPage.z = 1
@@ -69,6 +70,7 @@ Window {
 
         visible: false
         onStartGameClicked: {
+            console.log("From " + stackView.currentItem)
             stackView.push(gamePage)
             headerPage.visible = true
             headerPage.pageName = "%1 x %1".arg(gamePage.areaSize)
@@ -90,6 +92,7 @@ Window {
         z: 1
 
         onLogoClicked: {
+            console.log("From " + stackView.currentItem)
             stackView.push(aboutPage)
             logoPage.visible = false
             headerPage.visible = true
