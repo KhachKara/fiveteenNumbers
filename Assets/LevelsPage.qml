@@ -25,6 +25,7 @@ Item {
                 model: 3
                 GameStyleRect {
                     id: gameStyle
+
                     width: 140
 
                     gameSize: index + 2

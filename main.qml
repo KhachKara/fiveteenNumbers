@@ -17,7 +17,7 @@ Window {
 
     width: 360
     height: 640
-    color: mainBgColor   
+    color: mainBgColor
     visible: true
     title: qsTr("15 Numbers")
 
@@ -34,6 +34,7 @@ Window {
         }
     }
 
+
     WelcomePage {
         id: welcomePage
 
@@ -42,7 +43,7 @@ Window {
         anchors.topMargin: 160
 
         onNewGameClicked: {
-            stackView.push("qrc:/Assets/LevelsPage.qml")
+            stackView.push(levelsPage)
             headerPage.visible = true
             headerPage.z = 1
             headerPage.pageName = "New game"
@@ -56,15 +57,18 @@ Window {
         visible: false
         onStartGameClicked: {
             stackView.push(gamePage)
+            gamePage.started()
+            headerPage.visible = true
+            logoPage.visible = false
         }
     }
 
     GamePage {
         id: gamePage
 
-        anchors.fill: parent
         visible: false
     }
+
 
     LogoPage {
         id: logoPage
@@ -86,6 +90,19 @@ Window {
 
         anchors.fill: parent
         initialItem: welcomePage
+    }
+
+    // ------------------------------------
+    GameArea {
+        id: gameArea
+
+        visible: false
+    }
+
+    GameStyleRect {
+        id: gameStyle
+
+        visible: false
     }
 
     AdvertisePage {
