@@ -29,7 +29,11 @@ ApplicationWindow {
 
         onBackClicked: {
             console.log("Out of " + stackView.currentItem)
+            logoPage.visible = true
             stackView.pop()
+            if(stackView.currentItem === levelsPage) {
+                headerPage.pageName = "New game"
+            }
         }
     }
 
@@ -50,7 +54,7 @@ ApplicationWindow {
             console.log("Frome " + stackView.currentItem)
             stackView.push(levelsPage)
             headerPage.pageName = "New game"
-//            logoPage.visible = false
+            logoPage.visible = false
         }
     }
 
@@ -62,7 +66,9 @@ ApplicationWindow {
             console.log("From " + stackView.currentItem)
             stackView.push(gamePage)
             headerPage.pageName = "%1 x %1".arg(size)
-//            logoPage.visible = false
+            logoPage.visible = true
+            logoPage.z = 1
+            logoPage.y = 50
             gamePage.startGame(size)
         }
     }
@@ -78,7 +84,7 @@ ApplicationWindow {
 
         height: 100
         width: parent.width
-        z: 1
+//        z: 1
 
         onLogoClicked: {
             console.log("From " + stackView.currentItem)
