@@ -3,7 +3,6 @@ import QtQuick 2.2
 Item {
     id: root
 
-    anchors.fill: parent
 
 //    property alias rowS: rateRow.spacing
 
@@ -15,9 +14,6 @@ Item {
 
     Rectangle {
         id: ratePage
-
-        anchors.fill: parent
-        color: "#4B4453"
 
         Column {
             id: rateColumn

@@ -84,6 +84,10 @@ Item {
                     }
                     color = "#000000"
                 }
+                font {
+                    family: "Ubuntu"
+                    pixelSize: 18
+                }
             }
         }
 
@@ -123,6 +127,10 @@ Item {
                     }
                     color = "#000000"
                 }
+                font {
+                    family: "Ubuntu"
+                    pixelSize: 18
+                }
             }
         }
 
@@ -154,6 +162,10 @@ Item {
                 onFocusChanged: {
                     messageArea.placeholderText = ""
                     messageArea.color = "#000000"
+                }
+                font {
+                    family: "Ubuntu"
+                    pixelSize: 18
                 }
             }
         }

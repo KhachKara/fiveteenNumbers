@@ -107,10 +107,10 @@ Rectangle {
             }
 
             Text {
-                text: qsTr("Rate")
+                text: qsTr("Rate your game")
                 font {
                     family: "Ubuntu"
-                    pixelSize: 32
+                    pixelSize: 30
                 }
                 anchors.centerIn: parent
             }

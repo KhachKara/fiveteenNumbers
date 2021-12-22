@@ -22,5 +22,9 @@
         <file>Assets/ScoreBoard.qml</file>
         <file>Assets/icons/emptyStar.svg</file>
         <file>Assets/icons/filledStar.svg</file>
+        <file>Assets/RatePage.qml</file>
+        <file>Assets/AuthorizationPage.qml</file>
+        <file>Assets/icons/eye_hide.svg</file>
+        <file>Assets/icons/eye_show.svg</file>
     </qresource>
 </RCC>

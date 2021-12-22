@@ -38,6 +38,7 @@ ApplicationWindow {
                 stackView.pop()
                 headerPage.pageName = "New game"
                 logoPage.visible = false
+                winPage.visible = false
             }
         }
     }
@@ -60,6 +61,10 @@ ApplicationWindow {
             stackView.push(levelsPage)
             headerPage.pageName = "New game"
             logoPage.visible = false
+            headerPage.backIsPause = false
+        }
+        onQuitClicked: {
+            Qt.quit()
         }
     }
 
@@ -72,6 +77,7 @@ ApplicationWindow {
             stackView.push(gamePage)
             headerPage.pageName = "%1 x %1".arg(size)
             gamePage.startGame(size)
+            headerPage.backIsPause = false
         }
     }
 
@@ -79,11 +85,16 @@ ApplicationWindow {
         id: gamePage
 
         visible: false
+        onStarted: {
+            headerPage.backIsPause = true
+        }
 
         onFinished: {
             scoreBoard.steps = gameArea.stepCount
             scoreBoard.time = gameArea.gameTimeSec
+            headerPage.backIsPause = false
             winPage.visible = true
+            visible = false
         }
     }
 
@@ -92,7 +103,6 @@ ApplicationWindow {
 
         height: 100
         width: parent.width
-        //        z: 1
 
         onLogoClicked: {
             console.log("From " + stackView.currentItem)
@@ -126,6 +136,9 @@ ApplicationWindow {
     WinPage {
         id: winPage
 
+        steps: gamePage.steps
+        time: gamePage.time
+
         anchors {
             top: parent.top
             bottom: parent.bottom
@@ -137,11 +150,34 @@ ApplicationWindow {
             rightMargin: 30
         }
         visible: false
+        onContinueClicked: {
+            winPage.visible = false
+            stackView.pop()
+        }
+        onRateClicked: {
+            stackView.push(ratePage)
+            winPage.visible = false
+            authorizationPage.visible = true
+        }
     }
 
     ScoreBoard {
         id: scoreBoard
 
+        visible: false
+    }
+
+    RatePage {
+        id: ratePage
+
+        visible: false
+    }
+
+    AuthorizationPage {
+        id: authorizationPage
+
+        anchors.fill: parent
+        anchors.margins: 30
         visible: false
     }
 
