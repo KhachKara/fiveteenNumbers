@@ -30,9 +30,14 @@ ApplicationWindow {
         onBackClicked: {
             console.log("Out of " + stackView.currentItem)
             logoPage.visible = true
-            stackView.pop()
-            if(stackView.currentItem === levelsPage) {
+            if(stackView.currentItem === levelsPage || stackView.currentItem === aboutPage)
+            {
+                stackView.pop()
+                logoPage.visible = true
+            } else if (stackView.currentItem === gamePage) {
+                stackView.pop()
                 headerPage.pageName = "New game"
+                logoPage.visible = false
             }
         }
     }
@@ -66,9 +71,6 @@ ApplicationWindow {
             console.log("From " + stackView.currentItem)
             stackView.push(gamePage)
             headerPage.pageName = "%1 x %1".arg(size)
-            logoPage.visible = true
-            logoPage.z = 1
-            logoPage.y = 50
             gamePage.startGame(size)
         }
     }
@@ -77,6 +79,12 @@ ApplicationWindow {
         id: gamePage
 
         visible: false
+
+        onFinished: {
+            scoreBoard.steps = gameArea.stepCount
+            scoreBoard.time = gameArea.gameTimeSec
+            winPage.visible = true
+        }
     }
 
     LogoPage {
@@ -84,7 +92,7 @@ ApplicationWindow {
 
         height: 100
         width: parent.width
-//        z: 1
+        //        z: 1
 
         onLogoClicked: {
             console.log("From " + stackView.currentItem)
@@ -111,6 +119,28 @@ ApplicationWindow {
 
     GameStyleRect {
         id: gameStyle
+
+        visible: false
+    }
+
+    WinPage {
+        id: winPage
+
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
+            topMargin: 100
+            bottomMargin: 100
+            left: parent.left
+            right: parent.right
+            leftMargin: 30
+            rightMargin: 30
+        }
+        visible: false
+    }
+
+    ScoreBoard {
+        id: scoreBoard
 
         visible: false
     }

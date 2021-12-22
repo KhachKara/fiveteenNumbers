@@ -18,5 +18,9 @@
         <file>Assets/LevelsPage.qml</file>
         <file>Assets/GameStyleRect.qml</file>
         <file>Assets/NewSquare.qml</file>
+        <file>Assets/WinPage.qml</file>
+        <file>Assets/ScoreBoard.qml</file>
+        <file>Assets/icons/emptyStar.svg</file>
+        <file>Assets/icons/filledStar.svg</file>
     </qresource>
 </RCC>
