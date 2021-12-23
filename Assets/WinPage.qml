@@ -8,7 +8,7 @@ Rectangle {
     property string time: ""
 
     signal continueClicked()
-    signal rateClicked()
+    signal rateMeClicked()
 
     property alias topY: youWinTxt.anchors.topMargin
     property alias topS: scoreBoard.anchors.topMargin
@@ -118,7 +118,7 @@ Rectangle {
                 anchors.fill: parent
 
                 onClicked: {
-                    rateClicked()
+                    rateMeClicked()
                 }
             }
         }

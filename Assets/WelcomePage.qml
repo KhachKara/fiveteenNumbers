@@ -61,7 +61,7 @@ Item  {
                     if(text === "New game") {
                         newGameClicked()
                     }
-                    if(text === "Ratw") {
+                    if(text === "Rate") {
                         rateClicked()
                     }
                     if(text === "Settings") {

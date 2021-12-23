@@ -30,7 +30,11 @@ ApplicationWindow {
         onBackClicked: {
             console.log("Out of " + stackView.currentItem)
             logoPage.visible = true
-            if(stackView.currentItem === levelsPage || stackView.currentItem === aboutPage)
+            if(stackView.currentItem === levelsPage ||
+                    stackView.currentItem === settingsPage ||
+                    stackView.currentItem === ratePage ||
+                    stackView.currentItem === winPage ||
+                    stackView.currentItem === aboutPage)
             {
                 stackView.pop()
                 logoPage.visible = true
@@ -63,6 +67,21 @@ ApplicationWindow {
             logoPage.visible = false
             headerPage.backIsPause = false
         }
+
+        onSettingsClicked: {
+            console.log("Frome " + stackView.currentItem)
+            stackView.push(settingsPage)
+            logoPage.visible = false
+            headerPage.pageName = "Settings"
+        }
+
+        onRateClicked: {
+            console.log("Frome " + stackView.currentItem)
+            stackView.push(ratePage)
+            logoPage.visible = false
+            headerPage.pageName = "Rate"
+        }
+
         onQuitClicked: {
             Qt.quit()
         }
@@ -85,9 +104,6 @@ ApplicationWindow {
         id: gamePage
 
         visible: false
-        onStarted: {
-            headerPage.backIsPause = true
-        }
 
         onFinished: {
             scoreBoard.steps = gameArea.stepCount
@@ -120,7 +136,6 @@ ApplicationWindow {
         initialItem: welcomePage
     }
 
-    // ------------------------------------
     GameArea {
         id: gameArea
 
@@ -154,9 +169,9 @@ ApplicationWindow {
             winPage.visible = false
             stackView.pop()
         }
-        onRateClicked: {
+        onRateMeClicked: {
             // блок проверки наличие игрока в списке рейтингов
-            // если есть - показываем новый результ, если рекорд добавляем в список новые данные
+            // если есть - показываем новый результат, если рекорд - добавляем в список новые данные
             // если нет в списке - авторизуемся и добовляем в список подчеркиваем место и результат
             stackView.push(ratePage)
             winPage.visible = false
@@ -181,6 +196,20 @@ ApplicationWindow {
 
         anchors.fill: parent
         anchors.margins: 30
+        visible: false
+    }
+
+    SettingsPage {
+        id: settingsPage
+
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+            topMargin: 450
+            leftMargin: 30
+            rightMargin: 30
+        }
         visible: false
     }
 

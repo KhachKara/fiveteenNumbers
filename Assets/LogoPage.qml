@@ -15,8 +15,8 @@ Item {
             top: parent.top
             topMargin: 30
         }
-        source: "qrc:/Assets/icons/logo.svg"
 
+        source: "qrc:/Assets/icons/logo.svg"
 
         CursorShapeMouseArea {
             anchors.fill: parent
