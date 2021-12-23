@@ -110,7 +110,7 @@ ApplicationWindow {
             scoreBoard.time = gameArea.gameTimeSec
             headerPage.backIsPause = false
             winPage.visible = true
-            visible = false
+//            visible = false
         }
     }
 
@@ -173,7 +173,7 @@ ApplicationWindow {
             // блок проверки наличие игрока в списке рейтингов
             // если есть - показываем новый результат, если рекорд - добавляем в список новые данные
             // если нет в списке - авторизуемся и добовляем в список подчеркиваем место и результат
-            stackView.push(ratePage)
+//            stackView.pop()
             winPage.visible = false
             authorizationPage.visible = true
         }
@@ -206,7 +206,7 @@ ApplicationWindow {
             top: parent.top
             left: parent.left
             right: parent.right
-            topMargin: 450
+            topMargin: 400
             leftMargin: 30
             rightMargin: 30
         }
