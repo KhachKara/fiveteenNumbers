@@ -63,7 +63,6 @@ Item {
                     family: "Ubuntu"
                     pixelSize: 18
                 }
-
             }
         }
         Rectangle {
@@ -80,12 +79,28 @@ Item {
 
             Image {
                 id: eyeIcon
-                source: "qrc:/Assets/icons/eye_slash.svg"
-
+                source: "qrc:/Assets/icons/eye_hide.svg"
+                z: 1
                 anchors {
                     verticalCenter: parent.verticalCenter
                     right: parent.right
                     rightMargin: 10
+                }
+
+                CursorShapeMouseArea {
+                    anchors.fill: parent
+                    property int k: 1
+                    onClicked: {
+                        if(k > 0) {
+                            eyeIcon.source = "qrc:/Assets/icons/eye_show.svg"
+                            passwTxt.echoMode = TextInput.Normal
+                            k = k * (-1)
+                        } else {
+                            eyeIcon.source = "qrc:/Assets/icons/eye_hide.svg"
+                            passwTxt.echoMode = TextInput.Password
+                            k = k * (-1)
+                        }
+                    }
                 }
             }
 

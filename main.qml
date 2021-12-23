@@ -155,6 +155,9 @@ ApplicationWindow {
             stackView.pop()
         }
         onRateClicked: {
+            // блок проверки наличие игрока в списке рейтингов
+            // если есть - показываем новый результ, если рекорд добавляем в список новые данные
+            // если нет в списке - авторизуемся и добовляем в список подчеркиваем место и результат
             stackView.push(ratePage)
             winPage.visible = false
             authorizationPage.visible = true
