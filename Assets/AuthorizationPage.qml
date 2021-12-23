@@ -3,6 +3,9 @@ import QtQuick 2.0
 Item {
     id: root
 
+    property alias nickname: nickNameInp.text
+    property alias password: passwInp.text
+
     Rectangle {
         id: authorBgRect
 
@@ -39,8 +42,9 @@ Item {
                 right: parent.right
                 margins: 20
             }
+
             TextInput {
-                id: nickNameTxt
+                id: nickNameInp
 
                 color: "#b0a8b9"
                 anchors {
@@ -64,6 +68,23 @@ Item {
                     pixelSize: 18
                 }
             }
+            Image {
+                id: enterIcon
+                source: "qrc:/Assets/icons/enter_icon_gray.svg"
+                z: 1
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    right: parent.right
+                    rightMargin: 10
+                }
+
+                CursorShapeMouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        authorizationPage.visible = false
+                    }
+                }
+            }
         }
         Rectangle {
             id: passwRect
@@ -75,8 +96,36 @@ Item {
                 left: parent.left
                 right: parent.right
                 margins: 20
-            }
+            }          
 
+            TextInput {
+                id: passwInp
+
+                color: "#b0a8b9"
+                anchors {
+                    fill: parent
+                    left: parent.left
+                    leftMargin: 10
+                }
+
+                echoMode: TextInput.Normal
+
+                verticalAlignment: TextInput.AlignVCenter
+                text: "password"
+                property int k: 0
+                onFocusChanged: {
+                    if(k === 0) {
+                        text = ""
+                        passwInp.echoMode = "Password"
+                        ++k
+                    }
+                    color = "#000000"
+                }
+                font {
+                    family: "Ubuntu"
+                    pixelSize: 18
+                }
+            }           
             Image {
                 id: eyeIcon
                 source: "qrc:/Assets/icons/eye_hide.svg"
@@ -93,42 +142,14 @@ Item {
                     onClicked: {
                         if(k > 0) {
                             eyeIcon.source = "qrc:/Assets/icons/eye_show.svg"
-                            passwTxt.echoMode = TextInput.Normal
+                            passwInp.echoMode = TextInput.Normal
                             k = k * (-1)
                         } else {
                             eyeIcon.source = "qrc:/Assets/icons/eye_hide.svg"
-                            passwTxt.echoMode = TextInput.Password
+                            passwInp.echoMode = TextInput.Password
                             k = k * (-1)
                         }
                     }
-                }
-            }
-
-            TextInput {
-                id: passwTxt
-
-                color: "#b0a8b9"
-                anchors {
-                    fill: parent
-                    left: parent.left
-                    leftMargin: 10
-                }
-
-                echoMode: TextInput.Password
-
-                verticalAlignment: TextInput.AlignVCenter
-                text: "password"
-                property int k: 0
-                onFocusChanged: {
-                    if(k === 0) {
-                        text = ""
-                        ++k
-                    }
-                    color = "#000000"
-                }
-                font {
-                    family: "Ubuntu"
-                    pixelSize: 18
                 }
             }
         }
