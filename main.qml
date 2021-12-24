@@ -1,5 +1,5 @@
 import QtQml 2.2
-import QtQuick 2.15
+import QtQuick 2.2
 import QtQuick.Controls 2.5
 
 import "./Assets"
@@ -110,7 +110,6 @@ ApplicationWindow {
             scoreBoard.time = gameArea.gameTimeSec
             headerPage.backIsPause = false
             winPage.visible = true
-//            visible = false
         }
     }
 
@@ -173,9 +172,8 @@ ApplicationWindow {
             // блок проверки наличие игрока в списке рейтингов
             // если есть - показываем новый результат, если рекорд - добавляем в список новые данные
             // если нет в списке - авторизуемся и добовляем в список подчеркиваем место и результат
-//            stackView.pop()
             winPage.visible = false
-            authorizationPage.visible = true
+            stackView.push(authorizationPage)
         }
     }
 
@@ -194,7 +192,6 @@ ApplicationWindow {
     AuthorizationPage {
         id: authorizationPage
 
-        anchors.fill: parent
         anchors.margins: 30
         visible: false
     }

@@ -1,6 +1,5 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import QtQuick.Controls 2.5
-
 
 Item {
     id: root
@@ -118,7 +117,9 @@ Item {
                 }
                 verticalAlignment: TextInput.AlignVCenter
                 text: "e-mail"
-
+                validator: RegExpValidator {
+                    regExp: /[A-Za-z0-9_]+([-+.'][A-Za-z0-9_]+)*@[A-Za-z0-9_]+([-.][A-Za-z0-9_]+)*[.][A-Za-z0-9_]+([-.][A-Za-z0-9_]+)*./
+                }
                 property int k: 0
                 onFocusChanged: {
                     if(k === 0) {
@@ -130,6 +131,9 @@ Item {
                 font {
                     family: "Ubuntu"
                     pixelSize: 18
+                }
+                onTextChanged: {
+                    console.log(text, acceptableInput)
                 }
             }
         }
@@ -205,7 +209,7 @@ Item {
                     root.sendClicked()
                     messageBoxRect.visible = true
 
-                    if (!nameInp.text || !e_mailInp.text || !messageArea.text) {
+                    if (!nameInp.text || !e_mailInp.acceptableInput || !messageArea.text) {
                         messageBoxTxt.text = correctFill
                     } else {messageBoxTxt.text = success}
                 }

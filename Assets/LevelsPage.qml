@@ -5,7 +5,7 @@ Item {
     id: root
 
     signal startGameClicked(int size)
-    property alias topM: col.anchors.topMargin
+//    property alias topM: col.anchors.topMargin
 
     Rectangle {
         id: newGamePage

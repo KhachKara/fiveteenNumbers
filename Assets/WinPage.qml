@@ -1,5 +1,5 @@
 import QtQuick 2.2
-import QtQuick.Controls 2.15
+import QtQuick.Controls 2.2
 
 Rectangle {
     id: root
@@ -10,8 +10,8 @@ Rectangle {
     signal continueClicked()
     signal rateMeClicked()
 
-    property alias topY: youWinTxt.anchors.topMargin
-    property alias topS: scoreBoard.anchors.topMargin
+//    property alias topY: youWinTxt.anchors.topMargin
+//    property alias topS: scoreBoard.anchors.topMargin
 
     radius: 15
     color: "#FFFFFF"

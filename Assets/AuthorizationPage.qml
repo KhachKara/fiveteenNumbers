@@ -81,7 +81,7 @@ Item {
                 CursorShapeMouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        authorizationPage.visible = false
+                        stackView.pop()
                     }
                 }
             }
