@@ -18,7 +18,7 @@ Item {
         Column {
             id: rateColumn
 
-            spacing: 20
+            spacing: 15
 
             anchors {
                 top: parent.top
