@@ -27,6 +27,7 @@ ApplicationWindow {
         z: 1
         visible: stackView.depth > 1
 
+        property alias welcomeUser: gamePage.welcomeuser
         onBackClicked: {
             console.log("Out of " + stackView.currentItem)
             logoPage.visible = true
@@ -43,6 +44,10 @@ ApplicationWindow {
                 headerPage.pageName = "New game"
                 logoPage.visible = false
                 winPage.visible = false
+            } else if (stackView.currentItem === authorizationPage) {
+                stackView.pop()
+                logoPage.visible = false
+                welcomeUser.visuble = true
             }
         }
     }
@@ -192,8 +197,11 @@ ApplicationWindow {
     AuthorizationPage {
         id: authorizationPage
 
-        anchors.margins: 30
         visible: false
+        onEnterClicked: {
+            stackView.pop()
+            gamePage.welcomeuser.visible = true
+        }
     }
 
     SettingsPage {

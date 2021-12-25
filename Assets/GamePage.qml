@@ -1,4 +1,5 @@
 import QtQuick 2.2
+import QtQml 2.2
 
 Rectangle {
     id: root
@@ -8,6 +9,7 @@ Rectangle {
     readonly property alias areaSize: p.areaSize
 
     property alias  pause: gameArea.pause
+    property alias welcomeuser: welcomeUserItem
 
     signal started()
     signal finished()
@@ -36,6 +38,47 @@ Rectangle {
         id: p
         property int areaSize: -1
     }
+    // ------------ Welcome user ------------------------
+    Item {
+        id: welcomeUserItem
+
+        anchors.fill: parent
+
+        Text {
+            id: welcomeTxt
+            text: qsTr("Welcome!")
+            font {
+                family: "Ubuntu"
+                pixelSize: 32
+            }
+            color: "white"
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                top: parent.top
+                topMargin: 80
+            }
+        }
+        Text {
+            id: userTxt
+            text: authorizationPage.nickname
+            font {
+                family: "Ubuntu"
+                pixelSize: 24
+            }
+            color: "white"
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                top: welcomeTxt.bottom
+                topMargin: 10
+            }
+        }
+        Component.onCompleted: {
+            if(authorizationPage.nickname === "nickname") {
+                welcomeUserItem.visible = false
+            }
+        }
+    }
+    // --------- end Welcome user -----------------------
 
     Text {
         id: txtSteps

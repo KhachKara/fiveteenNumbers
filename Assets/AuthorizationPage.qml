@@ -3,6 +3,7 @@ import QtQuick 2.0
 Item {
     id: root
 
+    signal enterClicked()
     property alias nickname: nickNameInp.text
     property alias password: passwInp.text
 
@@ -81,7 +82,7 @@ Item {
                 CursorShapeMouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        stackView.pop()
+                        enterClicked()
                     }
                 }
             }
