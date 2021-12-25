@@ -1,5 +1,6 @@
 import QtQuick 2.2
 import QtQuick.Controls 2.5
+import "./js/variables.js" as Variables
 
 Item {
     id: root
@@ -117,8 +118,9 @@ Item {
                 }
                 verticalAlignment: TextInput.AlignVCenter
                 text: "e-mail"
+
                 validator: RegExpValidator {
-                    regExp: /[A-Za-z0-9_]+([-+.'][A-Za-z0-9_]+)*@[A-Za-z0-9_]+([-.][A-Za-z0-9_]+)*[.][A-Za-z0-9_]+([-.][A-Za-z0-9_]+)*./
+                    regExp: Variables.email_regular_expression
                 }
                 property int k: 0
                 onFocusChanged: {
