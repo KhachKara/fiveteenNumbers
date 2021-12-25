@@ -1,10 +1,9 @@
 #pragma once
 
 #include <QAbstractListModel>
+#include <QSqlQueryModel>
 
-class DataBaseModelPrivate;
-
-class DataBaseModel : public QAbstractListModel
+class DataBaseModel : public QSqlQueryModel
 {
 	Q_OBJECT
 public:
@@ -27,13 +26,11 @@ public:
 	explicit DataBaseModel(QObject *parent = nullptr);
 	virtual ~DataBaseModel() = default;
 
-	int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 	QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+public slots:
+	void updateModel();
 
 protected:
 	QHash<int, QByteArray> roleNames() const override;
-
-private:
-	DataBaseModelPrivate *_p = nullptr;
 };
 

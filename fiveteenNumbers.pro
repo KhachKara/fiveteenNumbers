@@ -7,13 +7,15 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 HEADERS += \
+    core.h \
     databasemodel.h \
-    databasemodelprivate.h \
+    databaseworker.h \
     myfunc.h
 
 SOURCES += \
+        core.cpp \
         databasemodel.cpp \
-        databasemodelprivate.cpp \
+        databaseworker.cpp \
         main.cpp
 
 RESOURCES += qml.qrc

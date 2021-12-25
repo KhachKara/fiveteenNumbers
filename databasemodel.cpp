@@ -1,8 +1,6 @@
 #include "databasemodel.h"
-#include "databasemodelprivate.h"
+#include "databaseworker.h"
 #include "myfunc.h"
-
-#include <QQmlEngine>
 
 const QString DataBaseModel::ITEM_NAME = "DataBaseModel";
 const bool DataBaseModel::IS_QML_REG = My::qmlRegisterType<DataBaseModel>
@@ -16,19 +14,22 @@ const std::array<QString, DataBaseModel::ROLE_COUNT> DataBaseModel::DB_ROLE_STR 
 };
 
 DataBaseModel::DataBaseModel(QObject *parent)
-	: QAbstractListModel(parent)
-//	, _p(parent)
+	: QSqlQueryModel(parent)
 {
-
-}
-
-
-int DataBaseModel::rowCount(const QModelIndex &parent) const
-{
+	updateModel();
 }
 
 QVariant DataBaseModel::data(const QModelIndex &index, int role) const
 {
+	int columnId = role - RoleBegin;
+	QModelIndex modelIndex = this->index(index.row(), columnId);
+
+	return QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
+}
+
+void DataBaseModel::updateModel()
+{
+	setQuery(DataBaseWorker::queryRate());
 }
 
 QHash<int, QByteArray> DataBaseModel::roleNames() const
