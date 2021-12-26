@@ -10,6 +10,7 @@ Item {
     property alias nickName: nameInp.text
     property alias e_mail: e_mailInp.text
     property alias message: messageArea.text
+    property alias messageBox: messageBoxRect
 
     readonly property string correctFill: "Feel the form correctly"
     readonly property string success: "Your mesage was\nsuccessfuly sent"
@@ -211,7 +212,8 @@ Item {
                     root.sendClicked()
                     messageBoxRect.visible = true
 
-                    if (!nameInp.text || !e_mailInp.acceptableInput || !messageArea.text) {
+                    if (!nameInp.text || !e_mailInp.acceptableInput ||
+                            !messageArea.text) {
                         messageBoxTxt.text = correctFill
                     } else {messageBoxTxt.text = success}
                 }

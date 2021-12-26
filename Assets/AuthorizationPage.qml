@@ -1,19 +1,24 @@
 import QtQuick 2.0
+import QtQml 2.2
+import QtQuick.Dialogs 1.3
 
 Item {
     id: root
 
     signal enterClicked()
+
     property alias nickname: nickNameInp.text
     property alias password: passwInp.text
 
     Rectangle {
         id: authorBgRect
 
+        anchors.centerIn: parent
+
         width: parent.width
         height: 200
         radius: 8
-        anchors.centerIn: parent
+
         color: "yellow"
 
         Text {

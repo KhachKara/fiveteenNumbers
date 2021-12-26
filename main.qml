@@ -198,9 +198,15 @@ ApplicationWindow {
         id: authorizationPage
 
         visible: false
+
         onEnterClicked: {
-            stackView.pop()
-            gamePage.welcomeuser.visible = true
+            if (nickname === "nickname"
+                    || password === "password"){
+                messagePage.visible = true
+            } else {
+                stackView.pop()
+                gamePage.welcomeuser.visible = true
+            }
         }
     }
 
@@ -222,5 +228,13 @@ ApplicationWindow {
         id: advertisePage
 
         anchors.bottom: parent.bottom
+    }
+
+    MessagePage {
+        id: messagePage
+
+        text: "Hello"
+
+        visible: false
     }
 }
