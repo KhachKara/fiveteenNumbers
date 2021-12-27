@@ -34,5 +34,6 @@
         <file>Assets/js/variables.js</file>
         <file>Assets/MessagePage.qml</file>
         <file>Assets/icons/warning.svg</file>
+        <file>Assets/TestingPage.qml</file>
     </qresource>
 </RCC>
