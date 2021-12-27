@@ -33,5 +33,6 @@
         <file>Assets/icons/EMPTY_checkbox.svg</file>
         <file>Assets/js/variables.js</file>
         <file>Assets/MessagePage.qml</file>
+        <file>Assets/icons/warning.svg</file>
     </qresource>
 </RCC>

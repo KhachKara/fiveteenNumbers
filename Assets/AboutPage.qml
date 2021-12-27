@@ -6,14 +6,38 @@ Item {
     id: root
 
     signal sendClicked()
+    signal messageCloseClicked()
 
     property alias nickName: nameInp.text
-    property alias e_mail: e_mailInp.text
+    property alias e_mail: e_mailInp
     property alias message: messageArea.text
+    property alias messageBoxTxt: messageBoxTxt.text
     property alias messageBox: messageBoxRect
 
     readonly property string correctFill: "Feel the form correctly"
     readonly property string success: "Your mesage was\nsuccessfuly sent"
+
+    states: [
+        State {
+            id: stateEmpty
+            name: "getEmpty"
+            PropertyChanges {
+                target: nameInp
+                color: "#b0a8b9"
+                text: "name"
+            }
+            PropertyChanges {
+                target: e_mailInp
+                color: "#b0a8b9"
+                text: "e-mail"
+            }
+            PropertyChanges {
+                target: messageArea
+                color: "#b0a8b9"
+                text: "message"
+            }
+        }
+    ]
 
     Rectangle {
         id: feedbackRect
@@ -91,7 +115,6 @@ Item {
                 }
             }
         }
-
         Rectangle {
             id: e_mail
 
@@ -140,7 +163,6 @@ Item {
                 }
             }
         }
-
         Rectangle {
             id: message
 
@@ -176,7 +198,6 @@ Item {
                 }
             }
         }
-
         Rectangle {
             id: sendBtn
 
@@ -209,13 +230,7 @@ Item {
                 anchors.fill: parent
 
                 onClicked: {
-                    root.sendClicked()
-                    messageBoxRect.visible = true
-
-                    if (!nameInp.text || !e_mailInp.acceptableInput ||
-                            !messageArea.text) {
-                        messageBoxTxt.text = correctFill
-                    } else {messageBoxTxt.text = success}
+                    sendClicked()
                 }
             }
         }
@@ -259,18 +274,14 @@ Item {
                 CursorShapeMouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        if(messageBoxTxt.text === success) {
-                            messageBoxRect.visible = false
-                            nameInp.text = ""
-                            e_mailInp.text = ""
-                            messageArea.text = ""
-                        } else {messageBoxRect.visible = false}
+                        messageCloseClicked()
                     }
                 }
             }
         }
     }
 
+    // footer _____________________________________
     Column {
         id: staffColumn
 

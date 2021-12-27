@@ -55,6 +55,20 @@ ApplicationWindow {
     AboutPage {
         id: aboutPage
 
+        onSendClicked: {
+            messageBox.visible = true
+
+            if (!nickName || !e_mail.acceptableInput || !message) {
+                messageBoxTxt = correctFill
+            } else {messageBoxTxt = success}
+        }
+
+        onMessageCloseClicked: {
+            if(messageBoxTxt === aboutPage.success) {
+                stackView.pop()
+                logoPage.visible = true
+            } else {messageBox.visible = false}
+        }
         visible: false
     }
 
@@ -200,10 +214,17 @@ ApplicationWindow {
         visible: false
 
         onEnterClicked: {
-            if (nickname === "nickname"
-                    || password === "password"){
+            if (nickname === "nickname"){
                 messagePage.visible = true
-            } else {
+                messagePage.text = messagePage.inUse
+            } else if(nickname === "") {
+                messagePage.visible = true
+                messagePage.text = messagePage.fillNickname
+            } else if(password === "") {
+                messagePage.visible = true
+                messagePage.text = messagePage.fillPassword
+            }
+            else {
                 stackView.pop()
                 gamePage.welcomeuser.visible = true
             }
@@ -233,7 +254,18 @@ ApplicationWindow {
     MessagePage {
         id: messagePage
 
-        text: "Hello"
+        property string inUse: "This nickname is already in use!"
+        property string fillNickname: "Fill the nickname!"
+        property string fillPassword: "Fill the password!"
+
+        anchors.centerIn: parent
+
+        onCloseButtonClicked: {
+            messagePage.visible = false
+        }
+
+        width: parent.width
+        height: 200
 
         visible: false
     }
