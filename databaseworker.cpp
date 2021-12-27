@@ -34,6 +34,7 @@ QString DataBaseWorker::queryRate()
 
 DataBaseWorker::DataBaseWorker(QObject *parent) : QObject(parent)
 {
+	connectToDataBase();
 }
 
 /* Методы для подключения к базе данных
@@ -52,7 +53,6 @@ void DataBaseWorker::connectToDataBase()
 
 bool DataBaseWorker::registerPlayer(QString login, QString mail, QString pass)
 {
-	/// \todo проверку на повторяемость
 	return insertPlayer(login, mail, QCryptographicHash::hash(pass.toLatin1(), QCryptographicHash::Sha256));
 }
 
@@ -144,8 +144,8 @@ bool DataBaseWorker::createTables()
 					"%3 INTEGER NOT NULL, "
 					"%4 INTEGER NOT NULL, "
 					"%5 INTEGER NOT NULL, "
-					"%6 TEXT NOT NULL,"
-					"%7 FOREIGN KEY (%3) REFERENCES %8(%9)"
+					"%6 TEXT NOT NULL, "
+					"FOREIGN KEY (%3) REFERENCES %7(%8)"
 				")")
 			.arg(DB_TB_RATE,
 				 DB_RATE_ID,
@@ -164,21 +164,32 @@ bool DataBaseWorker::createTables()
 	return true;
 }
 
-/* Метод для вставки записи в базу данных
- * */
 bool DataBaseWorker::insertPlayer(const QVariantList &data)
 {
-	/* Запрос SQL формируется из QVariantList,
-	 * в который передаются данные для вставки в таблицу.
-	 * */
 	QSqlQuery query;
+	QString qCheck = QString("SELECT %1 FROM %2 WHERE %1 = '%3'");
 
-	QString q = QString("INSERT INTO %1 ( %2, %3, %4)")
+	// Проверка на оригинальность логина
+	query.exec(qCheck.arg(DB_PLAYERS_LOGIN, DB_TB_PLAYER, data.at(0).toString()));
+	if (query.next()) {
+		qDebug() << __FILE__ << __LINE__ << "Login exist" << data.at(0).toString();
+		return false;
+	}
+
+	// Проверка на ригинальность почты
+	query.exec(qCheck.arg(DB_PLAYERS_MAIL, DB_TB_PLAYER, data.at(1).toString()));
+	if (query.next()) {
+		qDebug() << __FILE__ << __LINE__ << "Mail exist" << data.at(1).toString();
+		return false;
+	}
+
+
+	QString qInsert = QString("INSERT INTO %1 ( %2, %3, %4)")
 			.arg(DB_TB_PLAYER,
 				 data[0].toString(),
 				 data[1].toString(),
 				 data[2].toString());
-	if(!query.exec(q)){
+	if(!query.exec(qInsert)) {
 		qDebug() << QString("%1:%2").arg(__FILE__).arg(__LINE__)
 				 << query.lastError().text();
 		qDebug() << query.lastQuery();
@@ -202,7 +213,7 @@ bool DataBaseWorker::insertRate(const QVariantList &data)
 				 data[1].toString(),
 				 data[2].toString(),
 				 data[3].toString());
-	if(!query.exec(q)){
+	if(!query.exec(q)) {
 		qDebug() << QString("%1:%2").arg(__FILE__).arg(__LINE__)
 				 << query.lastError().text();
 		qDebug() << query.lastQuery();
