@@ -64,11 +64,14 @@ ApplicationWindow {
         }
 
         onMessageCloseClicked: {
-            if(messageBoxTxt === aboutPage.success) {
+            if(messageBoxTxt === success) {
                 stackView.pop()
                 logoPage.visible = true
+                messageBox.visible = false
+                state = "getEmpty"
             } else {messageBox.visible = false}
         }
+
         visible: false
     }
 
