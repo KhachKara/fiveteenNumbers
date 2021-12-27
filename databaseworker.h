@@ -45,6 +45,9 @@ public slots:
 	/// Если пароль не правильный возвращает -2.
 	int checkPass(QString login, QString pass);
 
+	/// Добавляет результат игры
+	bool addResult(int idPlayer, int steps, int time, QString date);
+
 private:
 	/* Внутренние методы для работы с базой данных
 	 * */
@@ -55,9 +58,7 @@ private:
 
 protected slots:
 	bool insertPlayer(const QVariantList &data);
-	bool insertPlayer(QString login, QString mail, QString pass);
 	bool insertRate(const QVariantList &data);
-	bool insertRate(int idPlayer, int steps, int time, QString date);
 
 private:
 	QSqlDatabase db;

@@ -7,10 +7,9 @@ const bool DataBaseModel::IS_QML_REG = My::qmlRegisterType<DataBaseModel>
 													(DataBaseModel::ITEM_NAME);
 
 const std::array<QString, DataBaseModel::ROLE_COUNT> DataBaseModel::DB_ROLE_STR {
-	"ID",
-	"Nik",
-	"Steps",
-	"Time"
+	"loginRole",
+	"stepsRole",
+	"timeRole"
 };
 
 DataBaseModel::DataBaseModel(QObject *parent)
