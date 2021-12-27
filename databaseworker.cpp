@@ -53,7 +53,8 @@ void DataBaseWorker::connectToDataBase()
 
 bool DataBaseWorker::registerPlayer(QString login, QString mail, QString pass)
 {
-	return insertPlayer(login, mail, QCryptographicHash::hash(pass.toLatin1(), QCryptographicHash::Sha256));
+	return insertPlayer(login, mail,
+						QString(QCryptographicHash::hash(pass.toLatin1(), QCryptographicHash::Sha256).toHex()));
 }
 
 int DataBaseWorker::checkPass(QString login, QString pass)
@@ -65,8 +66,9 @@ int DataBaseWorker::checkPass(QString login, QString pass)
 		qDebug() << __FILE__ << __LINE__ << "Can't find login:" << login;
 		return -1;
 	}
-	auto sha = QCryptographicHash::hash(pass.toLatin1(), QCryptographicHash::Sha256);
-	if (sha != query.value(DB_PLAYERS_PASS).toByteArray()) {
+	auto sha = QString(QCryptographicHash::hash(pass.toLatin1(), QCryptographicHash::Sha256).toHex());
+
+	if (sha != query.value(DB_PLAYERS_PASS).toString()) {
 		qDebug() << __FILE__ << __LINE__ << "The password is incorrect";
 		return -2;
 	}
@@ -80,7 +82,7 @@ bool DataBaseWorker::restoreDataBase()
 	// Если база данных открылась ...
 	if (openDataBase()) {
 		// Производим восстановление базы данных
-		return (this->createTables()) ? true : false;
+		return (createTables()) ? true : false;
 	} else {
 		qDebug() << "Can't open database";
 		return false;
@@ -98,11 +100,7 @@ bool DataBaseWorker::openDataBase()
 	db = QSqlDatabase::addDatabase("QSQLITE");
 	db.setHostName(DB_HOSTNAME);
 	db.setDatabaseName(DB_NAME);
-	if(db.open()){
-		return true;
-	} else {
-		return false;
-	}
+	return db.open();
 }
 
 /* Методы закрытия базы данных
@@ -184,8 +182,11 @@ bool DataBaseWorker::insertPlayer(const QVariantList &data)
 	}
 
 
-	QString qInsert = QString("INSERT INTO %1 ( %2, %3, %4)")
+	QString qInsert = QString("INSERT INTO %1 (%2, %3, %4) VALUES ('%5', '%6', '%7')")
 			.arg(DB_TB_PLAYER,
+				 DB_PLAYERS_LOGIN,
+				 DB_PLAYERS_MAIL,
+				 DB_PLAYERS_PASS,
 				 data[0].toString(),
 				 data[1].toString(),
 				 data[2].toString());
@@ -198,7 +199,7 @@ bool DataBaseWorker::insertPlayer(const QVariantList &data)
 	return true;
 }
 
-bool DataBaseWorker::insertPlayer(QString login, QString mail, QByteArray pass)
+bool DataBaseWorker::insertPlayer(QString login, QString mail, QString pass)
 {
 	return insertPlayer(QVariantList({login, mail, pass}));
 }

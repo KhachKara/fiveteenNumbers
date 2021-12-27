@@ -55,7 +55,7 @@ private:
 
 protected slots:
 	bool insertPlayer(const QVariantList &data);
-	bool insertPlayer(QString login, QString mail, QByteArray pass);
+	bool insertPlayer(QString login, QString mail, QString pass);
 	bool insertRate(const QVariantList &data);
 	bool insertRate(int idPlayer, int steps, int time, QString date);
 
