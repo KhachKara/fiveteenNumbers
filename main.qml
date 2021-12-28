@@ -274,7 +274,6 @@ ApplicationWindow {
     }
     TestingPage {
         id: testingPage
-//        anchors.fill: parent
 
         visible: true
     }
