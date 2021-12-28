@@ -220,6 +220,7 @@ ApplicationWindow {
         onEnterClicked: {
             if (core.signIn(nickname, password) === -1) {
                 core.registerPlayer(nickname, password)
+                gamePage.welcomeuser.visible = true
                 stackView.pop()
             } else if (core.signIn(nickname, password) === -2) {
                 messagePage.visible = true
