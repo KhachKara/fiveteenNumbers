@@ -25,11 +25,11 @@ public:
 	void setLogin(const QString &newLogin);
 
 public slots:
-	bool registerPlayer(QString login, QString mail, QString pass);
-	int signIn(QString login, QString pass);
+    bool registerPlayer(QString login, QString pass, QString mail = ""); // Kh
+    int signIn(QString login, QString pass);
 	void signOut();
 
-	bool addResult(int steps, int time, QString date);
+    bool addResult(int steps, int time/*, QString date*/); // Kh
 
 signals:
 	void idPlayerChanged();

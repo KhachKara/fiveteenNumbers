@@ -76,9 +76,9 @@ int DataBaseWorker::checkPass(QString login, QString pass)
 	return query.value(DB_PLAYERS_ID).toInt();
 }
 
-bool DataBaseWorker::addResult(int idPlayer, int steps, int time, QString date)
+bool DataBaseWorker::addResult(int idPlayer, int steps, int time/*, QString date*/)
 {
-	return insertRate(QVariantList{idPlayer, steps, time, date});
+    return insertRate(QVariantList{idPlayer, steps, time/*, date*/});
 }
 
 /* Методы восстановления базы данных
