@@ -154,7 +154,8 @@ ApplicationWindow {
         id: stackView
 
         anchors.fill: parent
-        initialItem: testingPage
+        initialItem: welcomePage
+//        initialItem: testingPage
     }
 
     GameArea {
@@ -275,6 +276,6 @@ ApplicationWindow {
     TestingPage {
         id: testingPage
 
-        visible: true
+        visible: false
     }
 }
