@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QCryptographicHash>
 
 #include "core.h"
 
@@ -18,7 +19,8 @@ int main(int argc, char *argv[])
 	context->setContextProperty("_arguments", app.arguments());
 	context->setContextProperty("core", &core);
 
-    const QUrl url(QStringLiteral("qrc:/main.qml"));
+//    const QUrl url(QStringLiteral("qrc:/main.qml"));
+	const QUrl url(QStringLiteral("qrc:/testWindow.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
         if (!obj && url == objUrl)

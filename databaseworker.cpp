@@ -27,9 +27,10 @@ const QString DataBaseWorker::DB_RATE_DATE = "date";
 
 QString DataBaseWorker::queryRate()
 {
-	return QString("SELECT %1, %2, %3 FROM %4 INNER JOIN %5 on %5.%6 = %4.%7 ORDER BY ")
+	auto s = QString("SELECT %1, %2, %3 FROM %4 INNER JOIN %5 on %5.%6 = %4.%7 ORDER BY %2")
 			.arg(DB_PLAYERS_LOGIN, DB_RATE_STEPS, DB_RATE_TIME,
 				 DB_TB_RATE, DB_TB_PLAYER, DB_PLAYERS_ID, DB_RATE_ID_PLAYER);
+	return s;
 }
 
 DataBaseWorker::DataBaseWorker(QObject *parent) : QObject(parent)
@@ -53,7 +54,8 @@ void DataBaseWorker::connectToDataBase()
 
 bool DataBaseWorker::registerPlayer(QString login, QString mail, QString pass)
 {
-	return insertPlayer(login, mail, QCryptographicHash::hash(pass.toLatin1(), QCryptographicHash::Sha256));
+	return insertPlayer(QVariantList{ login, mail,
+						QString(QCryptographicHash::hash(pass.toLatin1(), QCryptographicHash::Sha256).toHex())});
 }
 
 int DataBaseWorker::checkPass(QString login, QString pass)
@@ -62,15 +64,21 @@ int DataBaseWorker::checkPass(QString login, QString pass)
 			.arg(DB_PLAYERS_ID, DB_PLAYERS_PASS, DB_TB_PLAYER, DB_PLAYERS_LOGIN, login);
 	QSqlQuery query(qFindPlayer);
 	if (!query.next()) {
-		qDebug() << __FILE__ << __LINE__ << "Can't find login:" << login;
+		qDebug() << QString("%1:%2").arg(__FILE__).arg(__LINE__) << "Can't find login:" << login;
 		return -1;
 	}
-	auto sha = QCryptographicHash::hash(pass.toLatin1(), QCryptographicHash::Sha256);
-	if (sha != query.value(DB_PLAYERS_PASS).toByteArray()) {
-		qDebug() << __FILE__ << __LINE__ << "The password is incorrect";
+	auto sha = QString(QCryptographicHash::hash(pass.toLatin1(), QCryptographicHash::Sha256).toHex());
+
+	if (sha != query.value(DB_PLAYERS_PASS).toString()) {
+		qDebug() << QString("%1:%2").arg(__FILE__).arg(__LINE__) << "The password is incorrect";
 		return -2;
 	}
 	return query.value(DB_PLAYERS_ID).toInt();
+}
+
+bool DataBaseWorker::addResult(int idPlayer, int steps, int time, QString date)
+{
+	return insertRate(QVariantList{idPlayer, steps, time, date});
 }
 
 /* Методы восстановления базы данных
@@ -80,7 +88,7 @@ bool DataBaseWorker::restoreDataBase()
 	// Если база данных открылась ...
 	if (openDataBase()) {
 		// Производим восстановление базы данных
-		return (this->createTables()) ? true : false;
+		return (createTables()) ? true : false;
 	} else {
 		qDebug() << "Can't open database";
 		return false;
@@ -98,11 +106,7 @@ bool DataBaseWorker::openDataBase()
 	db = QSqlDatabase::addDatabase("QSQLITE");
 	db.setHostName(DB_HOSTNAME);
 	db.setDatabaseName(DB_NAME);
-	if(db.open()){
-		return true;
-	} else {
-		return false;
-	}
+	return db.open();
 }
 
 /* Методы закрытия базы данных
@@ -172,20 +176,22 @@ bool DataBaseWorker::insertPlayer(const QVariantList &data)
 	// Проверка на оригинальность логина
 	query.exec(qCheck.arg(DB_PLAYERS_LOGIN, DB_TB_PLAYER, data.at(0).toString()));
 	if (query.next()) {
-		qDebug() << __FILE__ << __LINE__ << "Login exist" << data.at(0).toString();
+		qDebug() << QString("%1:%2").arg(__FILE__).arg(__LINE__) << "Login exist" << data.at(0).toString();
 		return false;
 	}
 
 	// Проверка на ригинальность почты
 	query.exec(qCheck.arg(DB_PLAYERS_MAIL, DB_TB_PLAYER, data.at(1).toString()));
 	if (query.next()) {
-		qDebug() << __FILE__ << __LINE__ << "Mail exist" << data.at(1).toString();
+		qDebug() << QString("%1:%2").arg(__FILE__).arg(__LINE__) << "Mail exist" << data.at(1).toString();
 		return false;
 	}
 
-
-	QString qInsert = QString("INSERT INTO %1 ( %2, %3, %4)")
+	QString qInsert = QString("INSERT INTO %1 (%2, %3, %4) VALUES ('%5', '%6', '%7')")
 			.arg(DB_TB_PLAYER,
+				 DB_PLAYERS_LOGIN,
+				 DB_PLAYERS_MAIL,
+				 DB_PLAYERS_PASS,
 				 data[0].toString(),
 				 data[1].toString(),
 				 data[2].toString());
@@ -198,17 +204,16 @@ bool DataBaseWorker::insertPlayer(const QVariantList &data)
 	return true;
 }
 
-bool DataBaseWorker::insertPlayer(QString login, QString mail, QByteArray pass)
-{
-	return insertPlayer(QVariantList({login, mail, pass}));
-}
-
 bool DataBaseWorker::insertRate(const QVariantList &data)
 {
 	QSqlQuery query;
 
-	QString q = QString("INSERT INTO %1 ( %2, %3, %4, %5)")
+	QString q = QString("INSERT INTO %1 ( %2, %3, %4, %5) VALUES (%6, %7, %8, '%9')")
 			.arg(DB_TB_RATE,
+				 DB_RATE_ID_PLAYER,
+				 DB_RATE_STEPS,
+				 DB_RATE_TIME,
+				 DB_RATE_DATE,
 				 data[0].toString(),
 				 data[1].toString(),
 				 data[2].toString(),
@@ -220,9 +225,4 @@ bool DataBaseWorker::insertRate(const QVariantList &data)
 		return false;
 	}
 	return true;
-}
-
-bool DataBaseWorker::insertRate(int idPlayer, int steps, int time, QString date)
-{
-	return insertRate(QVariantList({QString(idPlayer), QString(steps), QString(time), date}));
 }

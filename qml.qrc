@@ -35,5 +35,6 @@
         <file>Assets/MessagePage.qml</file>
         <file>Assets/icons/warning.svg</file>
         <file>Assets/TestingPage.qml</file>
+        <file>testWindow.qml</file>
     </qresource>
 </RCC>

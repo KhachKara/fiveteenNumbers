@@ -12,10 +12,9 @@ public:
 	enum Role {
 		RoleBegin = Qt::UserRole + 1,
 
-		IdRole = RoleBegin,	// id
-		NikRole,			// nikname
-		StepsRole,			// result steps
-		TimeRole,			// result time
+		LoginRole = RoleBegin,	// nikname
+		StepsRole,				// result steps
+		TimeRole,				// result time
 
 		RoleEnd
 	};
