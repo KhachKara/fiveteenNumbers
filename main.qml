@@ -27,6 +27,7 @@ ApplicationWindow {
         z: 1
         visible: stackView.depth > 1
 
+        property alias welcomeUser: gamePage.welcomeuser
         onBackClicked: {
             console.log("Out of " + stackView.currentItem)
             logoPage.visible = true
@@ -43,12 +44,33 @@ ApplicationWindow {
                 headerPage.pageName = "New game"
                 logoPage.visible = false
                 winPage.visible = false
+            } else if (stackView.currentItem === authorizationPage) {
+                stackView.pop()
+                logoPage.visible = false
+                welcomeUser.visuble = true
             }
         }
     }
 
     AboutPage {
         id: aboutPage
+
+        onSendClicked: {
+            messageBox.visible = true
+
+            if (!nickName || !e_mail.acceptableInput || !message) {
+                messageBoxTxt = correctFill
+            } else {messageBoxTxt = success}
+        }
+
+        onMessageCloseClicked: {
+            if(messageBoxTxt === success) {
+                stackView.pop()
+                logoPage.visible = true
+                messageBox.visible = false
+                state = "getEmpty"
+            } else {messageBox.visible = false}
+        }
 
         visible: false
     }
@@ -132,7 +154,7 @@ ApplicationWindow {
         id: stackView
 
         anchors.fill: parent
-        initialItem: welcomePage
+        initialItem: testingPage
     }
 
     GameArea {
@@ -192,8 +214,24 @@ ApplicationWindow {
     AuthorizationPage {
         id: authorizationPage
 
-        anchors.margins: 30
         visible: false
+
+        onEnterClicked: {
+            if (nickname === "nickname"){
+                messagePage.visible = true
+                messagePage.text = messagePage.inUse
+            } else if(nickname === "") {
+                messagePage.visible = true
+                messagePage.text = messagePage.fillNickname
+            } else if(password === "") {
+                messagePage.visible = true
+                messagePage.text = messagePage.fillPassword
+            }
+            else {
+                stackView.pop()
+                gamePage.welcomeuser.visible = true
+            }
+        }
     }
 
     SettingsPage {
@@ -214,5 +252,30 @@ ApplicationWindow {
         id: advertisePage
 
         anchors.bottom: parent.bottom
+    }
+
+    MessagePage {
+        id: messagePage
+
+        property string inUse: "This nickname is already in use!"
+        property string fillNickname: "Fill the nickname!"
+        property string fillPassword: "Fill the password!"
+
+        anchors.centerIn: parent
+
+        onCloseButtonClicked: {
+            messagePage.visible = false
+        }
+
+        width: parent.width
+        height: 200
+
+        visible: false
+    }
+    TestingPage {
+        id: testingPage
+//        anchors.fill: parent
+
+        visible: true
     }
 }
