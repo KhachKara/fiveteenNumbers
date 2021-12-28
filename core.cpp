@@ -1,5 +1,6 @@
 #include "core.h"
 #include "myfunc.h"
+#include <QDebug>
 
 const QString Core::ITEM_NAME = "Core";
 const bool Core::IS_QML_REG = My::qmlRegisterType<Core>
