@@ -47,7 +47,7 @@ public slots:
 	int checkPass(QString login, QString pass);
 
 	/// Добавляет результат игры
-	bool addResult(int idPlayer, int sizeArea, int steps, int time, QString date);
+	bool addResult(int idPlayer, int sizeArea, int steps, int time, QString date = QString());
 
 private:
 	/* Внутренние методы для работы с базой данных

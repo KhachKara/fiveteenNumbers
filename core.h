@@ -29,7 +29,7 @@ public slots:
 	int signIn(QString login, QString pass);
 	void signOut();
 
-	bool addResult(int sizeArea, int steps, int time, QString date);
+	bool addResult(int sizeArea, int steps, int time, QString date = QString());
 
 signals:
 	void idPlayerChanged();
