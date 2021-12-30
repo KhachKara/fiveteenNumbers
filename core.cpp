@@ -18,9 +18,9 @@ DataBaseModel *Core::model() const
 	return _model;
 }
 
-bool Core::registerPlayer(QString login, QString mail, QString pass)
+bool Core::registerPlayer(QString login, QString pass, QString mail)
 {
-	if (!_db->registerPlayer(login, mail, pass)) {
+	if (!_db->registerPlayer(login, pass, mail)) {
 		return false;
 	}
 	signIn(login, pass);
@@ -40,14 +40,14 @@ void Core::signOut()
 	setLogin(QString());
 }
 
-bool Core::addResult(int steps, int time, QString date)
+bool Core::addResult(int sizeArea, int steps, int time, QString date)
 {
 	if (idPlayer() < 0) {
 		qDebug() << QString("%1:%2").arg(__FILE__).arg(__LINE__) << "must reg or sign in";
 		return false;
 	}
-	auto r = _db->addResult(idPlayer(), steps, time, date);
-	_model->updateModel();
+	auto r = _db->addResult(idPlayer(), sizeArea, steps, time, date);
+	_model->updateModel(sizeArea);
 	return r;
 }
 

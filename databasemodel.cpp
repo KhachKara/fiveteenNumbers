@@ -15,7 +15,6 @@ const std::array<QString, DataBaseModel::ROLE_COUNT> DataBaseModel::DB_ROLE_STR 
 DataBaseModel::DataBaseModel(QObject *parent)
 	: QSqlQueryModel(parent)
 {
-	updateModel();
 }
 
 QVariant DataBaseModel::data(const QModelIndex &index, int role) const
@@ -26,9 +25,9 @@ QVariant DataBaseModel::data(const QModelIndex &index, int role) const
 	return QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
 }
 
-void DataBaseModel::updateModel()
+void DataBaseModel::updateModel(int sizeArea)
 {
-	setQuery(DataBaseWorker::queryRate());
+	setQuery(DataBaseWorker::queryRate(sizeArea));
 }
 
 QHash<int, QByteArray> DataBaseModel::roleNames() const

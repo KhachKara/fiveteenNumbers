@@ -98,22 +98,13 @@ ApplicationWindow {
             MyGroupBox {
                 width: parent.width
                 MyHeader {
-                    text: "Reg player"
+                    text: "Reg or sing in"
                 }
 
                 MyField {
                     id: login
                     width: parent.width
                     text: 'Login'
-                }
-                TextInput {
-                    id: mail
-                    width: parent.width
-                    focus: true
-                    font.pixelSize: 40
-                    readOnly: true
-                    clip: true
-                    text: login.textInput + '@text.test'
                 }
                 MyField {
                     id: pass
@@ -124,31 +115,18 @@ ApplicationWindow {
                     text: "Reg player"
                     width: parent.width
                     onClicked: {
-                        let r = core.registerPlayer(login.textInput, mail.text, pass.textInput);
-                    }
-                }
-            }
-            MyGroupBox {
-                width: parent.width
-                MyHeader {
-                    text: "Sign in"
-                }
-
-                MyField {
-                    id: siLogin
-                    width: parent.width
-                    text: 'Login'
-                }
-                MyField {
-                    id: siPass
-                    width: parent.width
-                    text: 'Pass'
-                }
-                Button {
-                    text: "Sign in"
-                    width: parent.width
-                    onClicked: {
-                        let r = core.signIn(siLogin.textInput, siPass.textInput);
+                        let r = core.signIn(login.textInput, pass.textInput);
+                        switch (r) {
+                        case -1:
+                            r = core.registerPlayer(login.textInput, pass.textInput);
+                            console.info(r >= 0 ? 'зарегились' : 'какая то ошибка %1'.arg(r))
+                            break;
+                        case -2:
+                            console.info('не правильный пароль)')
+                            break
+                        default:
+                            console.info('залогинились')
+                        }
                     }
                 }
             }
@@ -156,6 +134,11 @@ ApplicationWindow {
                 width: parent.width
                 MyHeader {
                     text: "Add result"
+                }
+                MyField {
+                    id: sizeArea
+                    width: parent.width
+                    text: 'Size'
                 }
                 MyField {
                     id: steps
@@ -176,7 +159,8 @@ ApplicationWindow {
                     text: "Write result"
                     width: parent.width
                     onClicked: {
-                        let r = core.addResult(parseInt(steps.textInput),
+                        let r = core.addResult(parseInt(sizeArea.textInput),
+                                               parseInt(steps.textInput),
                                                parseInt(time.textInput),
                                                date.textInput);
                     }

@@ -27,7 +27,7 @@ public:
 
 	QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 public slots:
-	void updateModel();
+	void updateModel(int sizeArea);
 
 protected:
 	QHash<int, QByteArray> roleNames() const override;

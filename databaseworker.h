@@ -20,12 +20,13 @@ public:
 	static const QString DB_PLAYERS_PASS;
 	static const QString DB_RATE_ID;
 	static const QString DB_RATE_ID_PLAYER;
+	static const QString DB_RATE_SIZE_AREA;
 	static const QString DB_RATE_STEPS;
 	static const QString DB_RATE_TIME;
 	static const QString DB_RATE_DATE;
 
 	/// Возвращает запрос для таблицы: Login, Steprs, Time
-	static QString queryRate();
+	static QString queryRate(int sizeArea);
 
 	DataBaseWorker(QObject * parent = nullptr);
 	virtual ~DataBaseWorker() = default;
@@ -37,7 +38,7 @@ public:
 public slots:
 	/// Регистрация игрока.
 	/// true - если добавлена запись в БД
-	bool registerPlayer(QString login, QString mail, QString pass);
+	bool registerPlayer(QString login, QString pass, QString mail = QString());
 
 	/// Проверяет лог и пароль.
 	/// Если успешно возвращает индекс пользователя.
@@ -46,7 +47,7 @@ public slots:
 	int checkPass(QString login, QString pass);
 
 	/// Добавляет результат игры
-	bool addResult(int idPlayer, int steps, int time, QString date);
+	bool addResult(int idPlayer, int sizeArea, int steps, int time, QString date);
 
 private:
 	/* Внутренние методы для работы с базой данных

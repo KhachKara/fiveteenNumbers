@@ -21,15 +21,18 @@ const QString DataBaseWorker::DB_PLAYERS_MAIL = "mail";
 const QString DataBaseWorker::DB_PLAYERS_PASS = "password";
 const QString DataBaseWorker::DB_RATE_ID = "id";
 const QString DataBaseWorker::DB_RATE_ID_PLAYER = "idPlayer";
+const QString DataBaseWorker::DB_RATE_SIZE_AREA = "sizeArea";
 const QString DataBaseWorker::DB_RATE_STEPS = "steps";
 const QString DataBaseWorker::DB_RATE_TIME = "time";
 const QString DataBaseWorker::DB_RATE_DATE = "date";
 
-QString DataBaseWorker::queryRate()
+QString DataBaseWorker::queryRate(int sizeArea)
 {
-	auto s = QString("SELECT %1, %2, %3 FROM %4 INNER JOIN %5 on %5.%6 = %4.%7 ORDER BY %2")
+	auto s = QString("SELECT %1, %2, %3 FROM %4 INNER JOIN %5 on %5.%6 = %4.%7 WHERE %8 = %9 ORDER BY %2")
 			.arg(DB_PLAYERS_LOGIN, DB_RATE_STEPS, DB_RATE_TIME,
-				 DB_TB_RATE, DB_TB_PLAYER, DB_PLAYERS_ID, DB_RATE_ID_PLAYER);
+				 DB_TB_RATE, DB_TB_PLAYER, DB_PLAYERS_ID, DB_RATE_ID_PLAYER,
+				 DB_RATE_SIZE_AREA, QString("%1").arg(sizeArea));
+	qDebug() << s;
 	return s;
 }
 
@@ -52,7 +55,7 @@ void DataBaseWorker::connectToDataBase()
 	}
 }
 
-bool DataBaseWorker::registerPlayer(QString login, QString mail, QString pass)
+bool DataBaseWorker::registerPlayer(QString login, QString pass, QString mail)
 {
 	return insertPlayer(QVariantList{ login, mail,
 						QString(QCryptographicHash::hash(pass.toLatin1(), QCryptographicHash::Sha256).toHex())});
@@ -76,9 +79,9 @@ int DataBaseWorker::checkPass(QString login, QString pass)
 	return query.value(DB_PLAYERS_ID).toInt();
 }
 
-bool DataBaseWorker::addResult(int idPlayer, int steps, int time, QString date)
+bool DataBaseWorker::addResult(int idPlayer, int sizeArea, int steps, int time, QString date)
 {
-	return insertRate(QVariantList{idPlayer, steps, time, date});
+	return insertRate(QVariantList{idPlayer, sizeArea, steps, time, date});
 }
 
 /* Методы восстановления базы данных
@@ -128,9 +131,9 @@ bool DataBaseWorker::createTables()
 				"CREATE TABLE IF NOT EXISTS %1 ("
 					"%2 INTEGER PRIMARY KEY AUTOINCREMENT, "
 					"%3 TEXT NOT NULL, "
-					"%4 TEXT NOT NULL, "
+					"%4 TEXT, "
 					"%5 TEXT NOT NULL"
-				  ")")
+				")")
 			.arg(DB_TB_PLAYER,
 				 DB_PLAYERS_ID,
 				 DB_PLAYERS_LOGIN,
@@ -148,12 +151,14 @@ bool DataBaseWorker::createTables()
 					"%3 INTEGER NOT NULL, "
 					"%4 INTEGER NOT NULL, "
 					"%5 INTEGER NOT NULL, "
-					"%6 TEXT NOT NULL, "
-					"FOREIGN KEY (%3) REFERENCES %7(%8)"
+					"%6 INTEGER NOT NULL, "
+					"%7 TEXT NOT NULL, "
+					"FOREIGN KEY (%3) REFERENCES %8(%9)"
 				")")
 			.arg(DB_TB_RATE,
 				 DB_RATE_ID,
 				 DB_RATE_ID_PLAYER,
+				 DB_RATE_SIZE_AREA,
 				 DB_RATE_STEPS,
 				 DB_RATE_TIME,
 				 DB_RATE_DATE,
@@ -180,13 +185,6 @@ bool DataBaseWorker::insertPlayer(const QVariantList &data)
 		return false;
 	}
 
-	// Проверка на ригинальность почты
-	query.exec(qCheck.arg(DB_PLAYERS_MAIL, DB_TB_PLAYER, data.at(1).toString()));
-	if (query.next()) {
-		qDebug() << QString("%1:%2").arg(__FILE__).arg(__LINE__) << "Mail exist" << data.at(1).toString();
-		return false;
-	}
-
 	QString qInsert = QString("INSERT INTO %1 (%2, %3, %4) VALUES ('%5', '%6', '%7')")
 			.arg(DB_TB_PLAYER,
 				 DB_PLAYERS_LOGIN,
@@ -208,21 +206,24 @@ bool DataBaseWorker::insertRate(const QVariantList &data)
 {
 	QSqlQuery query;
 
-	QString q = QString("INSERT INTO %1 ( %2, %3, %4, %5) VALUES (%6, %7, %8, '%9')")
+	QString q = QString("INSERT INTO %1 ( %2, %3, %4, %5, %6) VALUES (%7, %8, %9, %10, '%11')")
 			.arg(DB_TB_RATE,
 				 DB_RATE_ID_PLAYER,
+				 DB_RATE_SIZE_AREA,
 				 DB_RATE_STEPS,
 				 DB_RATE_TIME,
 				 DB_RATE_DATE,
 				 data[0].toString(),
 				 data[1].toString(),
 				 data[2].toString(),
-				 data[3].toString());
+				 data[3].toString(),
+				 data[4].toString());
 	if(!query.exec(q)) {
 		qDebug() << QString("%1:%2").arg(__FILE__).arg(__LINE__)
 				 << query.lastError().text();
 		qDebug() << query.lastQuery();
 		return false;
 	}
+	qDebug() << q;
 	return true;
 }
