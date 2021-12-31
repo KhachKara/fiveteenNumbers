@@ -152,7 +152,7 @@ bool DataBaseWorker::createTables()
 					"%4 INTEGER NOT NULL, "
 					"%5 INTEGER NOT NULL, "
 					"%6 INTEGER NOT NULL, "
-					"%7 TEXT NOT NULL, "
+					"%7 TEXT, "
 					"FOREIGN KEY (%3) REFERENCES %8(%9)"
 				")")
 			.arg(DB_TB_RATE,
