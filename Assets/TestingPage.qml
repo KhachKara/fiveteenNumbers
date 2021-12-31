@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtQuick.Controls 2.2
 
 Item {
 
@@ -12,6 +13,10 @@ Item {
             color: "#f0f8ff"
             TextInput {
                 id: login
+
+                anchors.fill: parent
+                verticalAlignment: TextInput.AlignVCenter
+                anchors.leftMargin: 30
                 font {
                     family: "Ubuntu"
                     pixelSize: 32
@@ -26,6 +31,8 @@ Item {
                 id: password
 
                 anchors.fill: parent
+                verticalAlignment: TextInput.AlignVCenter
+                anchors.leftMargin: 30
                 font {
                     family: "Ubuntu"
                     pixelSize: 32
@@ -40,10 +47,24 @@ Item {
                 id: e_mail
 
                 anchors.fill: parent
+                verticalAlignment: TextInput.AlignVCenter
+                anchors.leftMargin: 30
                 font {
                     family: "Ubuntu"
                     pixelSize: 32
                 }
+            }
+        }
+        Button {
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: "Push me"
+            font {
+                family: "Ubuntu"
+                pixelSize: 32
+            }
+
+            onClicked: {
+                console.log(core.registerPlayer(login.text, password.text, e_mail.text))
             }
         }
     }

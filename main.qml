@@ -154,7 +154,8 @@ ApplicationWindow {
         id: stackView
 
         anchors.fill: parent
-        initialItem: testingPage
+        initialItem: welcomePage
+        //        initialItem: testingPage
     }
 
     GameArea {
@@ -217,17 +218,15 @@ ApplicationWindow {
         visible: false
 
         onEnterClicked: {
-            if (nickname === "nickname"){
+            if (core.signIn(nickname, password) === -1) {
+                core.registerPlayer(nickname, password)
+                gamePage.welcomeuser.visible = true
+                stackView.pop()
+            } else if (core.signIn(nickname, password) === -2) {
                 messagePage.visible = true
-                messagePage.text = messagePage.inUse
-            } else if(nickname === "") {
-                messagePage.visible = true
-                messagePage.text = messagePage.fillNickname
-            } else if(password === "") {
-                messagePage.visible = true
-                messagePage.text = messagePage.fillPassword
-            }
-            else {
+                messagePage.text = messagePage.passwordError
+                headerPage.enabled = false
+            } else {
                 stackView.pop()
                 gamePage.welcomeuser.visible = true
             }
@@ -260,11 +259,13 @@ ApplicationWindow {
         property string inUse: "This nickname is already in use!"
         property string fillNickname: "Fill the nickname!"
         property string fillPassword: "Fill the password!"
+        property string passwordError: "Fill the correct password!"
 
         anchors.centerIn: parent
 
         onCloseButtonClicked: {
             messagePage.visible = false
+            headerPage.enabled = true
         }
 
         width: parent.width
@@ -274,8 +275,7 @@ ApplicationWindow {
     }
     TestingPage {
         id: testingPage
-//        anchors.fill: parent
 
-        visible: true
+        visible: false
     }
 }
