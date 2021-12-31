@@ -57,8 +57,10 @@ void DataBaseWorker::connectToDataBase()
 
 bool DataBaseWorker::registerPlayer(QString login, QString pass, QString mail)
 {
-	return insertPlayer(QVariantList{ login, mail,
-						QString(QCryptographicHash::hash(pass.toLatin1(), QCryptographicHash::Sha256).toHex())});
+	if (_CRYPT_PASS) {
+		pass = QString(QCryptographicHash::hash(pass.toLatin1(), QCryptographicHash::Sha256).toHex());
+	}
+	return insertPlayer(QVariantList{ login, mail, pass });
 }
 
 int DataBaseWorker::checkPass(QString login, QString pass)
@@ -70,9 +72,11 @@ int DataBaseWorker::checkPass(QString login, QString pass)
 		qDebug() << QString("%1:%2").arg(__FILE__).arg(__LINE__) << "Can't find login:" << login;
 		return -1;
 	}
-	auto sha = QString(QCryptographicHash::hash(pass.toLatin1(), QCryptographicHash::Sha256).toHex());
+	if (_CRYPT_PASS) {
+		pass = QString(QCryptographicHash::hash(pass.toLatin1(), QCryptographicHash::Sha256).toHex());
+	}
 
-	if (sha != query.value(DB_PLAYERS_PASS).toString()) {
+	if (pass != query.value(DB_PLAYERS_PASS).toString()) {
 		qDebug() << QString("%1:%2").arg(__FILE__).arg(__LINE__) << "The password is incorrect";
 		return -2;
 	}

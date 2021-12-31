@@ -6,6 +6,7 @@
 class DataBaseWorker : public QObject
 {
 	Q_OBJECT
+	static const bool _CRYPT_PASS = false;
 public:
 	static const QString ITEM_NAME;     ///< DataBaseWorker
 	static const bool IS_QML_REG;
