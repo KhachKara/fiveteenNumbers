@@ -221,7 +221,9 @@ ApplicationWindow {
             if (core.signIn(nickname, password) === -1) {
                 core.registerPlayer(nickname, password)
                 gamePage.welcomeuser.visible = true
+                core.addResult(gamePage.areaSize, gamePage.steps, gameArea.gameTimeSec)
                 stackView.pop()
+                console.log(gameArea.gameTimeSec)
             } else if (core.signIn(nickname, password) === -2) {
                 messagePage.visible = true
                 messagePage.text = messagePage.passwordError
@@ -229,6 +231,7 @@ ApplicationWindow {
             } else {
                 stackView.pop()
                 gamePage.welcomeuser.visible = true
+                core.addResult(gamePage.areaSize, gamePage.steps, gameArea.gameTimeSec)
             }
         }
     }
