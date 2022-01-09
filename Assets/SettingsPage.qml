@@ -3,85 +3,64 @@ import QtQuick 2.2
 Item {
     id: root
 
-    Rectangle {
-        id: soundRect
+    component MyCheckBox: Image {
+        property bool checked: false
 
-        width: parent.width
-        height: 24
-        color: Qt.rgba(0,0,0,0)
-        Text {
-            id: soundTxt
+        source: checked ? "qrc:/Assets/icons/CHECKED_checkbox.svg" : "qrc:/Assets/icons/EMPTY_checkbox.svg"
 
-            color: "#B0A8B9"
-            text: qsTr("Sound")
-            font {
-                family: "Ubuntu"
-                pixelSize: 20
-            }
-            anchors.verticalCenter: soundRect.verticalCenter
-        }
-        Image {
-            id: soundCheckbox
-
-            property int k: 1
-
-            source: if(soundCheckbox.k > 0) {
-             "qrc:/Assets/icons/EMPTY_checkbox.svg"}
-            else {"qrc:/Assets/icons/CHECKED_checkbox.svg"}
-            anchors {
-                verticalCenter: parent.verticalCenter
-                right: parent.right
-            }
-
-            CursorShapeMouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    soundCheckbox.k =  soundCheckbox.k * (-1)
-                }
+        CursorShapeMouseArea {
+            anchors.fill: parent
+            onClicked: {
+                checked =  !checked;
             }
         }
     }
 
-    Rectangle {
-        id: musicRect
+    component MyCheckRow: Item {
+        property alias text: txt.text
+        property alias checked: checkBox.checked
 
-        anchors {
-            top: soundRect.bottom
-            topMargin: 24
-        }
-        width: parent.width
-        height: 24
-        color: Qt.rgba(0,0,0,0)
+        implicitHeight: 24
+
         Text {
-            id: musicTxt
+            id: txt
 
+            anchors.verticalCenter: parent.verticalCenter
             color: "#B0A8B9"
-            text: qsTr("Music")
             font {
                 family: "Ubuntu"
                 pixelSize: 20
             }
-            anchors.verticalCenter: musicRect.verticalCenter
         }
-        Image {
-            id: musicCheckbox
 
-            property int k: 1
-
-            source: if(musicCheckbox.k > 0) {
-                        "qrc:/Assets/icons/EMPTY_checkbox.svg"}
-                       else {"qrc:/Assets/icons/CHECKED_checkbox.svg"}
+        MyCheckBox {
+            id: checkBox
             anchors {
                 verticalCenter: parent.verticalCenter
                 right: parent.right
             }
+        }
+    }
 
-            CursorShapeMouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    musicCheckbox.k =  musicCheckbox.k * (-1)
-                }
-            }
+    Column {
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+            margins: 22
+        }
+
+        spacing: 22
+        MyCheckRow {
+            id: soundSetting
+            width: parent.width
+            text: qsTr("Sound")
+        }
+
+        MyCheckRow {
+            id: musicSetting
+            width: parent.width
+            text: qsTr("Music")
         }
     }
 }

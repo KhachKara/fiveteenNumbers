@@ -41,6 +41,7 @@ public slots:
 	/// true - если добавлена запись в БД
 	bool registerPlayer(QString login, QString pass, QString mail = QString());
 
+	bool checkLogin(QString login) const;
 	/// Проверяет лог и пароль.
 	/// Если успешно возвращает индекс пользователя.
 	/// Если аккаунт не найден, возвращает -1.

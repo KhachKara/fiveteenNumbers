@@ -11,7 +11,7 @@ Item {
     readonly property alias size: p.size
     readonly property alias areaSize: gameArea.width
 
-    // При окончании игры.
+    signal started()
     signal finished()
 
     implicitWidth: gameArea.implicitWidth
@@ -63,6 +63,7 @@ Item {
         } else {
             p.squareComponent.statusChanged.connect(p.createObjects);
         }
+        started();
     }
 
     // Инициализирует начальное положение клеток по порядку.

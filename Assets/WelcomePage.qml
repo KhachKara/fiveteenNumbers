@@ -1,5 +1,5 @@
-import QtQuick 2.0
-import QtQuick.Controls 2.5
+import QtQuick 2.12
+import QtQuick.Controls 2.12
 
 Item  {
     id: root
@@ -8,8 +8,7 @@ Item  {
     signal rateClicked()
     signal settingsClicked()
     signal quitClicked()
-
-    anchors.bottom: advertisePage.top
+    signal logoClicked()
 
     ListModel {
         id: listModel
@@ -27,10 +26,36 @@ Item  {
         }
     }
 
+    Image {
+        id: logoImage
+        anchors {
+            horizontalCenter: root.horizontalCenter
+            top: parent.top
+            topMargin: -70
+        }
+
+        source: "qrc:/Assets/icons/logo.svg"
+
+        CursorShapeMouseArea {
+            anchors.fill: parent
+
+            onClicked: {
+                logoClicked()
+            }
+        }
+    }
+
     ListView {
         id: listView
 
-        anchors.fill: parent
+        anchors {
+            top: logoImage.bottom
+            topMargin: 50
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
+        clip: true
 
         spacing: 12
         ScrollBar.vertical: ScrollBar{}
@@ -40,7 +65,7 @@ Item  {
         delegate: Rectangle {
             id: rectButton
 
-            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
             width: 300
             height: 70
             color: "#845EC2"

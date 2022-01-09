@@ -28,12 +28,11 @@ const QString DataBaseWorker::DB_RATE_DATE = "date";
 
 QString DataBaseWorker::queryRate(int sizeArea)
 {
-	auto s = QString("SELECT %1, %2, %3 FROM %4 INNER JOIN %5 on %5.%6 = %4.%7 WHERE %8 = %9 ORDER BY %2")
+	auto r = QString("SELECT %1, %2, %3 FROM %4 INNER JOIN %5 on %5.%6 = %4.%7 WHERE %8 = %9 ORDER BY %2")
 			.arg(DB_PLAYERS_LOGIN, DB_RATE_STEPS, DB_RATE_TIME,
 				 DB_TB_RATE, DB_TB_PLAYER, DB_PLAYERS_ID, DB_RATE_ID_PLAYER,
 				 DB_RATE_SIZE_AREA, QString("%1").arg(sizeArea));
-	qDebug() << s;
-	return s;
+	return r;
 }
 
 DataBaseWorker::DataBaseWorker(QObject *parent) : QObject(parent)
@@ -61,6 +60,14 @@ bool DataBaseWorker::registerPlayer(QString login, QString pass, QString mail)
 		pass = QString(QCryptographicHash::hash(pass.toLatin1(), QCryptographicHash::Sha256).toHex());
 	}
 	return insertPlayer(QVariantList{ login, mail, pass });
+}
+
+bool DataBaseWorker::checkLogin(QString login) const
+{
+	QString qFindPlayer = QString("SELECT %1, %2 FROM %3 WHERE %4 = '%5'")
+			.arg(DB_PLAYERS_ID, DB_PLAYERS_PASS, DB_TB_PLAYER, DB_PLAYERS_LOGIN, login);
+	QSqlQuery query(qFindPlayer);
+	return query.next();
 }
 
 int DataBaseWorker::checkPass(QString login, QString pass)
@@ -228,6 +235,5 @@ bool DataBaseWorker::insertRate(const QVariantList &data)
 		qDebug() << query.lastQuery();
 		return false;
 	}
-	qDebug() << q;
 	return true;
 }

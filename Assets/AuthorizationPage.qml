@@ -7,8 +7,62 @@ Item {
 
     signal enterClicked()
 
-    property alias nickname: nickNameInp.text
-    property alias password: passwInp.text
+    property var baseStackView
+    property int areaSize: -1;
+    property int steps: -1
+    property int timeSec: -1
+    property alias nickname: nick.text
+    property alias password: passw.text
+
+    component MyTextInput: Rectangle {
+        readonly property string text: _textInp.text !== placeholderText + _textInp.__key ? _textInp.text : ""
+        property alias placeholderText: _textInp.placeholderText
+        property int echoMode: TextInput.Normal
+        height: 40
+        radius: 8
+        onFocusChanged: {
+            if (focus) {
+                _textInp.forceActiveFocus();
+            }
+        }
+        TextInput {
+            id: _textInp
+            property bool emptyInput: text === placeholderText + __key || !text.length
+            property string placeholderText: "placeholderText"
+            property string __key: "    " // &nbsp
+
+            anchors {
+                fill: parent
+                leftMargin: 10
+            }
+            verticalAlignment: TextInput.AlignVCenter
+            text: placeholderText + __key
+            focus: true
+            echoMode: emptyInput ? TextInput.Normal : parent.echoMode
+            color: emptyInput ? "#b0a8b9" :"#000000"
+            onActiveFocusChanged: {
+                if (emptyInput) {
+                    if (activeFocus) {
+                        text = "";
+                    } else {
+                        text = placeholderText + __key
+                    }
+                }
+            }
+
+            font {
+                family: "Ubuntu"
+                pixelSize: 18
+            }
+        }
+    }
+
+    MessageDialog {
+        id: messageDialog
+        onAccepted: {
+            passw.focus = true;
+        }
+    }
 
     Rectangle {
         id: authorBgRect
@@ -37,47 +91,18 @@ Item {
             }
         }
 
-        Rectangle {
-            id: nickNameRect
-
-            height: 40
-            radius: 8
+        MyTextInput {
+            id: nick
             anchors {
                 top: authorTxt.bottom
                 left: parent.left
                 right: parent.right
                 margins: 20
             }
-
-            TextInput {
-                id: nickNameInp
-
-                color: "#b0a8b9"
-                anchors {
-                    fill: parent
-                    left: parent.left
-                    leftMargin: 10
-                }
-
-                verticalAlignment: TextInput.AlignVCenter
-                text: "nickname"
-                property int k: 0
-                onFocusChanged: {
-                    if(k === 0) {
-                        text = ""
-                        ++k
-                    }
-                    color = "#000000"
-                }
-                font {
-                    family: "Ubuntu"
-                    pixelSize: 18
-                }
-            }
+            placeholderText: "nickname"
             Image {
                 id: enterIcon
                 source: "qrc:/Assets/icons/enter_icon_gray.svg"
-                z: 1
                 anchors {
                     verticalCenter: parent.verticalCenter
                     right: parent.right
@@ -87,55 +112,45 @@ Item {
                 CursorShapeMouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        enterClicked()
+                        if (core.checkLogin(nickname)) {
+                            let r = core.signIn(nickname, password);
+                            if (r === -1) {
+                                // этого не должно происходить!
+                                console.error("Error in code");
+                            } else if (r === -2) {
+                                messageDialog.title = "Warning"
+                                messageDialog.text = "Fill the correct password!"
+                                messageDialog.visible = true
+                            } else {
+                                core.addResult(areaSize, steps, timeSec)
+                                baseStackView.pop()
+                            }
+                        } else {
+                            core.registerPlayer(nickname, password)
+                            core.addResult(areaSize, steps, timeSec)
+                            if (baseStackView) {
+                                baseStackView.pop()
+                            }
+                        }
                     }
                 }
             }
         }
-        Rectangle {
-            id: passwRect
-
-            height: 40
-            radius: 8
+        MyTextInput {
+            id: passw
             anchors {
-                top: nickNameRect.bottom
+                top: nick.bottom
                 left: parent.left
                 right: parent.right
                 margins: 20
-            }          
-
-            TextInput {
-                id: passwInp
-
-                color: "#b0a8b9"
-                anchors {
-                    fill: parent
-                    left: parent.left
-                    leftMargin: 10
-                }
-
-                echoMode: TextInput.Normal
-
-                verticalAlignment: TextInput.AlignVCenter
-                text: "password"
-                property int k: 0
-                onFocusChanged: {
-                    if(k === 0) {
-                        text = ""
-                        passwInp.echoMode = "Password"
-                        ++k
-                    }
-                    color = "#000000"
-                }
-                font {
-                    family: "Ubuntu"
-                    pixelSize: 18
-                }
-            }           
+            }
+            placeholderText: "password"
+            echoMode: TextInput.Password
             Image {
                 id: eyeIcon
-                source: "qrc:/Assets/icons/eye_hide.svg"
-                z: 1
+                source: passw.echoMode === TextInput.Password
+                        ? "qrc:/Assets/icons/eye_hide.svg"
+                        : "qrc:/Assets/icons/eye_show.svg"
                 anchors {
                     verticalCenter: parent.verticalCenter
                     right: parent.right
@@ -144,16 +159,11 @@ Item {
 
                 CursorShapeMouseArea {
                     anchors.fill: parent
-                    property int k: 1
                     onClicked: {
-                        if(k > 0) {
-                            eyeIcon.source = "qrc:/Assets/icons/eye_show.svg"
-                            passwInp.echoMode = TextInput.Normal
-                            k = k * (-1)
+                        if(passw.echoMode === TextInput.Password) {
+                            passw.echoMode = TextInput.Normal
                         } else {
-                            eyeIcon.source = "qrc:/Assets/icons/eye_hide.svg"
-                            passwInp.echoMode = TextInput.Password
-                            k = k * (-1)
+                            passw.echoMode = TextInput.Password
                         }
                     }
                 }

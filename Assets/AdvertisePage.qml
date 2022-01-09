@@ -3,8 +3,6 @@ import QtQuick 2.0
 Rectangle {
     id: advertisement
 
-    width: parent.width
-    height: 75
     color: "yellow"
     Text {
         id: adverTxt

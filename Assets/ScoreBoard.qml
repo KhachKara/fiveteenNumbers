@@ -3,31 +3,34 @@ import QtQuick 2.2
 Item {
     id: root
 
+    implicitWidth: 162
+    implicitHeight: 131
+
     function rate (gameSize, steps) {
         gameSize = gamePage.areaSize
         steps = gamePage.steps
 
         if (gameSize === 3 && steps <= 30 ) {
             return 3
-        } else if (gameSize === 3 && steps > 30 && steps <= 40 ) {
+        } else if (gameSize === 3 && steps <= 40 ) {
             return 2
-        } else if (gameSize === 3 && steps > 40 && steps <= 50 ) {
+        } else if (gameSize === 3 && steps <= 50 ) {
             return 1
         } else if (gameSize === 3 && steps > 50 ) {
             return 0
         } else if (gameSize === 4 && steps <= 100 ) {
             return 3
-        } else if (gameSize === 4 && steps > 100 && steps <= 200 ) {
+        } else if (gameSize === 4 && steps <= 200 ) {
             return 2
-        } else if (gameSize === 4 && steps > 200 && steps <= 300 ) {
+        } else if (gameSize === 4 && steps <= 300 ) {
             return 1
         } else if (gameSize === 4 && steps > 300 ) {
             return 0
         } else if (gameSize === 5 && steps <= 350 ) {
             return 3
-        } else if (gameSize === 5 && steps > 350 && steps <= 450 ) {
+        } else if (gameSize === 5 && steps <= 450 ) {
             return 2
-        } else if (gameSize === 5 && steps > 450 && steps <= 550 ) {
+        } else if (gameSize === 5 && steps <= 550 ) {
             return 1
         } else if (gameSize === 5 && steps > 550 ) {
             return 0
@@ -38,9 +41,6 @@ Item {
 
     property alias steps: txtStepsValue.text
     property alias time: txtTimeValue.text
-
-    width: 162
-    height: 135   
 
     Image {
         id: firstStar

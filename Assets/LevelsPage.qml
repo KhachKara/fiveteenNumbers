@@ -3,40 +3,24 @@ import QtQuick.Controls 2.5
 
 Item {
     id: root
-
     signal startGameClicked(int size)
-//    property alias topM: col.anchors.topMargin
+    clip: true
 
-    Rectangle {
-        id: newGamePage
-
-        anchors.fill: parent
-        color: "#4B4453"
-
-        Column {
-            id: col
-            anchors {
-                horizontalCenter: parent.horizontalCenter
-                top: parent.top
-                topMargin: 100
-            }
-            spacing: 8
-            Repeater {
-                model: 3
-                GameStyleRect {
-                    id: gameStyle
-
-                    width: 140
-
-                    gameSize: index + 2
-                    txtGameMode: gameSize + "x" + gameSize
-
-                    CursorShapeMouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                            root.startGameClicked(gameStyle.gameSize)
-                        }
-                    }
+    ListView {
+        id: listView
+        anchors.horizontalCenter: parent.horizontalCenter
+        width: 140
+        height: parent.height
+        spacing: 8
+        model: 3
+        delegate: GameStyleRect {
+            width: listView.width
+            gameSize: index + 2
+            txtGameMode: gameSize + "x" + gameSize
+            CursorShapeMouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    root.startGameClicked(gameSize)
                 }
             }
         }

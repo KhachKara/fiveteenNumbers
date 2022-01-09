@@ -18,6 +18,11 @@ DataBaseModel *Core::model() const
 	return _model;
 }
 
+bool Core::isLogin() const
+{
+	return _idPlayer != ID_NONE;
+}
+
 bool Core::registerPlayer(QString login, QString pass, QString mail)
 {
 	if (!_db->registerPlayer(login, pass, mail)) {
@@ -27,22 +32,27 @@ bool Core::registerPlayer(QString login, QString pass, QString mail)
 	return true;
 }
 
+bool Core::checkLogin(QString login) const
+{
+	return _db->checkLogin(login);
+}
+
 int Core::signIn(QString login, QString pass)
 {
 	setIdPlayer(_db->checkPass(login, pass));
-	setLogin(idPlayer() >= 0 ? login : QString());
+	setLogin(isLogin() ? login : QString());
 	return idPlayer();
 }
 
 void Core::signOut()
 {
-	setIdPlayer(-1);
+	setIdPlayer(ID_NONE);
 	setLogin(QString());
 }
 
 bool Core::addResult(int sizeArea, int steps, int time, QString date)
 {
-	if (idPlayer() < 0) {
+	if (!isLogin()) {
 		qDebug() << QString("%1:%2").arg(__FILE__).arg(__LINE__) << "must reg or sign in";
 		return false;
 	}
@@ -73,6 +83,9 @@ void Core::setIdPlayer(int newIdPlayer)
 {
 	if (_idPlayer == newIdPlayer)
 		return;
+	bool registratedChanged = _idPlayer == ID_NONE || newIdPlayer == ID_NONE;
 	_idPlayer = newIdPlayer;
 	emit idPlayerChanged();
+	if (registratedChanged)
+		emit isLoginChanged();
 }
