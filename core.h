@@ -8,7 +8,7 @@ class Core : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(DataBaseModel * model READ model CONSTANT)
-	Q_PROPERTY(bool isLogin READ isLogin NOTIFY isLoginChanged)
+	Q_PROPERTY(bool isSignIn READ isSignIn NOTIFY isSignInChanged)
 	Q_PROPERTY(int idPlayer READ idPlayer NOTIFY idPlayerChanged)
 	Q_PROPERTY(QString login READ login NOTIFY loginChanged)
 public:
@@ -19,24 +19,31 @@ public:
 
 	DataBaseModel *model() const;
 
-	bool isLogin() const;
+	bool isSignIn() const;
 	int idPlayer() const;
 	void setIdPlayer(int newIdPlayer);
 
 	const QString &login() const;
 	void setLogin(const QString &newLogin);
-	bool checkHash(QString login, QString hash) const;
+	int checkAccount(QString login, QString hash);
 
 public slots:
 	bool registerPlayer(QString login, QString pass, QString mail = QString());
 	bool checkLogin(QString login) const;
 	int signIn(QString login, QString pass);
 	void signOut();
-
 	bool addResult(int sizeArea, int steps, int time, QString date = QString());
 
+	bool existRecoveryGame() const;
+	void saveGame(QString area, int steps, int timeSec) const;
+	void saveTimeSec(int timeSec) const;
+	void removeGame() const;
+	QString recoveryArea() const;
+	int recoverySteps() const;
+	int recoveryTimeSec() const;
+
 signals:
-	void isLoginChanged();
+	void isSignInChanged();
 	void idPlayerChanged();
 	void loginChanged();
 

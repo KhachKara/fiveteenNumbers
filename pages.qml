@@ -14,6 +14,17 @@ ApplicationWindow {
     height: 640
     color: mainBgColor
     title: "15 Numbers"
+
+    Component.onCompleted: {
+        if (core.existRecoveryGame()) {
+            gamePage.recoveryGame(
+                        core.recoveryArea()
+                        , core.recoverySteps()
+                        , core.recoveryTimeSec())
+            stackView.push(gamePage);
+        }
+    }
+
     /*header: */Item {
         id: headerItem
         anchors {
@@ -173,7 +184,7 @@ ApplicationWindow {
         }
         onRateMeClicked: {
             stackView.replace(ratePage);
-            if (!core.isLogin) {
+            if (!core.isSignIn) {
                 stackView.push(authorizationPage);
             } else {
                 core.addResult(gamePage.areaSize, gamePage.steps, gamePage.timeSec);

@@ -12,7 +12,18 @@ Item {
     readonly property alias areaSize: gameArea.width
 
     signal started()
+    signal continued()
     signal finished()
+
+    function getGamePosition() {
+        let arr = [];
+        for (let i = 0; i < p.squares.length; ++i) {
+            for (let j = 0; j < p.squares.length; ++j) {
+                arr.push(p.squares[i][j].number);
+            }
+        }
+        return arr.join(",");
+    }
 
     implicitWidth: gameArea.implicitWidth
     implicitHeight: gameArea.implicitHeight
@@ -40,7 +51,7 @@ Item {
     }
 
     // Инициализирует игру по последовательности array.
-    function initGameArray(array) {
+    function initGameArray(array, steps = 0, timeSec = 0) {
         if (root.squareUrl === '') {
             console.error('Квадрат не объявлен!')
             return
@@ -54,7 +65,8 @@ Item {
         p.size = Math.sqrt(array.length);
         p.array = array;
         p.squareComponent = Qt.createComponent(root.squareUrl);
-
+        p.stepsCount = steps;
+        p.gameTimeSec = timeSec;
         if (p.squareComponent.status === Component.Error) {
             console.error('Ошибка в коде квадрата');
             return;
@@ -63,7 +75,11 @@ Item {
         } else {
             p.squareComponent.statusChanged.connect(p.createObjects);
         }
-        started();
+        if (steps) {
+            continued()
+        } else {
+            started();
+        }
     }
 
     // Инициализирует начальное положение клеток по порядку.
@@ -151,8 +167,6 @@ Item {
         }
 
         function initOtherFields() {
-            p.stepsCount = 0;
-            p.gameTimeSec = 0;
             root.pause = false;
             p.gameStart = new Date;
             p.gameFinish = new Date(0);

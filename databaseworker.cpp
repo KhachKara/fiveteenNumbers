@@ -8,8 +8,8 @@
 #include <QSqlQuery>
 
 const QString DataBaseWorker::ITEM_NAME = "DataBaseWorker";
-const bool DataBaseWorker::IS_QML_REG = My::qmlRegisterType<DataBaseWorker>
-													(DataBaseWorker::ITEM_NAME);
+//const bool DataBaseWorker::IS_QML_REG = My::qmlRegisterType<DataBaseWorker>
+//													(DataBaseWorker::ITEM_NAME);
 
 const QString DataBaseWorker::DB_NAME = "database.db";
 const QString DataBaseWorker::DB_HOSTNAME = "DataBase";
@@ -76,20 +76,20 @@ bool DataBaseWorker::checkLogin(QString login) const
 	return query.next();
 }
 
-bool DataBaseWorker::checkHash(QString login, QString hash) const
+int DataBaseWorker::checkHash(QString login, QString hash)
 {
 	QString qFindPlayer = QString("SELECT %1, %2 FROM %3 WHERE %4 = '%5'")
 			.arg(DB_PLAYERS_ID, DB_PLAYERS_PASS, DB_TB_PLAYER, DB_PLAYERS_LOGIN, login);
 	QSqlQuery query(qFindPlayer);
 	if (!query.next()) {
 		qDebug() << QString("%1:%2").arg(__FILE__).arg(__LINE__) << "Can't find login:" << login;
-		return false;
+		return ERROR_LOGIN;
 	}
 	if (hash != query.value(DB_PLAYERS_PASS).toString()) {
 		qDebug() << QString("%1:%2").arg(__FILE__).arg(__LINE__) << "The hash is incorrect";
-		return false;
+		return ERROR_PASSWORD;
 	}
-	return true;
+	return query.value(DB_PLAYERS_ID).toInt();
 }
 
 int DataBaseWorker::checkPass(QString login, QString pass)
@@ -99,12 +99,12 @@ int DataBaseWorker::checkPass(QString login, QString pass)
 	QSqlQuery query(qFindPlayer);
 	if (!query.next()) {
 		qDebug() << QString("%1:%2").arg(__FILE__).arg(__LINE__) << "Can't find login:" << login;
-		return -1;
+		return ERROR_LOGIN;
 	}
 
 	if (getHash(pass) != query.value(DB_PLAYERS_PASS).toString()) {
 		qDebug() << QString("%1:%2").arg(__FILE__).arg(__LINE__) << "The password is incorrect";
-		return -2;
+		return ERROR_PASSWORD;
 	}
 	return query.value(DB_PLAYERS_ID).toInt();
 }

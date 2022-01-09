@@ -23,6 +23,12 @@ Item {
         gameArea.initGameArray(array);
     }
 
+    function recoveryGame(arrayStr, steps, timeSec) {
+        console.log(arrayStr);
+        let array = arrayStr.split(",").map(Number);
+        gameArea.initGameArray(array, steps, timeSec);
+    }
+
     function formatTime(sec) {
         let m = Math.floor(sec / 60);
         let s = sec % 60;
@@ -94,10 +100,22 @@ Item {
         squareUrl: "NewSquare.qml"
 
         onStarted: {
+            core.removeGame();
             root.started();
         }
         onFinished: {
-            root.finished()
+            core.removeGame();
+            root.finished();
+        }
+
+        onStepCountChanged: {
+            let areaStr = getGamePosition();
+            if (areaStr.length > 0) {
+                core.saveGame(getGamePosition(), stepCount, gameTimeSec);
+            }
+        }
+        onGameTimeSecChanged: {
+            core.saveTimeSec(gameTimeSec);
         }
     }
 }

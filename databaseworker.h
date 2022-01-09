@@ -9,7 +9,10 @@ class DataBaseWorker : public QObject
 	static const bool _CRYPT_PASS = false;
 public:
 	static const QString ITEM_NAME;     ///< DataBaseWorker
-	static const bool IS_QML_REG;
+	static const bool IS_QML_REG = false;
+
+	static const int ERROR_LOGIN = -1;
+	static const int ERROR_PASSWORD = -2;
 
 	static const QString DB_NAME;
 	static const QString DB_HOSTNAME;
@@ -43,12 +46,12 @@ public slots:
 	bool registerPlayer(QString login, QString pass, QString mail = QString());
 
 	bool checkLogin(QString login) const;
-	bool checkHash(QString login, QString hash) const;
 	/// Проверяет лог и пароль.
 	/// Если успешно возвращает индекс пользователя.
 	/// Если аккаунт не найден, возвращает -1.
 	/// Если пароль не правильный возвращает -2.
 	int checkPass(QString login, QString pass);
+	int checkHash(QString login, QString hash);
 
 	/// Добавляет результат игры
 	bool addResult(int idPlayer, int sizeArea, int steps, int time, QString date = QString());
