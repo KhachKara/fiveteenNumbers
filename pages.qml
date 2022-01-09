@@ -13,6 +13,7 @@ ApplicationWindow {
     width: 360
     height: 640
     color: mainBgColor
+    title: "15 Numbers"
     /*header: */Item {
         id: headerItem
         anchors {

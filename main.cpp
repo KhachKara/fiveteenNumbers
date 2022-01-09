@@ -10,7 +10,9 @@ int main(int argc, char *argv[])
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
-
+	QCoreApplication::setOrganizationName("KhachSoft");
+//    QCoreApplication::setOrganizationDomain("mysoft.com");
+	QCoreApplication::setApplicationName("15 Numbers");
     QGuiApplication app(argc, argv);
 
 	Core core;
