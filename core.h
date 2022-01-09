@@ -25,6 +25,7 @@ public:
 
 	const QString &login() const;
 	void setLogin(const QString &newLogin);
+	bool checkHash(QString login, QString hash) const;
 
 public slots:
 	bool registerPlayer(QString login, QString pass, QString mail = QString());

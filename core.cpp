@@ -74,6 +74,11 @@ void Core::setLogin(const QString &newLogin)
 	emit loginChanged();
 }
 
+bool Core::checkHash(QString login, QString hash) const
+{
+	return _db->checkHash(login, hash);
+}
+
 int Core::idPlayer() const
 {
 	return _idPlayer;

@@ -35,6 +35,15 @@ QString DataBaseWorker::queryRate(int sizeArea)
 	return r;
 }
 
+QString DataBaseWorker::getHash(QString pass)
+{
+	if (_CRYPT_PASS) {
+		return QString(QCryptographicHash::hash(pass.toLatin1(), QCryptographicHash::Sha256).toHex());;
+	} else {
+		return pass;
+	}
+}
+
 DataBaseWorker::DataBaseWorker(QObject *parent) : QObject(parent)
 {
 	connectToDataBase();
@@ -56,18 +65,31 @@ void DataBaseWorker::connectToDataBase()
 
 bool DataBaseWorker::registerPlayer(QString login, QString pass, QString mail)
 {
-	if (_CRYPT_PASS) {
-		pass = QString(QCryptographicHash::hash(pass.toLatin1(), QCryptographicHash::Sha256).toHex());
-	}
-	return insertPlayer(QVariantList{ login, mail, pass });
+	return insertPlayer(QVariantList{ login, mail, getHash(pass) });
 }
 
 bool DataBaseWorker::checkLogin(QString login) const
 {
+	QString qFindPlayer = QString("SELECT %1 FROM %2 WHERE %3 = '%4'")
+			.arg(DB_PLAYERS_ID, DB_TB_PLAYER, DB_PLAYERS_LOGIN, login);
+	QSqlQuery query(qFindPlayer);
+	return query.next();
+}
+
+bool DataBaseWorker::checkHash(QString login, QString hash) const
+{
 	QString qFindPlayer = QString("SELECT %1, %2 FROM %3 WHERE %4 = '%5'")
 			.arg(DB_PLAYERS_ID, DB_PLAYERS_PASS, DB_TB_PLAYER, DB_PLAYERS_LOGIN, login);
 	QSqlQuery query(qFindPlayer);
-	return query.next();
+	if (!query.next()) {
+		qDebug() << QString("%1:%2").arg(__FILE__).arg(__LINE__) << "Can't find login:" << login;
+		return false;
+	}
+	if (hash != query.value(DB_PLAYERS_PASS).toString()) {
+		qDebug() << QString("%1:%2").arg(__FILE__).arg(__LINE__) << "The hash is incorrect";
+		return false;
+	}
+	return true;
 }
 
 int DataBaseWorker::checkPass(QString login, QString pass)
@@ -79,11 +101,8 @@ int DataBaseWorker::checkPass(QString login, QString pass)
 		qDebug() << QString("%1:%2").arg(__FILE__).arg(__LINE__) << "Can't find login:" << login;
 		return -1;
 	}
-	if (_CRYPT_PASS) {
-		pass = QString(QCryptographicHash::hash(pass.toLatin1(), QCryptographicHash::Sha256).toHex());
-	}
 
-	if (pass != query.value(DB_PLAYERS_PASS).toString()) {
+	if (getHash(pass) != query.value(DB_PLAYERS_PASS).toString()) {
 		qDebug() << QString("%1:%2").arg(__FILE__).arg(__LINE__) << "The password is incorrect";
 		return -2;
 	}

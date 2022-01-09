@@ -28,6 +28,7 @@ public:
 
 	/// Возвращает запрос для таблицы: Login, Steprs, Time
 	static QString queryRate(int sizeArea);
+	static QString getHash(QString pass);
 
 	DataBaseWorker(QObject * parent = nullptr);
 	virtual ~DataBaseWorker() = default;
@@ -42,6 +43,7 @@ public slots:
 	bool registerPlayer(QString login, QString pass, QString mail = QString());
 
 	bool checkLogin(QString login) const;
+	bool checkHash(QString login, QString hash) const;
 	/// Проверяет лог и пароль.
 	/// Если успешно возвращает индекс пользователя.
 	/// Если аккаунт не найден, возвращает -1.
