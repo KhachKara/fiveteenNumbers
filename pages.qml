@@ -104,6 +104,14 @@ ApplicationWindow {
         GamePage {
             id: gamePage
             visible: false
+            Text {
+                id: unauthorizedTxt
+                text: "Unauthorized player"
+                anchors.left: parent.left
+                anchors.right: parent.right
+                font.family: "Ubuntu"
+                font.pixelSize: 32
+            }
             onFinished: {
                 winPage.visible = true
             }
