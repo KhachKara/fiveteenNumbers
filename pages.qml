@@ -53,7 +53,6 @@ ApplicationWindow {
     StackView {
         id: stackView
         anchors {
-//            fill: parent
             top: headerItem.bottom
             bottom: advertisePage.top
             left: parent.left
@@ -64,7 +63,6 @@ ApplicationWindow {
         WelcomePage {
             id: welcomePage
             visible: false
-//            anchors.fill: parent
             onLogoClicked: {
                 stackView.push(aboutPage)
             }
@@ -84,13 +82,11 @@ ApplicationWindow {
         AboutPage {
             id: aboutPage
             visible: false
-//            anchors.fill: parent
             baseStackView: stackView
         }
         LevelsPage {
             id: levelsPage
             visible: false
-//            anchors.fill: parent
             onStartGameClicked: function (size) {
                 console.log("From " + stackView.currentItem)
                 gamePage.startGame(size)
@@ -100,7 +96,6 @@ ApplicationWindow {
         RatePage {
             id: ratePage
             visible: false
-//            anchors.fill: parent
         }
         SettingsPage {
             id: settingsPage
@@ -110,7 +105,6 @@ ApplicationWindow {
         GamePage {
             id: gamePage
             visible: false
-//            anchors.fill: parent
             onFinished: {
                 winPage.visible = true
             }
