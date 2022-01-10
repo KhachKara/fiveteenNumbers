@@ -100,7 +100,6 @@ ApplicationWindow {
         SettingsPage {
             id: settingsPage
             visible: false
-            anchors.fill: parent
         }
         GamePage {
             id: gamePage
