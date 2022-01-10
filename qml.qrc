@@ -1,7 +1,41 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>Assets/ProjectStyles.qml</file>
-        <file>Assets/Square.qml</file>
+        <file>Assets/HeaderPage.qml</file>
+        <file>Assets/CursorShapeMouseArea.qml</file>
+        <file>Assets/icons/exit.svg</file>
+        <file>Assets/icons/back.svg</file>
+        <file>Assets/icons/pause.svg</file>
+        <file>Assets/WelcomePage.qml</file>
+        <file>Assets/icons/logo.svg</file>
+        <file>Assets/AdvertisePage.qml</file>
+        <file>Assets/LogoPage.qml</file>
+        <file>Assets/AboutPage.qml</file>
+        <file>Assets/icons/success_close.svg</file>
+        <file>Assets/icons/close.svg</file>
+        <file>Assets/GameArea.qml</file>
+        <file>Assets/GamePage.qml</file>
+        <file>Assets/LevelsPage.qml</file>
+        <file>Assets/GameStyleRect.qml</file>
+        <file>Assets/NewSquare.qml</file>
+        <file>Assets/WinPage.qml</file>
+        <file>Assets/ScoreBoard.qml</file>
+        <file>Assets/icons/emptyStar.svg</file>
+        <file>Assets/icons/filledStar.svg</file>
+        <file>Assets/RatePage.qml</file>
+        <file>Assets/AuthorizationPage.qml</file>
+        <file>Assets/icons/eye_hide.svg</file>
+        <file>Assets/icons/eye_show.svg</file>
+        <file>Assets/icons/enter_icon_black.svg</file>
+        <file>Assets/icons/enter_icon_gray.svg</file>
+        <file>Assets/SettingsPage.qml</file>
+        <file>Assets/icons/CHECKED_checkbox.svg</file>
+        <file>Assets/icons/EMPTY_checkbox.svg</file>
+        <file>Assets/js/variables.js</file>
+        <file>Assets/MessagePage.qml</file>
+        <file>Assets/icons/warning.svg</file>
+        <file>Assets/TestingPage.qml</file>
+        <file>testWindow.qml</file>
+        <file>pages.qml</file>
     </qresource>
 </RCC>

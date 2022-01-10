@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="89.763695"
+   height="100"
+   viewBox="0 0 89.763698 100"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="logo.svg"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   inkscape:label="Бэкэнд"
+   style="fill:none">
+  <metadata
+     id="metadata8">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="7.1999998"
+     inkscape:cx="32.411387"
+     inkscape:cy="37.500001"
+     inkscape:window-width="1326"
+     inkscape:window-height="740"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     showborder="false" />
+  <g
+     id="g817"
+     transform="translate(0,24.999998)">
+    <path
+       inkscape:connector-curvature="0"
+       onclick="console.log(&quot;Хачатур Карапетян&quot;)"
+       inkscape:label="frontend"
+       style="fill:#ff8066;fill-opacity:1;stroke-width:0.78740036"
+       id="frontend"
+       d="m 84.35266,7.5957894 c -0.792153,0.197796 -0.216529,-0.10512 -18.102745,9.5379366 -8.665973,4.672126 -16.04321,8.765821 -16.393763,9.096757 -1.408498,1.330476 -1.331175,-0.05663 -1.331175,23.879729 v 21.493586 l 0.436217,0.809467 c 0.939211,1.742546 2.878424,2.787373 4.712199,2.537759 1.059453,-0.144066 0.54606,0.126 11.190617,-5.883399 4.547393,-2.566974 11.501323,-6.491347 15.453194,-8.720493 3.952,-2.229107 7.528382,-4.337774 7.947218,-4.684227 0.418927,-0.347227 0.926,-0.991386 1.127571,-1.430746 0.348812,-0.764147 0.366169,-1.759107 0.370077,-22.055613 C 89.766604,9.2015374 89.819084,10.350427 88.708584,9.0438987 87.774652,7.9438201 85.70859,7.2569694 84.35266,7.5957894 Z" />
+    <path
+       inkscape:connector-curvature="0"
+       onclick="console.log(&quot;Анастасия Карапетян&quot;)"
+       inkscape:label="design"
+       style="fill:#c34a36;fill-opacity:1;stroke-width:0.78740036"
+       id="path853"
+       d="M 3.2900514,7.6901961 C 2.1002574,8.0133454 1.0299518,8.8664134 0.45060334,9.9539747 L 0,10.799881 0.00433068,32.115758 c 0.004134,20.195721 0.02322913,21.357374 0.36280585,22.099067 0.19724937,0.430774 0.66045297,1.046453 1.02955477,1.368533 0.8201013,0.7142 33.1875147,19.002373 34.0842097,19.25744 2.017951,0.574853 4.256611,-0.446467 5.324162,-2.427533 l 0.436222,-0.809467 V 50.012505 28.421426 L 40.799001,27.530482 C 40.555456,27.040247 40.112549,26.410247 39.814672,26.130483 39.374755,25.717181 10.753294,10.130824 6.8899596,8.2005147 5.5153153,7.5137388 4.4802458,7.3669694 3.2900514,7.6901961 Z" />
+    <path
+       inkscape:connector-curvature="0"
+       onclick="console.log(&quot;Мгер Карапетян&quot;)"
+       inkscape:label="backend"
+       style="fill:#ff8066;fill-opacity:1;stroke-width:0.78740036"
+       id="backend"
+       d="m 42.914592,-24.755561 c -0.378977,0.135408 -8.573058,4.359038 -18.209193,9.386105 C 11.355262,-8.404822 7.0122034,-6.0519128 6.4582519,-5.4830915 4.7062378,-3.6845169 4.8353716,-0.76238896 6.7405422,0.89792432 7.1041324,1.214855 15.386042,5.6696495 25.145006,10.79752 c 13.078483,6.872429 17.977693,9.355496 18.633599,9.444788 0.58567,0.07968 1.212829,0.01477 1.833851,-0.18937 0.519138,-0.170793 8.91409,-4.439525 18.655254,-9.486211 C 77.340759,3.7938256 82.175519,1.1970536 82.729817,0.65052566 84.468437,-1.0650649 84.38574,-3.9969542 82.550276,-5.7075835 81.999127,-6.2210434 46.992062,-24.344061 45.690486,-24.789755 c -0.853221,-0.291919 -1.898495,-0.279218 -2.775894,0.03419 z" />
+  </g>
+</svg>

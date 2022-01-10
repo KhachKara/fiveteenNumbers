@@ -1,19 +1,28 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include <QCryptographicHash>
 
+#include "core.h"
 
 int main(int argc, char *argv[])
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
-
+	QCoreApplication::setOrganizationName("KhachSoft");
+//    QCoreApplication::setOrganizationDomain("mysoft.com");
+	QCoreApplication::setApplicationName("15 Numbers");
     QGuiApplication app(argc, argv);
-    qmlRegisterSingletonType(QUrl("qrc:///Assets/ProjectStyles.qml"), "Common", 43, 21, "ProjectStyles");
 
-
+	Core core;
     QQmlApplicationEngine engine;
-    const QUrl url(QStringLiteral("qrc:/main.qml"));
+	QQmlContext *context = engine.rootContext();
+	context->setContextProperty("_arguments", app.arguments());
+	context->setContextProperty("core", &core);
+
+	const QUrl url(QStringLiteral("qrc:/pages.qml"));
+//	const QUrl url(QStringLiteral("qrc:/testWindow.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
         if (!obj && url == objUrl)
