@@ -111,7 +111,6 @@ ApplicationWindow {
         AuthorizationPage {
             id: authorizationPage
             visible: false
-            anchors.fill: parent
             baseStackView: stackView
             areaSize: gamePage.areaSize
             steps: gamePage.steps
