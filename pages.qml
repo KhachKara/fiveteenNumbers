@@ -36,6 +36,18 @@ ApplicationWindow {
             id: headerComponent
             anchors.fill: parent
             visible: stackView.depth > 1
+            Text {
+                id: unauthorizedTxt
+                text: "Unauthorized player"
+                anchors {
+                    horizontalCenter: headerComponent.horizontalCenter
+                    bottom: headerComponent.bottom
+                }
+                font.family: "Ubuntu"
+                font.pixelSize: 32
+                color: "white"
+                visible: stackView.depth > 2 && stackView.depth < 4
+            }
             onBackClicked: {
                 stackView.pop();
             }
@@ -103,15 +115,7 @@ ApplicationWindow {
         }
         GamePage {
             id: gamePage
-            visible: false
-            Text {
-                id: unauthorizedTxt
-                text: "Unauthorized player"
-                anchors.left: parent.left
-                anchors.right: parent.right
-                font.family: "Ubuntu"
-                font.pixelSize: 32
-            }
+            visible: false         
             onFinished: {
                 winPage.visible = true
             }
