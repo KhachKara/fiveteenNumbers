@@ -5,18 +5,18 @@ Item  {
     id: root
 
     signal newGameClicked()
-    signal rateClicked()
     signal settingsClicked()
     signal quitClicked()
     signal logoClicked()
+
+    property color mainBgColor: "transparent"
+    readonly property real iconGradientSize: 50
+    property real bottomGradientSize: 0
 
     ListModel {
         id: listModel
         ListElement {
             text: "New game"
-        }
-        ListElement {
-            text: "Rate"
         }
         ListElement {
             text: "Settings"
@@ -26,47 +26,73 @@ Item  {
         }
     }
 
-    Image {
+    Rectangle {
         id: logoImage
         anchors {
-            horizontalCenter: root.horizontalCenter
             top: parent.top
             topMargin: -70
         }
+        width: parent.width
+        height: 130 + root.iconGradientSize
+        z: 1
 
-        source: "qrc:/Assets/icons/logo.svg"
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: root.mainBgColor }
+            GradientStop {
+                position: (logoImage.height - root.iconGradientSize) / logoImage.height;
+                color: root.mainBgColor
+            }
+            GradientStop { position: 1; color: "transparent" }
+        }
 
-        CursorShapeMouseArea {
-            anchors.fill: parent
+        Image {
+            anchors {
+                fill: parent
+                bottomMargin: root.iconGradientSize
+            }
+            fillMode: Image.PreserveAspectFit
+            source: "qrc:/Assets/icons/logo.svg"
 
-            onClicked: {
-                logoClicked()
+            CursorShapeMouseArea {
+                anchors.fill: parent
+
+                onClicked: {
+                    logoClicked()
+                }
             }
         }
     }
+
 
     ListView {
         id: listView
 
         anchors {
             top: logoImage.bottom
-            topMargin: 50
+            topMargin: -root.iconGradientSize
             left: parent.left
+            leftMargin: 30
             right: parent.right
+            rightMargin: 30
             bottom: parent.bottom
+            bottomMargin: -root.bottomGradientSize
         }
-        clip: true
+        bottomMargin: root.bottomGradientSize
 
-        spacing: 12
+        Binding on topMargin {
+            value: Math.max(listView.height - (listView.contentHeight
+                                      + root.iconGradientSize)
+                            , root.iconGradientSize)
+            delayed: true
+        }
+
         ScrollBar.vertical: ScrollBar{}
-
+        spacing: 12
 
         model: listModel
         delegate: Rectangle {
-            id: rectButton
-
             anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
-            width: 300
+            width: listView.width
             height: 70
             color: "#845EC2"
             radius: 8
@@ -85,14 +111,9 @@ Item  {
                 onClicked: {
                     if(text === "New game") {
                         newGameClicked()
-                    }
-                    if(text === "Rate") {
-                        rateClicked()
-                    }
-                    if(text === "Settings") {
+                    } else  if(text === "Settings") {
                         settingsClicked()
-                    }
-                    if(text === "Quit") {
+                    } else if(text === "Quit") {
                         quitClicked()
                     }
                 }
@@ -100,5 +121,3 @@ Item  {
         }
     }
 }
-
-

@@ -8,6 +8,7 @@ ApplicationWindow {
     id: root
 
     readonly property color mainBgColor: "#4B4453"
+    readonly property real bottomGradientSize: 25
 
     visible: true
     width: 360
@@ -31,6 +32,7 @@ ApplicationWindow {
             left: parent.left
             right: parent.right
         }
+        z: 1
         height: 100
         HeaderPage {
             id: headerComponent
@@ -41,20 +43,31 @@ ApplicationWindow {
             }
         }
     }
-    /*footer: */AdvertisePage {
-        id: advertisePage
+
+    /*footer: */Rectangle {
+        id: bottomGradient
         anchors {
             left: parent.left
             right: parent.right
             bottom: parent.bottom
         }
-        height: 75
+        z: 1
+        height: 30 + root.bottomGradientSize
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: "transparent" }
+            GradientStop {
+                position: root.bottomGradientSize / bottomGradient.height;
+                color: root.mainBgColor
+            }
+            GradientStop { position: 1.0; color: root.mainBgColor }
+        }
     }
+
     StackView {
         id: stackView
         anchors {
             top: headerItem.bottom
-            bottom: advertisePage.top
+            bottom: bottomGradient.top
             left: parent.left
             right: parent.right
         }
@@ -63,6 +76,8 @@ ApplicationWindow {
         WelcomePage {
             id: welcomePage
             visible: false
+            mainBgColor: root.mainBgColor
+            bottomGradientSize: root.bottomGradientSize
             onLogoClicked: {
                 stackView.push(aboutPage)
             }
@@ -71,9 +86,6 @@ ApplicationWindow {
             }
             onSettingsClicked: {
                 stackView.push(settingsPage)
-            }
-            onRateClicked: {
-                stackView.push(ratePage)
             }
             onQuitClicked: {
                 Qt.quit()
@@ -93,10 +105,6 @@ ApplicationWindow {
                 stackView.push(gamePage)
             }
         }
-        RatePage {
-            id: ratePage
-            visible: false
-        }
         SettingsPage {
             id: settingsPage
             visible: false
@@ -107,15 +115,6 @@ ApplicationWindow {
             onFinished: {
                 winPage.visible = true
             }
-        }
-        AuthorizationPage {
-            id: authorizationPage
-            visible: false
-            anchors.fill: parent
-            baseStackView: stackView
-            areaSize: gamePage.areaSize
-            steps: gamePage.steps
-            timeSec: gamePage.timeSec
         }
 
         states: [
@@ -134,13 +133,6 @@ ApplicationWindow {
                 PropertyChanges {
                     target: headerComponent
                     pageName: "New game"
-                }
-            },
-            State {
-                when: stackView.currentItem == ratePage
-                PropertyChanges {
-                    target: headerComponent
-                    pageName: "Rate"
                 }
             },
             State {
@@ -163,25 +155,13 @@ ApplicationWindow {
     WinPage {
         id: winPage
         visible: false
-        anchors {
-            top: parent.top
-            left: parent.left
-            right: parent.right
-            bottom: stackView.bottom
-        }
+        anchors.fill: parent
+        z: 1
 
         steps: gamePage.steps
         time: gamePage.time
         onContinueClicked: {
             stackView.pop();
-        }
-        onRateMeClicked: {
-            stackView.replace(ratePage);
-            if (!core.isSignIn) {
-                stackView.push(authorizationPage);
-            } else {
-                core.addResult(gamePage.areaSize, gamePage.steps, gamePage.timeSec);
-            }
         }
     }
 }

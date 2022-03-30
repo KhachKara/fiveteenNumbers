@@ -1,14 +1,13 @@
 import QtQuick 2.2
 import QtQuick.Controls 2.2
 
-Rectangle {
+Item {
     id: root
 
     property int steps: 0
     property string time: ""
 
     signal continueClicked()
-    signal rateMeClicked()
 
     component MyButton: Rectangle {
         id: mBtn
@@ -37,10 +36,13 @@ Rectangle {
         }
     }
 
-    color: "#1b0a37"
-    opacity: 0.8
     MouseArea {
         anchors.fill: parent // Не позволяет прожимать сквозь "заклятие"
+    }
+    Rectangle {
+        anchors.fill: parent
+        color: "#1b0a37"
+        opacity: 0.8
     }
     Rectangle {
         id: popupRect
@@ -49,6 +51,7 @@ Rectangle {
             left: parent.left
             right: parent.right
             margins: 30
+            bottomMargin: 60
         }
         radius: 15
         height: contentColumn.height
@@ -89,26 +92,6 @@ Rectangle {
                 onClicked: {
                     root.visible = false;
                     continueClicked();
-                }
-            }
-            Item { width: 1; height: 12 }
-            MyButton {
-                id: rateBtn
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    leftMargin: 30
-                    rightMargin: 30
-                }
-                border {
-                    width: 3
-                    color: "#845EC2"
-                }
-                text: qsTr("Rate your game")
-                textColor: "#845EC2"
-                onClicked: {
-                    root.visible = false;
-                    rateMeClicked();
                 }
             }
             Item { width: 1; height: 36 }
