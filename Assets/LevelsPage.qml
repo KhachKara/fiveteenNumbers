@@ -1,16 +1,31 @@
-import QtQuick 2.0
-import QtQuick.Controls 2.5
+import QtQuick 2.12
+import QtQuick.Controls 2.12
 
 Item {
     id: root
     signal startGameClicked(int size)
-    clip: true
+    property real headerGradientSize: 0
+    property real bottomGradientSize: 0
 
     ListView {
         id: listView
-        anchors.horizontalCenter: parent.horizontalCenter
         width: 140
-        height: parent.height
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            top: parent.top
+            topMargin: -root.headerGradientSize
+            bottom: parent.bottom
+            bottomMargin: -root.bottomGradientSize
+        }
+        bottomMargin: root.bottomGradientSize
+
+        Binding on topMargin {
+            value: Math.max(listView.height - (listView.contentHeight
+                                               + root.headerGradientSize)
+                            , root.headerGradientSize)
+            delayed: true
+        }
+
         spacing: 8
         model: 3
         delegate: GameStyleRect {

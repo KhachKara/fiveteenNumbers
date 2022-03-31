@@ -81,12 +81,11 @@ Item  {
 
         Binding on topMargin {
             value: Math.max(listView.height - (listView.contentHeight
-                                      + root.iconGradientSize)
+                                               + root.iconGradientSize)
                             , root.iconGradientSize)
             delayed: true
         }
 
-        ScrollBar.vertical: ScrollBar{}
         spacing: 12
 
         model: listModel

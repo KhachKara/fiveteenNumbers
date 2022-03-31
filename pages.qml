@@ -8,6 +8,7 @@ ApplicationWindow {
     id: root
 
     readonly property color mainBgColor: "#4B4453"
+    readonly property real headerGradientSize: 35
     readonly property real bottomGradientSize: 25
 
     visible: true
@@ -26,7 +27,7 @@ ApplicationWindow {
         }
     }
 
-    /*header: */Item {
+    /*header: */Rectangle {
         id: headerItem
         anchors {
             left: parent.left
@@ -34,10 +35,18 @@ ApplicationWindow {
         }
         z: 1
         height: 100
+        visible: stackView.depth > 1
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: root.mainBgColor }
+            GradientStop {
+                position: (headerItem.height - root.headerGradientSize) / headerItem.height;
+                color: root.mainBgColor
+            }
+            GradientStop { position: 1.0; color: "transparent" }
+        }
         HeaderPage {
             id: headerComponent
             anchors.fill: parent
-            visible: stackView.depth > 1
             onBackClicked: {
                 stackView.pop();
             }
@@ -99,6 +108,8 @@ ApplicationWindow {
         LevelsPage {
             id: levelsPage
             visible: false
+            headerGradientSize: root.headerGradientSize
+            bottomGradientSize: root.bottomGradientSize
             onStartGameClicked: function (size) {
                 console.log("From " + stackView.currentItem)
                 gamePage.startGame(size)
