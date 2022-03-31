@@ -7,8 +7,6 @@
         <file>Assets/icons/pause.svg</file>
         <file>Assets/WelcomePage.qml</file>
         <file>Assets/icons/logo.svg</file>
-        <file>Assets/AdvertisePage.qml</file>
-        <file>Assets/LogoPage.qml</file>
         <file>Assets/AboutPage.qml</file>
         <file>Assets/icons/success_close.svg</file>
         <file>Assets/icons/close.svg</file>
@@ -27,7 +25,6 @@
         <file>Assets/icons/enter_icon_gray.svg</file>
         <file>Assets/icons/CHECKED_checkbox.svg</file>
         <file>Assets/icons/EMPTY_checkbox.svg</file>
-        <file>Assets/MessagePage.qml</file>
         <file>Assets/icons/warning.svg</file>
         <file>pages.qml</file>
         <file>Assets/icons/telegram.png</file>
