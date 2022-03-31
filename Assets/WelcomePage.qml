@@ -105,9 +105,9 @@ Item  {
 
                 onClicked: {
                     if(text === "New game") {
-                        newGameClicked()
+                        newGameClicked();
                     } else if(text === "Quit") {
-                        quitClicked()
+                        quitClicked();
                     }
                 }
             }

@@ -47,13 +47,13 @@ Flickable {
                     if (activeFocus) {
                         text = "";
                     } else {
-                        text = placeholderText + __key
+                        text = placeholderText + __key;
                     }
                 }
             }
             onTextChanged: {
                 if (text !== placeholderText + __key) {
-                    emptyInput = !text.length
+                    emptyInput = !text.length;
                 }
             }
 
@@ -68,13 +68,13 @@ Flickable {
         id: messageDialog
         onAccepted: {
             if (!name.text) {
-                console.info('name empty')
+                console.info('name empty');
                 name.focus = true;
             } else if (!e_mail.text) {
-                console.info('mail empty')
+                console.info('mail empty');
                 e_mail.focus = true;
             } else if (!messageArea.text) {
-                console.info('message empty')
+                console.info('message empty');
                 message.focus = true;
             } else {
                 sendClicked();
@@ -155,7 +155,7 @@ Flickable {
                 bottomMargin: 50
             }
             onFocusChanged: {
-                messageArea.forceActiveFocus()
+                messageArea.forceActiveFocus();
             }
 
             ScrollView {
@@ -238,7 +238,7 @@ Flickable {
             CursorShapeMouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    Qt.openUrlExternally("https://www.behance.net/bo4koanast8de6")
+                    Qt.openUrlExternally("https://www.behance.net/bo4koanast8de6");
                 }
             }
         }

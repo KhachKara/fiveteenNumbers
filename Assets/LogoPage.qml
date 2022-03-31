@@ -22,7 +22,7 @@ Item {
             anchors.fill: parent
 
             onClicked: {
-                logoClicked()
+                logoClicked();
             }
         }
     }

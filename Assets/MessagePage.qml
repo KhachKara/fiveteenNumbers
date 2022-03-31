@@ -63,7 +63,7 @@ Item {
                 anchors.fill: parent
 
                 onClicked: {
-                    closeButtonClicked()
+                    closeButtonClicked();
                 }
             }
         }

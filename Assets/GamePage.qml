@@ -24,7 +24,6 @@ Item {
     }
 
     function recoveryGame(arrayStr, steps, timeSec) {
-        console.log(arrayStr);
         let array = arrayStr.split(",").map(Number);
         gameArea.initGameArray(array, steps, timeSec);
     }
@@ -32,7 +31,7 @@ Item {
     function formatTime(sec) {
         let m = Math.floor(sec / 60);
         let s = sec % 60;
-        return '%1:%2'.arg(m).arg(s > 9 ? s : '0' + s)
+        return '%1:%2'.arg(m).arg(s > 9 ? s : '0' + s);
     }
 
     component MyText: Text {

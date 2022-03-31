@@ -35,7 +35,7 @@ Item {
             CursorShapeMouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    root.startGameClicked(gameSize)
+                    root.startGameClicked(gameSize);
                 }
             }
         }

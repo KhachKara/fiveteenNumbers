@@ -53,8 +53,8 @@ Item {
     // Инициализирует игру по последовательности array.
     function initGameArray(array, steps = 0, timeSec = 0) {
         if (root.squareUrl === '') {
-            console.error('Квадрат не объявлен!')
-            return
+            console.error('Квадрат не объявлен!');
+            return;
         }
 
         p.clearGame();
@@ -76,7 +76,7 @@ Item {
             p.squareComponent.statusChanged.connect(p.createObjects);
         }
         if (steps) {
-            continued()
+            continued();
         } else {
             started();
         }
@@ -231,8 +231,8 @@ Item {
 
         // Обновление позиции квадрата.
         function updateOneSquarePositions(square, row, column) {
-            squares[row][column].x = column * squareWidth
-            squares[row][column].y = row * squareWidth
+            squares[row][column].x = column * squareWidth;
+            squares[row][column].y = row * squareWidth;
         }
 
         // Обновление позиций квадратов в соотвествии с матрицей.
@@ -356,7 +356,7 @@ Item {
                     squares[i][j].destroy();
                 }
             }
-            squares = []
+            squares = [];
         }
 
         // Перемещает квадрат влево (если слево свободно)

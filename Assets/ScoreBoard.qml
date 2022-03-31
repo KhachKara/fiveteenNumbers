@@ -6,41 +6,31 @@ Item {
     implicitWidth: 162
     implicitHeight: 131
 
-    function rate (gameSize, steps) {
-        gameSize = gamePage.areaSize
-        steps = gamePage.steps
-
-        if (gameSize === 3 && steps <= 30 ) {
-            return 3
-        } else if (gameSize === 3 && steps <= 40 ) {
-            return 2
-        } else if (gameSize === 3 && steps <= 50 ) {
-            return 1
-        } else if (gameSize === 3 && steps > 50 ) {
-            return 0
-        } else if (gameSize === 4 && steps <= 100 ) {
-            return 3
-        } else if (gameSize === 4 && steps <= 200 ) {
-            return 2
-        } else if (gameSize === 4 && steps <= 300 ) {
-            return 1
-        } else if (gameSize === 4 && steps > 300 ) {
-            return 0
-        } else if (gameSize === 5 && steps <= 350 ) {
-            return 3
-        } else if (gameSize === 5 && steps <= 450 ) {
-            return 2
-        } else if (gameSize === 5 && steps <= 550 ) {
-            return 1
-        } else if (gameSize === 5 && steps > 550 ) {
-            return 0
-        } else {
-            return 3
-        }
-    }
-
+    property int countStars: 0
     property alias steps: txtStepsValue.text
     property alias time: txtTimeValue.text
+
+    function updateScore(_areaSize, _steps, _timeStr) {
+        countStars = rate(_areaSize, _steps);
+        steps = _steps;
+        time = _timeStr;
+    }
+
+    function rate(gameSize, steps) {
+        switch(gameSize) {
+        case 2:
+            return steps < 4 ? 3 : steps < 5 ? 2 : steps < 6 ? 1 : 0;
+        case 3:
+            return steps < 31 ? 3 : steps < 41 ? 2 : steps < 51 ? 1 : 0;
+        case 4:
+            return steps < 100 ? 3 : steps < 200 ? 2 : steps < 300 ? 1 : 0;
+        case 5:
+            return steps < 350 ? 3 : steps < 450 ? 2 : steps < 550 ? 1 : 0;
+        default:
+            console.info('wtf', gameSize);
+            return 2;
+        }
+    }
 
     Image {
         id: firstStar
@@ -50,7 +40,7 @@ Item {
             topMargin: 10
         }
         source: {
-            if (rate() >= 1) {
+            if (countStars >= 1) {
                 "./icons/filledStar.svg"
             } else {
                 "./icons/emptyStar.svg"
@@ -65,7 +55,7 @@ Item {
             top: parent.top
         }
         source: {
-            if (rate() >= 2) {
+            if (countStars >= 2) {
                 "./icons/filledStar.svg"
             } else {
                 "./icons/emptyStar.svg"
@@ -82,7 +72,7 @@ Item {
             topMargin: 10
         }
         source: {
-            if (rate() === 3) {
+            if (countStars === 3) {
                 "./icons/filledStar.svg"
             } else {
                 "./icons/emptyStar.svg"

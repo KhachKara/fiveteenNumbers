@@ -1,13 +1,12 @@
 import QtQuick 2.0
 
 MouseArea {
-//    anchors.fill: parent
     hoverEnabled: true
 
     onEntered: {
-        cursorShape = Qt.PointingHandCursor
+        cursorShape = Qt.PointingHandCursor;
     }
     onExited: {
-        cursorShape = Qt.ArrowCursor
+        cursorShape = Qt.ArrowCursor;
     }
 }

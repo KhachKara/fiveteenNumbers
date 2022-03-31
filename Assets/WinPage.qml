@@ -4,10 +4,16 @@ import QtQuick.Controls 2.2
 Item {
     id: root
 
-    property int steps: 0
-    property string time: ""
+    property var gameObj
 
     signal continueClicked()
+
+    function showWinPage() {
+        scoreBoard.updateScore(gameObj.areaSize,
+                               gameObj.steps,
+                               gameObj.time);
+        visible = true;
+    }
 
     component MyButton: Rectangle {
         id: mBtn
@@ -31,7 +37,7 @@ Item {
             anchors.fill: parent
 
             onClicked: {
-                mBtn.clicked()
+                mBtn.clicked();
             }
         }
     }
@@ -74,8 +80,6 @@ Item {
             ScoreBoard {
                 id: scoreBoard
                 anchors.horizontalCenter: parent.horizontalCenter
-                steps: root.steps
-                time: root.time
             }
             Item { width: 10; height: 26 }
             MyButton {

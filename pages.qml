@@ -22,7 +22,7 @@ ApplicationWindow {
             gamePage.recoveryGame(
                         core.recoveryArea()
                         , core.recoverySteps()
-                        , core.recoveryTimeSec())
+                        , core.recoveryTimeSec());
             stackView.push(gamePage);
         }
     }
@@ -39,7 +39,7 @@ ApplicationWindow {
         gradient: Gradient {
             GradientStop { position: 0.0; color: root.mainBgColor }
             GradientStop {
-                position: (headerItem.height - root.headerGradientSize) / headerItem.height;
+                position: (headerItem.height - root.headerGradientSize) / headerItem.height
                 color: root.mainBgColor
             }
             GradientStop { position: 1.0; color: "transparent" }
@@ -65,7 +65,7 @@ ApplicationWindow {
         gradient: Gradient {
             GradientStop { position: 0.0; color: "transparent" }
             GradientStop {
-                position: root.bottomGradientSize / bottomGradient.height;
+                position: root.bottomGradientSize / bottomGradient.height
                 color: root.mainBgColor
             }
             GradientStop { position: 1.0; color: root.mainBgColor }
@@ -88,13 +88,13 @@ ApplicationWindow {
             mainBgColor: root.mainBgColor
             bottomGradientSize: root.bottomGradientSize
             onLogoClicked: {
-                stackView.push(aboutPage)
+                stackView.push(aboutPage);
             }
             onNewGameClicked: {
                 stackView.push(levelsPage);
             }
             onQuitClicked: {
-                Qt.quit()
+                Qt.quit();
             }
         }
         AboutPage {
@@ -108,16 +108,15 @@ ApplicationWindow {
             headerGradientSize: root.headerGradientSize
             bottomGradientSize: root.bottomGradientSize
             onStartGameClicked: function (size) {
-                console.log("From " + stackView.currentItem)
-                gamePage.startGame(size)
-                stackView.push(gamePage)
+                gamePage.startGame(size);
+                stackView.push(gamePage);
             }
         }
         GamePage {
             id: gamePage
             visible: false
             onFinished: {
-                winPage.visible = true
+                winPage.showWinPage();
             }
         }
 
@@ -155,8 +154,8 @@ ApplicationWindow {
         anchors.fill: parent
         z: 1
 
-        steps: gamePage.steps
-        time: gamePage.time
+        gameObj: gamePage
+
         onContinueClicked: {
             stackView.pop();
         }
