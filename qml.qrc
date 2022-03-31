@@ -27,9 +27,10 @@
         <file>Assets/icons/enter_icon_gray.svg</file>
         <file>Assets/icons/CHECKED_checkbox.svg</file>
         <file>Assets/icons/EMPTY_checkbox.svg</file>
-        <file>Assets/js/variables.js</file>
         <file>Assets/MessagePage.qml</file>
         <file>Assets/icons/warning.svg</file>
         <file>pages.qml</file>
+        <file>Assets/icons/telegram.png</file>
+        <file>Assets/icons/behance.png</file>
     </qresource>
 </RCC>

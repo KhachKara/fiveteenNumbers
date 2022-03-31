@@ -11,15 +11,20 @@ Item {
 
     signal backClicked()
 
-    Image {
-        id: back
-        property bool isPause: false
-        source: isPause ? "./icons/pause.svg" : "./icons/back.svg"
+    Item {
         anchors {
-            top: parent.top
+            verticalCenter: parent.verticalCenter
             left: parent.left
             leftMargin: 30
-            topMargin: 32
+        }
+        width: 50
+        height: width
+        Image {
+
+            id: back
+            property bool isPause: false
+            source: isPause ? "./icons/pause.svg" : "./icons/back.svg"
+            anchors.centerIn: parent
         }
 
         CursorShapeMouseArea {
@@ -28,18 +33,21 @@ Item {
             onClicked: {
                 root.backClicked();
             }
-
         }
     }
 
-    Image {
+    Item {
         id: exit
-        source: "./icons/exit.svg"
         anchors {
-            top: parent.top
+            verticalCenter: parent.verticalCenter
             right: parent.right
             rightMargin: 30
-            topMargin: 32
+        }
+        width: 50
+        height: width
+        Image {
+            source: "./icons/exit.svg"
+            anchors.centerIn: parent
         }
         CursorShapeMouseArea {
             anchors.fill: parent

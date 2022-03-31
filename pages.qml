@@ -100,7 +100,6 @@ ApplicationWindow {
         AboutPage {
             id: aboutPage
             visible: false
-            baseStackView: stackView
         }
         LevelsPage {
             id: levelsPage

@@ -26,6 +26,8 @@ Item {
             return steps < 100 ? 3 : steps < 200 ? 2 : steps < 300 ? 1 : 0;
         case 5:
             return steps < 350 ? 3 : steps < 450 ? 2 : steps < 550 ? 1 : 0;
+        case 6:
+            return steps < 2 * 350 ? 3 : steps < 2 * 450 ? 2 : steps < 2 * 550 ? 1 : 0;
         default:
             console.info('wtf', gameSize);
             return 2;

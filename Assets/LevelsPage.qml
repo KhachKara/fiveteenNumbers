@@ -27,7 +27,7 @@ Item {
         }
 
         spacing: 8
-        model: 3
+        model: 5
         delegate: GameStyleRect {
             width: listView.width
             gameSize: index + 2
