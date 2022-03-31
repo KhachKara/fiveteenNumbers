@@ -93,9 +93,6 @@ ApplicationWindow {
             onNewGameClicked: {
                 stackView.push(levelsPage);
             }
-            onSettingsClicked: {
-                stackView.push(settingsPage)
-            }
             onQuitClicked: {
                 Qt.quit()
             }
@@ -115,10 +112,6 @@ ApplicationWindow {
                 gamePage.startGame(size)
                 stackView.push(gamePage)
             }
-        }
-        SettingsPage {
-            id: settingsPage
-            visible: false
         }
         GamePage {
             id: gamePage
@@ -144,13 +137,6 @@ ApplicationWindow {
                 PropertyChanges {
                     target: headerComponent
                     pageName: "New game"
-                }
-            },
-            State {
-                when: stackView.currentItem == settingsPage
-                PropertyChanges {
-                    target: headerComponent
-                    pageName: "Settings"
                 }
             },
             State {

@@ -5,7 +5,6 @@ Item  {
     id: root
 
     signal newGameClicked()
-    signal settingsClicked()
     signal quitClicked()
     signal logoClicked()
 
@@ -17,9 +16,6 @@ Item  {
         id: listModel
         ListElement {
             text: "New game"
-        }
-        ListElement {
-            text: "Settings"
         }
         ListElement {
             text: "Quit"
@@ -110,8 +106,6 @@ Item  {
                 onClicked: {
                     if(text === "New game") {
                         newGameClicked()
-                    } else  if(text === "Settings") {
-                        settingsClicked()
                     } else if(text === "Quit") {
                         quitClicked()
                     }
