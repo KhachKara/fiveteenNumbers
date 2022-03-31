@@ -8,15 +8,11 @@ CONFIG += c++11
 
 HEADERS += \
     core.h \
-    databasemodel.h \
-    databaseworker.h \
     myfunc.h \
     userdata.h
 
 SOURCES += \
         core.cpp \
-        databasemodel.cpp \
-        databaseworker.cpp \
         main.cpp \
         userdata.cpp
 
