@@ -29,5 +29,6 @@
         <file>pages.qml</file>
         <file>Assets/icons/telegram.png</file>
         <file>Assets/icons/behance.png</file>
+        <file>Assets/Ui.qml</file>
     </qresource>
 </RCC>

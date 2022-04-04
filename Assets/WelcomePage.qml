@@ -59,7 +59,6 @@ Item  {
         }
     }
 
-
     ListView {
         id: listView
 
@@ -113,4 +112,22 @@ Item  {
             }
         }
     }
+
+    states: [
+        State {
+            name: "horizontal"
+            when: !Ui.isPortrait
+            AnchorChanges {
+                target: logoImage
+                top: undefined
+                verticalCenter: parent.verticalCenter
+            }
+            PropertyChanges {
+                target: logoImage
+                leftMargin: 88
+
+            }
+        }
+
+    ]
 }

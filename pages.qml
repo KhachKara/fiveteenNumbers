@@ -1,7 +1,7 @@
 import QtQml 2.12
 import QtQuick 2.12
 import QtQuick.Controls 2.12
-
+import UiSingleton 12.34
 import "./Assets"
 
 ApplicationWindow {
@@ -18,6 +18,7 @@ ApplicationWindow {
     title: "15 Numbers"
 
     Component.onCompleted: {
+        Ui.initModule(root);
         if (core.existRecoveryGame()) {
             gamePage.recoveryGame(
                         core.recoveryArea()

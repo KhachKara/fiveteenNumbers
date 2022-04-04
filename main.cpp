@@ -14,6 +14,8 @@ int main(int argc, char *argv[])
 //    QCoreApplication::setOrganizationDomain("mysoft.com");
 	QCoreApplication::setApplicationName("15 Numbers");
     QGuiApplication app(argc, argv);
+	qmlRegisterSingletonType(QUrl("qrc:/Assets/Ui.qml"), "UiSingleton", 12, 34, "Ui");
+
 
 	Core core;
     QQmlApplicationEngine engine;
